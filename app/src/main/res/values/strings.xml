@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name" translatable="false">Bio Tracker</string>
+    <string name="select_language">Select Language</string>
+    <string name="select_language_ml">ഭാഷ തിരഞ്ഞെടുക്കുക</string>
+    <string name="txt_continue">Continue</string>
+    <string name="txt_continue_ml">തുടരുക</string>
+    <string name="english">English</string>
+    <string name="malayalam">മലയാളം</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="mobile_number_ml">മൊബൈൽ നമ്പർ</string>
+    <string name="password">Password</string>
+    <string name="password_ml">പാസ്സ്‌വേർഡ്</string>
+    <string name="login">LOGIN</string>
+    <string name="login_ml">ലോഗിൻ ചെയ്യുക</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="create_an_account_ml">അക്കൗണ്ട് തുടങ്ങുക</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_ml">മുഴുവൻ പേര്</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="date_of_birth_ml">ജനന തിയ്യതി</string>
+    <string name="email_address">Email address</string>
+    <string name="email_address_ml">ഇമെയിൽ വിലാസം</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password_ml">പാസ്സ്‌വേർഡ് ഉറപ്പാക്കുക</string>
+    <string name="register">REGISTER</string>
+    <string name="register_ml">രജിസ്റ്റർ ചെയ്യുക</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="back_to_login_ml">ലോഗിനിലേക്ക് മടങ്ങുക</string>
+    <string name="house_name">House Name</string>
+    <string name="house_name_ml">വീട്ട് പേര്</string>
+    <string name="place">Place</string>
+    <string name="place_ml">സ്ഥലം</string>
+    <string name="pincode">Pincode</string>
+    <string name="pincode_ml">പിൻകോഡ്</string>
+    <string name="district">District</string>
+    <string name="district_ml">ജില്ല</string>
+    <string name="add_address">Add Address</string>
+    <string name="add_address_ml">അഡ്രസ്സ് ചേർക്കുക</string>
+    <string name="full_name_error">Please enter full name</string>
+    <string name="full_name_error_ml">ദയവായി മുഴുവൻ പേര് ചേർക്കുക</string>
+</resources>

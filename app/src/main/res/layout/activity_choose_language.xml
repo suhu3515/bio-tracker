@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChooseLanguageActivity"
+    android:background="#F44336">
+
+    <TextView
+        android:id="@+id/language_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_language"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/alfa_slab_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:id="@+id/language_heading_ml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_language_ml"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/alfa_slab_one"
+        app:layout_constraintTop_toBottomOf="@id/language_heading"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/language_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <RadioButton
+            android:id="@+id/radio_eng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/english"
+            android:buttonTint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:checked="true"
+            android:layout_margin="20dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@android:color/white"
+            android:text="@string/malayalam"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_margin="20dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_language_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="@android:color/white"
+        android:text="@string/txt_continue"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="50dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
