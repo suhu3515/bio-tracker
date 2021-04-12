@@ -58,6 +58,8 @@ public class AddAddressActivity extends AppCompatActivity {
             buttonAddress.setText(R.string.add_address_ml);
         }
 
+
+
         buttonAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +140,6 @@ public class AddAddressActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                            Log.e("response:", response.body().toString());
                             jsonObject = response.body();
                             if (response.isSuccessful())
                             {

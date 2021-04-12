@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VolumeCalculationActivity"
+    android:background="#F44336">
+
+    <EditText
+        android:id="@+id/edit_text_rect_length"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:hint="Length (in cm)"
+        android:inputType="phone"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:visibility="gone"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <EditText
+        android:id="@+id/edit_text_rect_breadth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Breadth (in cm)"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textColorHint="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_rect_length" />
+
+    <EditText
+        android:id="@+id/edit_text_circle_radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:hint="Radius (in cm)"
+        android:visibility="gone"
+        android:inputType="phone"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <EditText
+        android:id="@+id/edit_text_circle_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Height (in cm)"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textColorHint="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_circle_radius" />
+
+    <EditText
+        android:id="@+id/edit_text_rect_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Height (in cm)"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textColorHint="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_rect_breadth" />
+
+    <Button
+        android:id="@+id/button_add_farm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD FARM DETAILS"
+        android:textColor="@android:color/black"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

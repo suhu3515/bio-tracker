@@ -76,6 +76,40 @@ if(isset($_GET['apicall']))
 
             }
         break;
+
+        case 'add_farm':
+            if(isTheseParametersAvailable(array('fish_type','fish_count','tank_vol','start_date','est_time','user_id')))
+            {
+                $fishName = $_POST['fish_type'];
+                $fishCount = $_POST['fish_count'];
+                $tankVolume = $_POST['tank_vol'];
+                $startingDate = $_POST['start_date'];
+                $estimatedTime = $_POST['est_time'];
+                $userId = $_POST['user_id'];
+
+                $stmt2 = $conn->prepare("insert into farm(fish_type, fish_count, tank_volume, start_date, est_time, user_id) values (?,?,?,?,?,?)");
+                $stmt2->bind_param("ssssss", $fishName, $fishCount, $tankVolume, $startingDate, $estimatedTime, $userId);
+                if($stmt2->execute())
+                {
+                    $stmt2->close();
+                    $response['error']= false;
+                    $response['message'] = 'Farm details added Successfully';
+
+                }
+                else
+                {
+                    $stmt2->close();
+                    $response['error']= false;
+                    $response['message'] = 'Farm details added Successfully';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+
+            }
+        break;
     }
 }
 else

@@ -41,14 +41,14 @@
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1><a href="index.html">BioTracker</a></h1>
+        <h1><a href="index.php">BioTracker</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.php"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#contact">Login</a></li>
 

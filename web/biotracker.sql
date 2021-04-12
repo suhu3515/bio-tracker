@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2021 at 06:17 PM
+-- Generation Time: Apr 12, 2021 at 02:52 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -74,10 +74,18 @@ CREATE TABLE `farm` (
   `fish_type` varchar(35) NOT NULL,
   `fish_count` int(11) NOT NULL,
   `tank_volume` decimal(10,0) NOT NULL,
-  `start_time` datetime NOT NULL,
+  `start_date` date NOT NULL,
   `est_time` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farm`
+--
+
+INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
+(4, 'Nutter', 300, '672000', '2021-04-12', 6, 11),
+(5, 'Nutter', 510, '471000', '2021-04-10', 6, 11);
 
 -- --------------------------------------------------------
 
@@ -111,14 +119,14 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
-(1, 7736918949, 'abcde', 'USER'),
 (2, 9564558548, 'asdfg', 'USER'),
 (3, 9565224554, 'qweas', 'USER'),
 (4, 8766316667, 'aaass', 'USER'),
 (5, 9546679357, 'momoom', 'USER'),
 (6, 5484584854, 'asaaas', 'USER'),
 (7, 9533626233, 'dhldhl', 'USER'),
-(8, 9633058949, 'qqwwee', 'USER');
+(10, 9633058949, 'suhu3515@', 'USER'),
+(11, 7994367615, 'qwerty', 'USER');
 
 -- --------------------------------------------------------
 
@@ -222,14 +230,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_dob`, `user_hname`, `user_place`, `user_pincode`, `user_dst`, `user_mobile`, `user_email`, `user_status`) VALUES
-(1, 'suhail a k', '1998-10-28', 'valathel house', 'maranchery', 679581, 'malappuram', 7736918949, 'suhu3515@gmail.com', 1),
 (2, 'fsg', '2021-04-09', 'asds', 'adadd', 558464, 'adas', 9564558548, 's@s.s', 1),
 (3, 'ysf', '2021-04-09', 'afaf', 'dsff', 678581, 'zfacx', 9565224554, 's@s.s', 1),
 (4, 'suh', '2021-04-09', 'bsnjs', 'ghsjh', 679594, 'bakjzis', 8766316667, 's@s.s', 1),
 (5, 'sijhh', '2021-04-09', 'hhjs', 'bjsjjs', 975946, 'bjauhs', 9546679357, 's@s.s', 1),
 (6, 'fsff', '0000-00-00', 'asaaa', 'dgweg', 685581, 'FCC dh', 5484584854, 'sczd@sdd.ffg', 1),
 (7, 'fhh', '2021-04-09', 'gghg', 'gjhg', 678585, 'dgfd', 9533626233, 's@e.s', 1),
-(8, 'suhail', '1998-10-28', 'valathel', 'mry', 679581, 'mlp', 9633058949, 'suhu3515@gmail.com', 1);
+(10, 'Suhail A K', '1998-10-28', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 9633058949, 'suhu3515@gmail.com', 1),
+(11, 'Safwan V', '2002-09-30', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 7994367615, 'safwan@gmail.com', 1);
 
 --
 -- Indexes for dumped tables
@@ -343,7 +351,7 @@ ALTER TABLE `daily_data`
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `instructions`
@@ -355,7 +363,7 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
@@ -391,7 +399,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
