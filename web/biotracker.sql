@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2021 at 02:52 PM
+-- Generation Time: Apr 15, 2021 at 08:07 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -84,8 +84,9 @@ CREATE TABLE `farm` (
 --
 
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
-(4, 'Nutter', 300, '672000', '2021-04-12', 6, 11),
-(5, 'Nutter', 510, '471000', '2021-04-10', 6, 11);
+(4, 'Nutter', 300, '672000', '2021-04-12', 6, 2),
+(5, 'Nutter', 510, '471000', '2021-04-10', 6, 11),
+(6, 'Nutter', 670, '720000', '2021-04-13', 6, 11);
 
 -- --------------------------------------------------------
 
@@ -351,7 +352,7 @@ ALTER TABLE `daily_data`
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `instructions`

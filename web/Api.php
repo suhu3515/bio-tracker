@@ -99,8 +99,40 @@ if(isset($_GET['apicall']))
                 else
                 {
                     $stmt2->close();
-                    $response['error']= false;
-                    $response['message'] = 'Farm details added Successfully';
+                    $response['error']= true;
+                    $response['message'] = 'Something went wrong!';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+
+            }
+        break;
+
+        case "view_farm_details":
+
+            if (isTheseParametersAvailable(array('user_id')))
+            {
+                $farm = array();
+                $farm_user_id = $_POST['user_id'];
+                $stmt3 = "select * from farm where user_id='$farm_user_id'";
+                $res_stmt3 = mysqli_query($conn,$stmt3);
+                $temp = array();
+                if ($res_stmt3)
+                {
+                    while ($row_stmt3 = mysqli_fetch_array($res_stmt3))
+                    {
+                        $temp['farm_id'] = $row_stmt3[0];
+                        $temp['fish_type'] = $row_stmt3[1];
+                        $temp['fish_count'] = $row_stmt3[2];
+                        $temp['tank_volume'] = $row_stmt3[3];
+                        $temp['start_date'] = $row_stmt3[4];
+                        $temp['est_time'] = $row_stmt3[5];
+                        array_push($farm,$temp);
+                    }
+                    $response = $farm;
                 }
             }
             else

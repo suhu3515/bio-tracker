@@ -1,5 +1,6 @@
 package com.example.biotracker;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -23,4 +24,8 @@ public interface Api
     @FormUrlEncoded
     Call<JsonObject> addFarm(@Field("fish_type") String fishType, @Field("fish_count") String fishCount, @Field("tank_vol") String tankVolume,
                              @Field("start_date") String startDate, @Field("est_time") String estTime, @Field("user_id") String userId);
+
+    @POST("Api.php?apicall=view_farm_details")
+    @FormUrlEncoded
+    Call<JsonArray> viewFarm(@Field("user_id") String userId);
 }

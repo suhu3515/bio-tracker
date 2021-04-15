@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BioTracker">
-        <activity android:name=".VolumeCalculationActivity"></activity>
+        <activity android:name=".DailyDataActivity"></activity>
+        <activity android:name=".FarmDetailsActivity" />
+        <activity android:name=".VolumeCalculationActivity" />
         <activity android:name=".FarmActivity" />
         <activity android:name=".AddFarmActivity" />
         <activity android:name=".HomeActivity" />
