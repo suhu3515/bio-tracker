@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2021 at 08:07 AM
+-- Generation Time: Apr 17, 2021 at 08:25 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -59,9 +59,21 @@ CREATE TABLE `daily_data` (
   `ph_level` int(11) DEFAULT NULL,
   `oxygen_level` int(11) DEFAULT NULL,
   `nitrogen_level` int(11) DEFAULT NULL,
+  `nitrate_level` int(11) NOT NULL,
+  `nitrite_level` int(11) NOT NULL,
   `mortality_count` int(11) DEFAULT NULL,
+  `data_date` varchar(30) NOT NULL,
   `farm_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `daily_data`
+--
+
+INSERT INTO `daily_data` (`data_id`, `ammonia_level`, `ph_level`, `oxygen_level`, `nitrogen_level`, `nitrate_level`, `nitrite_level`, `mortality_count`, `data_date`, `farm_id`) VALUES
+(1, 10, 25, 55, 54, 0, 0, 5, '16-04-2021', 8),
+(6, 10, 25, 55, 54, 10, 11, 5, '15-04-2021', 8),
+(7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8);
 
 -- --------------------------------------------------------
 
@@ -84,9 +96,7 @@ CREATE TABLE `farm` (
 --
 
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
-(4, 'Nutter', 300, '672000', '2021-04-12', 6, 2),
-(5, 'Nutter', 510, '471000', '2021-04-10', 6, 11),
-(6, 'Nutter', 670, '720000', '2021-04-13', 6, 11);
+(8, 'Nutter', 500, '6358500', '2021-04-16', 6, 11);
 
 -- --------------------------------------------------------
 
@@ -346,13 +356,13 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `daily_data`
 --
 ALTER TABLE `daily_data`
-  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `instructions`

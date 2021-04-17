@@ -28,4 +28,11 @@ public interface Api
     @POST("Api.php?apicall=view_farm_details")
     @FormUrlEncoded
     Call<JsonArray> viewFarm(@Field("user_id") String userId);
+
+    @POST("Api.php?apicall=add_daily_data")
+    @FormUrlEncoded
+    Call<JsonObject> addData(@Field("ammonia_val") String ammoniaValue, @Field("ph_val") String pHValue, @Field("oxygen_val") String oxygenValue,
+                             @Field("nitrogen_val") String nitrogenValue, @Field("nitrate_val") String nitrateValue,
+                             @Field("nitrite_val") String nitriteValue,@Field("mortal_count") String mortalCount,
+                             @Field("data_date") String dataDate, @Field("farm_id") String farmId);
 }

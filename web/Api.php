@@ -139,7 +139,53 @@ if(isset($_GET['apicall']))
             {
                 $response['error'] = true;
                 $response['message'] = 'required parameters are not available';
+            }
+        break;
 
+        case "add_daily_data":
+
+            if (isTheseParametersAvailable(array('ammonia_val','ph_val','oxygen_val','nitrogen_val','nitrate_val','nitrite_val','mortal_count','data_date','farm_id')))
+            {
+                $ammonia_value = $_POST['ammonia_val'];
+                $ph_value = $_POST['ph_val'];
+                $oxygen_value = $_POST['oxygen_val'];
+                $nitrogen_value = $_POST['nitrogen_val'];
+                $nitrate_value = $_POST['nitrate_val'];
+                $nitrite_value = $_POST['nitrite_val'];
+                $mortality_count = $_POST['mortal_count'];
+                $data_date = $_POST['data_date'];
+                $farm_id = $_POST['farm_id'];
+
+                $stmt5= $conn->prepare("SELECT * FROM daily_data where farm_id=? and data_date=?");
+                $stmt5->bind_param("ss",$farm_id, $data_date);
+                $stmt5->execute();
+                $stmt5->store_result();
+                if ($stmt5->num_rows > 0)
+                {
+                    $stmt5->close();
+                    $response['error'] = true;
+                    $response['message'] = 'Data already added';
+                }
+                else
+                {
+                    $stmt6 = $conn->prepare("INSERT INTO daily_data(ammonia_level, ph_level, oxygen_level, nitrogen_level, nitrate_level, nitrite_level, mortality_count, data_date, farm_id) values (?,?,?,?,?,?,?,?,?)");
+                    $stmt6->bind_param("sssssssss", $ammonia_value, $ph_value, $oxygen_value, $nitrogen_value, $nitrate_value, $nitrite_value,$mortality_count, $data_date, $farm_id);
+                    if ($stmt6->execute())
+                    {
+                        $response['error']= false;
+                        $response['message'] = 'Data added successfully...';
+                    }
+                    else
+                    {;
+                        $response['error']= true;
+                        $response['message'] = 'Something went wrong!';
+                    }
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
             }
         break;
     }
