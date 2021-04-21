@@ -178,7 +178,7 @@
                 </div>
               </div>
               <div class="col-md-12">
-                <a href="seller_registration.php">Seller Registration</a>
+                <a href="seller/pages/page-seller-register.php">Seller Registration</a>
               </div> 
               <div class="mb-3">
                 <div class="loading">Logging in</div>

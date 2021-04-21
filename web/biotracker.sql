@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 02:59 AM
+-- Generation Time: Apr 21, 2021 at 10:54 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -139,7 +139,8 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (6, 5484584854, 'asaaas', 'USER'),
 (7, 9533626233, 'dhldhl', 'USER'),
 (10, 9633058949, 'suhu3515@', 'USER'),
-(11, 7994367615, 'qwerty', 'USER');
+(11, 7994367615, 'qwerty', 'USER'),
+(12, 7736918949, 'abcde', 'SELLER');
 
 -- --------------------------------------------------------
 
@@ -201,8 +202,15 @@ CREATE TABLE `seller` (
   `seller_mail` varchar(40) NOT NULL,
   `seller_upi_id` int(15) NOT NULL,
   `seller_gstin` varchar(30) NOT NULL,
-  `seller_status` int(11) NOT NULL
+  `seller_status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `seller`
+--
+
+INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`, `seller_dst`, `seller_phone`, `seller_mail`, `seller_upi_id`, `seller_gstin`, `seller_status`) VALUES
+(1, 'ANB International', 'Ermanagalam', 'Valathel house', 'Malappuram', 7736918949, 'anbintl@gmail.com', 2147483647, 'GSTIN00568975', 0);
 
 -- --------------------------------------------------------
 
@@ -376,7 +384,7 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
@@ -400,7 +408,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tutorials`
