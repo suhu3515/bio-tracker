@@ -50,9 +50,6 @@ public class HomeActivity extends AppCompatActivity {
                     openFragment(HomeFragment.newInstance("",""));
                     return true;
 
-                case R.id.navigation_reports:
-                    openFragment(ReportsFragment.newInstance("",""));
-                    return true;
 
                 case R.id.navigation_more:
                     openFragment(MoreFragment.newInstance("",""));

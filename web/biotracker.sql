@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2021 at 08:25 AM
+-- Generation Time: Apr 21, 2021 at 02:59 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -73,7 +73,9 @@ CREATE TABLE `daily_data` (
 INSERT INTO `daily_data` (`data_id`, `ammonia_level`, `ph_level`, `oxygen_level`, `nitrogen_level`, `nitrate_level`, `nitrite_level`, `mortality_count`, `data_date`, `farm_id`) VALUES
 (1, 10, 25, 55, 54, 0, 0, 5, '16-04-2021', 8),
 (6, 10, 25, 55, 54, 10, 11, 5, '15-04-2021', 8),
-(7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8);
+(7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8),
+(8, 7, 7, 10, 8, 9, 10, 0, '18-04-2021', 8),
+(9, 8, 9, 7, 9, 5, 8, 0, '19-04-2021', 8);
 
 -- --------------------------------------------------------
 
@@ -356,7 +358,7 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `daily_data`
 --
 ALTER TABLE `daily_data`
-  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `farm`

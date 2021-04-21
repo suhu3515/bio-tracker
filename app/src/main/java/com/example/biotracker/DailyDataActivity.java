@@ -106,6 +106,7 @@ public class DailyDataActivity extends AppCompatActivity {
                                     if (!jsonObject.getBoolean("error"))
                                     {
                                         Toast.makeText(DailyDataActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                     else
                                     {

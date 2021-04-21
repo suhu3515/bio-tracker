@@ -80,13 +80,26 @@
         android:id="@+id/button_details_add_daily_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD DAILY DATA"
-        android:textSize="28sp"
+        android:text="ADD DATA"
+        android:textSize="24sp"
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_details_tank_volume"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="@android:color/white"/>
+
+    <Button
+        android:id="@+id/button_details_view_daily_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REPORTS"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_details_tank_volume"
         android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
         android:backgroundTint="@android:color/white"/>
 
 

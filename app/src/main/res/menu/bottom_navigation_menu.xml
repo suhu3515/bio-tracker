@@ -17,11 +17,6 @@
         android:title="Community"/>
 
     <item
-        android:id="@+id/navigation_reports"
-        android:icon="@drawable/logo_reports"
-        android:title="Reports"/>
-
-    <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/logo_more"
         android:title="More"/>

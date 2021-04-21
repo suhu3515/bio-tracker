@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class FarmDetailsActivity extends AppCompatActivity {
 
     TextView textViewFishName, textViewFishCount, textViewStartDate, textViewEstimatedTime, textViewTankVolume;
-    Button buttonAddDailyData;
+    Button buttonAddDailyData, buttonViewReports;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class FarmDetailsActivity extends AppCompatActivity {
         textViewStartDate = findViewById(R.id.text_view_details_start_date);
         textViewTankVolume = findViewById(R.id.text_view_details_tank_volume);
         buttonAddDailyData = findViewById(R.id.button_details_add_daily_data);
+        buttonViewReports = findViewById(R.id.button_details_view_daily_data);
 
         textViewFishName.setText(getIntent().getExtras().getString("fish_type"));
         textViewFishCount.setText(getIntent().getExtras().getString("fish_count"));
@@ -40,6 +41,18 @@ public class FarmDetailsActivity extends AppCompatActivity {
                 dailyDataIntent.putExtra("farm_id", farm_id);
                 startActivity(dailyDataIntent);
                 finish();
+            }
+        });
+
+        buttonViewReports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent reportIntent = new Intent(FarmDetailsActivity.this, ReportsActivity.class);
+                reportIntent.putExtra("farm_id", farm_id);
+                startActivity(reportIntent);
+                finish();
+
             }
         });
     }

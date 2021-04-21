@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportsActivity"
+    android:background="#F44336">
+
+    <TextView
+        android:id="@+id/reports_text_view_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date: "
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"/>
+
+    <Spinner
+        android:id="@+id/reports_spin_select"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/reports_text_view_select"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="@android:color/white"
+        android:foregroundTint="@android:color/white"/>
+
+    <Button
+        android:id="@+id/reports_button_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:text="Apply"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/reports_spin_select"
+        app:layout_constraintTop_toBottomOf="@id/reports_text_view_select"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/reports_text_view_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="report"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reports_spin_select"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone"/>
+
+    <TableLayout
+        android:id="@+id/table_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/reports_text_view_report"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_ammonia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ammonia "
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_ammonia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10.5"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_ph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pH level "
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_ph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_oxygen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oxygen"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_oxygen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_nitrogen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nitrogen"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_nitrogen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_nitrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nitrate"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_nitrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12.4"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_nitrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nitrite"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_nitrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24.4"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/reports_caps_mortality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mortality"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/reports_text_mortality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/report_text_view_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Needs atleast 5 daily data to calculate average"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/table_report"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:visibility="gone"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/reports_button_analyse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:text="analyse"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/report_text_view_warning"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/black"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

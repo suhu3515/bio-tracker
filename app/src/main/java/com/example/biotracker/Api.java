@@ -35,4 +35,21 @@ public interface Api
                              @Field("nitrogen_val") String nitrogenValue, @Field("nitrate_val") String nitrateValue,
                              @Field("nitrite_val") String nitriteValue,@Field("mortal_count") String mortalCount,
                              @Field("data_date") String dataDate, @Field("farm_id") String farmId);
+
+    @POST("Api.php?apicall=get_data_count")
+    @FormUrlEncoded
+    Call<JsonObject> getCount(@Field("farm_id") String farmId);
+
+    @POST("Api.php?apicall=get_average")
+    @FormUrlEncoded
+    Call<JsonObject> getAverage(@Field("farm_id") String farmId);
+
+    @POST("Api.php?apicall=get_dates")
+    @FormUrlEncoded
+    Call<JsonArray> getDates(@Field("farm_id") String farmId);
+
+    @POST("Api.php?apicall=get_daily_data")
+    @FormUrlEncoded
+    Call<JsonObject> getDailyData(@Field("farm_id") String farmId, @Field("data_date") String dataDate);
+
 }

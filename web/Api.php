@@ -188,6 +188,110 @@ if(isset($_GET['apicall']))
                 $response['message'] = 'required parameters are not available';
             }
         break;
+
+        case "get_data_count":
+
+            if(isTheseParametersAvailable(array('farm_id')))
+            {
+                $farm_id2 = $_POST['farm_id'];
+                $stmt7 = "select * from daily_data where farm_id='$farm_id2'";
+                $res_stmt7 = mysqli_query($conn, $stmt7);
+                if ($res_stmt7)
+                {
+                    $response['count'] = mysqli_num_rows($res_stmt7);
+                    $response['error'] = false;
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_average":
+
+            if (isTheseParametersAvailable(array('farm_id')))
+            {
+                $farm_id3 = $_POST['farm_id'];
+                $stmt8 = "select avg(ammonia_level), avg(ph_level), avg(oxygen_level), avg(nitrogen_level), avg(nitrate_level), avg(nitrite_level), sum(mortality_count) from daily_data where farm_id='$farm_id3'";
+                $res_stmt8 = mysqli_query($conn, $stmt8);
+                if ($res_stmt8)
+                {
+                    $response['error'] = false;
+                    $row_stmt8 = mysqli_fetch_array($res_stmt8);
+                    $response['avg_ammonia'] = $row_stmt8[0];
+                    $response['avg_ph'] = $row_stmt8[1];
+                    $response['avg_oxygen'] = $row_stmt8[2];
+                    $response['avg_nitrogen'] = $row_stmt8[3];
+                    $response['avg_nitrate'] = $row_stmt8[4];
+                    $response['avg_nitrite'] = $row_stmt8[5];
+                    $response['sum_mortality'] = $row_stmt8[6];
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_dates":
+
+            if (isTheseParametersAvailable(array('farm_id')))
+            {
+                $dates = array();
+                $farm_id4 = $_POST['farm_id'];
+                $stmt9 = "select data_date from daily_data where farm_id='$farm_id4'";
+                $res_stmt9 = mysqli_query($conn, $stmt9);
+                if ($stmt9)
+                {
+                    array_push($dates,"Average");
+                    while ($row_stmt9 = mysqli_fetch_array($res_stmt9))
+                    {
+                        array_push($dates, $row_stmt9[0]);
+                    }
+                    $response = $dates;
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_daily_data":
+            if(isTheseParametersAvailable(array('farm_id','data_date')))
+            {
+                $farm_id5 = $_POST['farm_id'];
+                $data_date1 = $_POST['data_date'];
+                $stmt10 = "select ammonia_level, ph_level, oxygen_level, nitrogen_level, nitrate_level, nitrite_level, mortality_count from daily_data where farm_id='$farm_id5' and data_date='$data_date1'";
+                $res_stmt10 = mysqli_query($conn, $stmt10);
+                if ($res_stmt10)
+                {
+                    $response['error'] = false;
+                    $row_stmt10 = mysqli_fetch_array($res_stmt10);
+                    $response['ammonia'] = $row_stmt10[0];
+                    $response['ph'] = $row_stmt10[1];
+                    $response['oxygen'] = $row_stmt10[2];
+                    $response['nitrogen'] = $row_stmt10[3];
+                    $response['nitrate'] = $row_stmt10[4];
+                    $response['nitrite'] = $row_stmt10[5];
+                    $response['mortality'] = $row_stmt10[6];
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = "Something went wrong!";
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+
     }
 }
 else
