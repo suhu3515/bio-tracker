@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 07:20 PM
+-- Generation Time: Apr 23, 2021 at 08:31 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -214,7 +214,7 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`, `seller_dst`, `seller_phone`, `seller_mail`, `seller_upi_id`, `seller_gstin`, `seller_status`) VALUES
-(2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', '2147483647', 'GSTIN00568975', 0),
+(2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', '2147483647', 'GSTIN00568975', 1),
 (3, 'ANB International', 'Ermanagalam', 'assalama mission', 'Kozhikode', 6238383110, 'anbintl@gmail.com', '9656823@ybl', 'GSTIN00568965', 0);
 
 -- --------------------------------------------------------

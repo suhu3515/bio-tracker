@@ -97,13 +97,14 @@
                     <div class="row">
                         <div class="col-12 col-xl-12">
                             <div class="card">
-                                <div class="card-body">
+                                <form method="post" action="">
+                                    <div class="card-body">
                                         <?php
-                                            include_once '../../DbConnect.php';
+                                        include_once '../../DbConnect.php';
 
-                                            $sel_seller = "select * from seller where seller_id=".htmlspecialchars($_GET['seller_id']);
-                                            $res_seller = $conn->query($sel_seller);
-                                            $row_seller = $res_seller->fetch_array();
+                                        $sel_seller = "select * from seller where seller_id=".htmlspecialchars($_GET['seller_id']);
+                                        $res_seller = $conn->query($sel_seller);
+                                        $row_seller = $res_seller->fetch_array();
 
                                         ?>
                                         <div class="form-group">
@@ -112,7 +113,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;
                                             <?php
-                                                echo "<label class='form-label'>$row_seller[1]</label>";
+                                            echo "<label class='form-label'>$row_seller[1]</label>";
                                             ?>
                                         </div>
                                         <div class="form-group">
@@ -178,12 +179,18 @@
                                             $seller_id = "".htmlspecialchars($_GET['seller_id']);
                                             ?>
                                         </div>
-                                        <?php
-                                            echo "<a href='seller_approve.php?sid=$seller_id'><button type='button' class='btn btn-success'>Approve</button></a>";
-                                        ?>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="sellers.php"><button class="btn btn-danger">Cancel</button></a>
-                                </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Select Action</label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <select class='form-control-sm col-sm-3' name="seller_status" id="seller_status">
+                                                <option value="1">Approve</option>
+                                                <option value="0">Cancel</option>
+                                            </select>
+                                        </div>
+                                        <button type='submit' class='btn btn-primary' name="update_status" id="update_status">Update</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -202,9 +209,10 @@
 
 <?php
 
-if (isset($_POST['submit']))
+if (isset($_POST['update_status']))
 {
-    $seller_update = "update seller set seller_status='1' where seller_id=".htmlspecialchars($_GET['seller_id']);
+    $seller_status = $_POST['seller_status'];
+    $seller_update = "update seller set seller_status='$seller_status' where seller_id='$seller_id'";
     $res_seller_update = $conn->query($seller_update);
     if ($res_seller_update)
     {
