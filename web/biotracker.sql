@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 07:44 AM
+-- Generation Time: Apr 23, 2021 at 07:20 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -99,8 +99,8 @@ CREATE TABLE `farm` (
 --
 
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
-(8, 'Nutter', 500, '6358500', '2021-04-16', 6, 11),
-(9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 11);
+(8, 'Nutter', 500, '6358500', '2021-04-16', 6, 13),
+(9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 13);
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,9 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (7, 9533626233, 'dhldhl', 'USER'),
 (10, 9633058949, 'suhu3515@', 'USER'),
 (13, 9946739215, 'pvmstores', 'SELLER'),
-(15, 9876543210, 'admin', 'ADMIN');
+(15, 9876543210, 'admin', 'ADMIN'),
+(16, 6238383110, 'anbintl', 'SELLER'),
+(17, 9946739216, 'sakkeer123', 'USER');
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,7 @@ CREATE TABLE `seller` (
   `seller_dst` varchar(40) NOT NULL,
   `seller_phone` bigint(12) NOT NULL,
   `seller_mail` varchar(40) NOT NULL,
-  `seller_upi_id` int(15) NOT NULL,
+  `seller_upi_id` varchar(15) NOT NULL,
   `seller_gstin` varchar(30) NOT NULL,
   `seller_status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -212,7 +214,8 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`, `seller_dst`, `seller_phone`, `seller_mail`, `seller_upi_id`, `seller_gstin`, `seller_status`) VALUES
-(2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', 2147483647, 'GSTIN00568975', 0);
+(2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', '2147483647', 'GSTIN00568975', 0),
+(3, 'ANB International', 'Ermanagalam', 'assalama mission', 'Kozhikode', 6238383110, 'anbintl@gmail.com', '9656823@ybl', 'GSTIN00568965', 0);
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,8 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_dob`, `user_hname`, `user_pla
 (6, 'fsff', '0000-00-00', 'asaaa', 'dgweg', 685581, 'FCC dh', 5484584854, 'sczd@sdd.ffg', 1),
 (7, 'fhh', '2021-04-09', 'gghg', 'gjhg', 678585, 'dgfd', 9533626233, 's@e.s', 1),
 (10, 'Suhail A K', '1998-10-28', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 9633058949, 'suhu3515@gmail.com', 1),
-(11, 'Safwan V', '2002-09-30', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 7994367615, 'safwan@gmail.com', 1);
+(11, 'Safwan V', '2002-09-30', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 7994367615, 'safwan@gmail.com', 1),
+(13, 'Mohammed Sakkeer', '1980-05-02', 'valathel', 'athikaripadi', 679581, 'malappuram', 9946739216, 'mohamedsawani@gmail.com', 1);
 
 --
 -- Indexes for dumped tables
@@ -386,7 +390,7 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
@@ -410,7 +414,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tutorials`
@@ -422,7 +426,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

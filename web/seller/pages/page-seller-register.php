@@ -166,7 +166,7 @@
 									</div>
 
 									<div class="card-body">
-										<label for="sellercpass">Seller Mail <span>*</span></label>
+										<label for="sellercpass">Confirm Password <span>*</span></label>
 										<input type="password" class="form-control  mb-3" placeholder="Confirm Password" name="sellercpass" id="sellercpass" required>
 										<button class="btn btn-primary" type="submit" name="add_seller" id="add_seller">REGISTER</button>
 									</div>

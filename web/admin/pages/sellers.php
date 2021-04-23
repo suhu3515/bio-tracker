@@ -37,7 +37,7 @@
 
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="sellers.html">
+						<a class="sidebar-link" href="sellers.php">
               <i class="align-middle" data-feather="users"></i> <span class="align-middle">Sellers</span>
             </a>
 					</li>
@@ -77,8 +77,8 @@
               </a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="log-out"></i>Log out</a>
-								<div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../../index.php"><i class="align-middle mr-1" data-feather="log-out"></i>Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -95,40 +95,48 @@
 
 					</div>
 					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title mb-4">Products</h5>
-												<h1 class="display-5 mt-1 mb-3">10</h1>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title mb-4">Users</h5>
-												<h1 class="display-5 mt-1 mb-3">120</h1>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title mb-4">Sellers</h5>
-												<h1 class="display-5 mt-1 mb-3">5</h1>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title mb-4">User Reports</h5>
-												<h1 class="display-5 mt-1 mb-3">64</h1>
-											</div>
-										</div>
-									</div>
-								</div>
+
+						<div class="col-12 col-xl-12">
+							<div class="card">
+								<table class="table">
+									<thead>
+									<tr>
+										<th style="width:25%;">Name</th>
+										<th style="width:25%">Address</th>
+										<th class="d-none d-md-table-cell" style="width:20%">Mobile Number</th>
+										<th>Status</th>
+										<th style="width=10%">Details</th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php
+									    include_once '../../DbConnect.php';
+
+									    $seller_sel = "select seller_id,seller_name,seller_place,seller_addr,seller_phone,seller_status from seller";
+									    $seller_res = $conn->query($seller_sel);
+									    while ($seller_row = $seller_res->fetch_array())
+                                        {
+                                            echo "<tr>";
+                                            echo "<td>$seller_row[1]</td>";
+                                            echo "<td>$seller_row[3] , $seller_row[2]</td>";
+                                            echo "<td>$seller_row[4]</td>";
+                                            if ($seller_row[5] == 0)
+                                            {
+                                                echo "<td style='color: red'>In review</td>";
+                                            }
+
+                                            if ($seller_row[5] == 1)
+                                            {
+                                                echo "<td style='color: green'>Approved</td>";
+                                            }
+                                            echo "<td><a href='seller_details.php?seller_id=$seller_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
+                                        }
+									?>
+									</tbody>
+								</table>
 							</div>
 						</div>
+
 					</div>
 
 				</div>
