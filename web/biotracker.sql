@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 10:54 AM
+-- Generation Time: Apr 23, 2021 at 07:44 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -75,7 +75,8 @@ INSERT INTO `daily_data` (`data_id`, `ammonia_level`, `ph_level`, `oxygen_level`
 (6, 10, 25, 55, 54, 10, 11, 5, '15-04-2021', 8),
 (7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8),
 (8, 7, 7, 10, 8, 9, 10, 0, '18-04-2021', 8),
-(9, 8, 9, 7, 9, 5, 8, 0, '19-04-2021', 8);
+(9, 8, 9, 7, 9, 5, 8, 0, '19-04-2021', 8),
+(10, 7, 8, 10, 7, 9, 9, 0, '22-04-2021', 9);
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,8 @@ CREATE TABLE `farm` (
 --
 
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
-(8, 'Nutter', 500, '6358500', '2021-04-16', 6, 11);
+(8, 'Nutter', 500, '6358500', '2021-04-16', 6, 11),
+(9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 11);
 
 -- --------------------------------------------------------
 
@@ -139,8 +141,8 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (6, 5484584854, 'asaaas', 'USER'),
 (7, 9533626233, 'dhldhl', 'USER'),
 (10, 9633058949, 'suhu3515@', 'USER'),
-(11, 7994367615, 'qwerty', 'USER'),
-(12, 7736918949, 'abcde', 'SELLER');
+(13, 9946739215, 'pvmstores', 'SELLER'),
+(15, 9876543210, 'admin', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -210,7 +212,7 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`, `seller_dst`, `seller_phone`, `seller_mail`, `seller_upi_id`, `seller_gstin`, `seller_status`) VALUES
-(1, 'ANB International', 'Ermanagalam', 'Valathel house', 'Malappuram', 7736918949, 'anbintl@gmail.com', 2147483647, 'GSTIN00568975', 0);
+(2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', 2147483647, 'GSTIN00568975', 0);
 
 -- --------------------------------------------------------
 
@@ -366,13 +368,13 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `daily_data`
 --
 ALTER TABLE `daily_data`
-  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `instructions`
@@ -384,7 +386,7 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
@@ -408,7 +410,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tutorials`
@@ -420,7 +422,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

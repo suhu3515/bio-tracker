@@ -9,11 +9,11 @@
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
 
-	<link rel="shortcut icon" href="../examples/img/icons/icon-48x48.png" />
+	<link rel="shortcut icon" href="../../examples/img/icons/icon-48x48.png" />
 
 	<title>Seller Registration | Bio Tracker</title>
 
-	<link href="../examples/css/app.css" rel="stylesheet">
+	<link href="../../examples/css/app.css" rel="stylesheet">
 
 	<script type="text/javascript">
 
@@ -184,7 +184,7 @@
 	</div>
 
 	<script src="js/vendor.js"></script>
-	<script src="../examples/js/app.js"></script>
+	<script src="../../examples/js/app.js"></script>
 
 </body>
 

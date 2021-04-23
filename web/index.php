@@ -166,7 +166,7 @@
 
         <div class="row mt-5 justify-content-center">
           <div class="col-lg-10">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="username" class="form-control" id="username" placeholder="Your Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -179,13 +179,8 @@
               </div>
               <div class="col-md-12">
                 <a href="seller/pages/page-seller-register.php">Seller Registration</a>
-              </div> 
-              <div class="mb-3">
-                <div class="loading">Logging in</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Login</button></div>
+              <div class="text-center"><button type="submit" class="btn btn-primary" name="buttonlogin" id="buttonlogin">Login</button></div>
             </form>
           </div>
 
@@ -229,3 +224,26 @@
 </body>
 
 </html>
+
+<?php
+
+include_once 'DbConnect.php';
+
+if (isset($_POST['buttonlogin']))
+{
+    $login_mob = $_POST['username'];
+    $login_pass = $_POST['password'];
+
+    $login_sel = "select * from login where mobile='$login_mob' and password='$login_pass' and role='ADMIN'";
+    $login_res = $conn->query($login_sel);
+    $count = mysqli_num_rows($login_res);
+    if ($count > 0)
+    {
+        echo "<script>window.location='admin/pages/admin_panel.html'</script>";
+    }
+    else
+    {
+        echo "<script>window.location='index.php#contact'</script>";
+    }
+}
+?>
