@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -237,13 +242,33 @@ if (isset($_POST['buttonlogin']))
     $login_sel = "select * from login where mobile='$login_mob' and password='$login_pass' and role='ADMIN'";
     $login_res = $conn->query($login_sel);
     $count = mysqli_num_rows($login_res);
+    $login_row = $login_res->fetch_array();
     if ($count > 0)
     {
         echo "<script>window.location='admin/pages/admin_panel.html'</script>";
     }
+
+    $status_check = "select * from seller where seller_phone='$login_mob' and seller_status = 1";
+    $res_status_check = $conn->query($status_check);
+    $row_status_check = $res_status_check->fetch_array();
+    if (mysqli_num_rows($res_status_check) > 0)
+    {
+        $login_seller = "select * from login where mobile='$login_mob' and password='$login_pass' and role='SELLER'";
+        $login_seller_res = $conn->query($login_seller);
+        if (mysqli_num_rows($login_seller_res) > 0)
+        {
+            $seller = $row_status_check[0];
+            $_SESSION['seller_id'] = $seller;
+            echo "<script>window.location='seller/pages/seller_panel.html'</script>";
+        }
+        else
+        {
+            echo "<script>alert('Please check your mobile/password')</script>";
+        }
+    }
     else
     {
-        echo "<script>window.location='index.php#contact'</script>";
+        echo "<script>alert('Your acoount is still in review')</script>";
     }
 }
 ?>

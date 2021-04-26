@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 08:31 PM
+-- Generation Time: Apr 26, 2021 at 04:45 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -154,12 +154,22 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 
 CREATE TABLE `marketplace` (
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(40) NOT NULL,
+  `product_name` varchar(70) NOT NULL,
+  `product_price` int(11) NOT NULL,
   `product_qty` int(11) NOT NULL,
-  `product_desc` varchar(50) NOT NULL,
+  `product_desc` varchar(100) NOT NULL,
+  `product_img` text NOT NULL,
   `seller_id` int(11) NOT NULL,
-  `product_status` int(11) NOT NULL
+  `product_status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `marketplace`
+--
+
+INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 1, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 0),
+(4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -396,7 +406,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `marketplace`
 --
 ALTER TABLE `marketplace`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
