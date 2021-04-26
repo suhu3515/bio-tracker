@@ -245,6 +245,7 @@ if (isset($_POST['buttonlogin']))
     $login_row = $login_res->fetch_array();
     if ($count > 0)
     {
+        $_SESSION['logged_in'] = "admin";
         echo "<script>window.location='admin/pages/admin_panel.html'</script>";
     }
 

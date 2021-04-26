@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2021 at 04:45 AM
+-- Generation Time: Apr 26, 2021 at 11:17 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -168,7 +168,7 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 1, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 0),
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 1, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0);
 
 -- --------------------------------------------------------

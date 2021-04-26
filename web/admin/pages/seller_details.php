@@ -43,7 +43,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
+						<a class="sidebar-link" href="products.php">
               <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Products</span>
             </a>
 					</li>
