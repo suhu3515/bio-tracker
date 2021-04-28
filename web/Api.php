@@ -142,6 +142,33 @@ if(isset($_GET['apicall']))
             }
         break;
 
+        case "get_products":
+
+            $sel_products = "select product_id, product_name, product_price, product_qty, product_desc, product_img,seller_id from marketplace where product_status='1' and product_qty<>0 ";
+            $res_products = $conn->query($sel_products);
+            $products = array();
+            $temp = array();
+            if ($res_products)
+            {
+                while ($row_products = $res_products->fetch_array())
+                {
+                    $temp['product_id'] = $row_products[0];
+                    $temp['product_name'] = $row_products[1];
+                    $temp['product_price'] = $row_products[2];
+                    $temp['product_qty'] = $row_products[3];
+                    $temp['product_desc'] = $row_products[4];
+                    $temp['product_img'] = $row_products[5];
+                    $temp['seller_id'] = $row_products[6];
+                    $sel_seller = "select seller_name from seller where seller_id='$row_products[6]'";
+                    $res_seller = $conn->query($sel_seller);
+                    $row_seller = $res_seller->fetch_array();
+                    $temp['seller_name'] = $row_seller[0];
+                    array_push($products,$temp);
+                }
+                $response = $products;
+            }
+        break;
+
         case "add_daily_data":
 
             if (isTheseParametersAvailable(array('ammonia_val','ph_val','oxygen_val','nitrogen_val','nitrate_val','nitrite_val','mortal_count','data_date','farm_id')))

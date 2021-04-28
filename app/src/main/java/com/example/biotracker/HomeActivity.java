@@ -6,22 +6,85 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
+    public static List<Products> productsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(HomeFragment.newInstance("",""));
+
+        productsList = new ArrayList<>();
+
+        Call<JsonArray> getProductsCall = RetrofitClient.getInstance().getMyApi().getProducts();
+        getProductsCall.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+
+                if (response.isSuccessful())
+                {
+                    try
+                    {
+                        JSONArray jsonArray = new JSONArray(response.body().toString());
+                        for (int i=0;i<jsonArray.length();i++)
+                        {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            productsList.add(new Products(Integer.parseInt(object.getString("product_id")),
+                                    object.getString("product_name"),
+                                    object.getString("product_price"),
+                                    object.getString("product_qty"),
+                                    object.getString("product_desc"),
+                                    object.getString("product_img"),
+                                    object.getString("seller_name"),
+                                    Integer.parseInt(object.getString("seller_id"))));
+
+                        }
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void openFragment(Fragment fragment)
