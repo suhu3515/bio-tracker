@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 07:12 AM
+-- Generation Time: Apr 29, 2021 at 12:11 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -168,7 +168,7 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 1, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 12, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0);
 
 -- --------------------------------------------------------
@@ -180,12 +180,21 @@ INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `produ
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `product_qty` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `order_amount` int(11) NOT NULL,
   `payment_mode` varchar(20) NOT NULL,
-  `delivery_date` date NOT NULL,
-  `payment_status` int(11) NOT NULL,
-  `order_status` int(11) NOT NULL
+  `delivery_date` date DEFAULT NULL,
+  `payment_status` int(11) NOT NULL DEFAULT 0,
+  `order_status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `payment_mode`, `delivery_date`, `payment_status`, `order_status`) VALUES
+(2, 3, 3, 13, 6300, 'COD', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -412,7 +421,7 @@ ALTER TABLE `marketplace`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reports`

@@ -57,6 +57,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+        buttonOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent orderIntent = new Intent(ProductDetailsActivity.this, AddOrderInfoActivity.class);
+                orderIntent.putExtra("prod_qty", getIntent().getExtras().getString("prod_qty"));
+                orderIntent.putExtra("prod_price", getIntent().getExtras().getString("prod_price"));
+                orderIntent.putExtra("prod_id", productId);
+                startActivity(orderIntent);
+            }
+        });
+
         try
         {
             URL url = new URL(location);

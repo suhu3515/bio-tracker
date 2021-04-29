@@ -59,4 +59,9 @@ public interface Api
     @FormUrlEncoded
     Call<JsonObject> getSeller(@Field("seller_id") String sellerId);
 
+    @POST("Api.php?apicall=add_orders")
+    @FormUrlEncoded
+    Call<JsonObject> addOrder(@Field("product_id") String productId, @Field("user_id") String userId, @Field("payment_mode") String paymentMode,
+                              @Field("product_qty") String orderQty, @Field("order_amount") String orderAmount);
+
 }

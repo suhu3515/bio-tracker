@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmOrderActivity">
+
+    <TextView
+        android:id="@+id/confirm_text_view_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text=""
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/confirm_text_view_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/confirm_text_view_payment"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/confirm_text_view_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/confirm_text_view_qty"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/confirm_text_view_address_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="ADDRESS"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_text_view_total"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/confirm_text_view_address_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/confirm_text_view_address_head"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TableRow
+            android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/button_cancel_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:text="CANCEL"
+                android:layout_margin="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"/>
+
+            <Button
+                android:id="@+id/button_confirm_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F44336"
+                android:text="CONFIRM"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:layout_margin="5dp"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

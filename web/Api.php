@@ -344,7 +344,58 @@ if(isset($_GET['apicall']))
                 $response['error'] = true;
                 $response['message'] = 'required parameters are not available';
             }
+        break;
 
+        case "add_orders":
+
+            if(isTheseParametersAvailable(array('product_id','user_id','payment_mode','product_qty','order_amount')))
+            {
+                $product = $_POST['product_id'];
+                $userId = $_POST['user_id'];
+                $payment_mode = $_POST['payment_mode'];
+                $product_qty = (int)$_POST['product_qty'];
+                $order_amount = $_POST['order_amount'];
+
+                $res_order = $conn->query("insert into orders(product_id,product_qty,user_id,order_amount,payment_mode) values ('$product',$product_qty,'$userId','$order_amount','$payment_mode')");
+                if ($res_order)
+                {
+                   $res_prod = $conn->query("select product_qty from marketplace where product_id='$product'");
+                   if($res_prod)
+                   {
+                       $row_prod = $res_prod->fetch_array();
+                       $prod_qty = (int)$row_prod[0];
+                       $stock = $prod_qty - $product_qty;
+                       $upd_prod = $conn->query("update marketplace set product_qty='$stock' where product_id='$product'");
+                       if ($upd_prod)
+                       {
+                           $response['error'] = false;
+                           $response['message'] = 'order placed successfully...';
+                       }
+                       else
+                       {
+                           $response['error'] = true;
+                           $response['message'] = 'Something went wrong!';
+                       }
+                   }
+                   else
+                   {
+                       $response['error'] = true;
+                       $response['message'] = 'Something went wrong!';
+                   }
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Something went wrong!';
+                }
+
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
     }
 }
 else
