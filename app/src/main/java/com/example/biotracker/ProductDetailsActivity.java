@@ -2,9 +2,11 @@ package com.example.biotracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +45,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         sellerId = getIntent().getExtras().getInt("seller_id");
         productId = getIntent().getExtras().getInt("prod_id");
         location = String.format("http://192.168.0.103/biotracker/seller/pages/%s",getIntent().getExtras().getString("prod_img"));
+
+        textViewSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent sellerIntent = new Intent(ProductDetailsActivity.this, SellerDetailsActivity.class);
+                sellerIntent.putExtra("seller_id", sellerId);
+                startActivity(sellerIntent);
+
+            }
+        });
 
         try
         {

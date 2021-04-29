@@ -55,4 +55,8 @@ public interface Api
     @POST("Api.php?apicall=get_products")
     Call<JsonArray> getProducts();
 
+    @POST("Api.php?apicall=get_seller")
+    @FormUrlEncoded
+    Call<JsonObject> getSeller(@Field("seller_id") String sellerId);
+
 }

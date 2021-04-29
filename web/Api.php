@@ -318,6 +318,32 @@ if(isset($_GET['apicall']))
                 $response['error'] = true;
                 $response['message'] = 'required parameters are not available';
             }
+        break;
+
+        case "get_seller":
+
+            if (isTheseParametersAvailable(array('seller_id')))
+            {
+                $seller_id = $_POST['seller_id'];
+
+                $seller_sel = "select seller_name, seller_place, seller_addr, seller_dst,seller_phone, seller_mail from seller where seller_id='$seller_id'";
+                $seller_res = $conn->query($seller_sel);
+                while ($seller_row = $seller_res->fetch_array())
+                {
+                    $response['seller_name'] = $seller_row[0];
+                    $response['seller_place'] = $seller_row[1];
+                    $response['seller_addr'] = $seller_row[2];
+                    $response['seller_dst'] = $seller_row[3];
+                    $response['seller_phone'] = $seller_row[4];
+                    $response['seller_mail'] = $seller_row[5];
+                    $response['error'] = false;
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
 
     }
 }
