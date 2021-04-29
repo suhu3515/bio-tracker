@@ -51,7 +51,7 @@ $seller = $_SESSION['seller_id'];
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#">
+                    <a class="sidebar-link" href="orders.php">
                         <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Orders</span>
                     </a>
                 </li>

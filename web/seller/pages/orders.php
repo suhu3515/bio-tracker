@@ -43,13 +43,13 @@ $seller_id = $_SESSION["seller_id"];
 					</li>
 
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="products.php">
               <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Products</span>
             </a>
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="orders.php">
               <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Orders</span>
             </a>
@@ -91,8 +91,7 @@ $seller_id = $_SESSION["seller_id"];
 
                     <div class="row mb-2 mb-xl-3">
                         <div class="col-auto d-none d-sm-block">
-                            <h3><strong>Products</strong></h3>
-                            <a href="products_add.php"><button class="btn btn-primary">Add  <span class="fa fa-plus"></span></button></a>
+                            <h3><strong>Orders</strong></h3>
                         </div>
 
                     </div>
@@ -103,36 +102,60 @@ $seller_id = $_SESSION["seller_id"];
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th style="width:20%;">Name</th>
-                                        <th style="width:30%">Description</th>
-                                        <th style="width:15%">Price</th>
-                                        <th class="d-none d-md-table-cell" style="width:10%">Quantity</th>
+                                        <th>User Name</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Amount</th>
+                                        <th class="d-none d-md-table-cell" >Payment Status</th>
                                         <th>Status</th>
-                                        <th style="width=10%">Details</th>
+                                        <th>Update</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
 
-                                    $product_sel = "select product_id,product_name,product_price,product_qty,product_desc,product_status from marketplace where seller_id='$seller_id'";
-                                    $product_res = $conn->query($product_sel);
-                                    while ($product_row = $product_res->fetch_array())
+                                    $order_sel = "select * from orders where product_id in (select product_id from marketplace where seller_id='$seller_id' and product_status='1')";
+                                    $order_res = $conn->query($order_sel);
+                                    while ($order_row = $order_res->fetch_array())
                                     {
                                         echo "<tr>";
-                                        echo "<td>$product_row[1]</td>";
-                                        echo "<td>$product_row[4]</td>";
-                                        echo "<td>$product_row[2]</td>";
-                                        echo "<td>$product_row[3]</td>";
-                                        if ($product_row[5] == 0)
+                                        $res_user = $conn->query("select user_name from users where user_id='$order_row[3]'");
+                                        while ($row_user = $res_user->fetch_array())
                                         {
-                                            echo "<td style='color: red'>In review</td>";
+                                            echo "<td>$row_user[0]</td>";
                                         }
-
-                                        if ($product_row[5] == 1)
+                                        $res_prod = $conn->query("select product_name from marketplace where product_id='$order_row[1]'");
+                                        while ($row_prod = $res_prod->fetch_array())
+                                        {
+                                            echo "<td>$row_prod[0]</td>";
+                                        }
+                                        echo "<td>$order_row[2]</td>";
+                                        echo "<td>INR $order_row[4]</td>";
+                                        if ($order_row[7] == 0)
+                                        {
+                                            echo "<td style='color: red'>Not paid</td>";
+                                        }
+                                        if ($order_row[7] == 1)
                                         {
                                             echo "<td style='color: green'>Approved</td>";
                                         }
-                                        echo "<td><a href='product_details.php?prod_id=$product_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
+                                        if ($order_row[8] == 0)
+                                        {
+                                            echo "<td>Rejected</td>";
+                                        }
+                                        if ($order_row[8] == 1)
+                                        {
+                                            echo "<td>Confirmed</td>";
+                                        }
+                                        if ($order_row[8] == 2)
+                                        {
+                                            echo "<td>Dispatched</td>";
+                                        }
+                                        if ($order_row[8] == 3)
+                                        {
+                                            echo "<td>Completed</td>";
+                                        }
+                                        echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
                                     }
                                     ?>
                                     </tbody>
