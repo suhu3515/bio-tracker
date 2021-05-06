@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 01:52 PM
+-- Generation Time: May 06, 2021 at 06:53 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -76,7 +76,8 @@ INSERT INTO `daily_data` (`data_id`, `ammonia_level`, `ph_level`, `oxygen_level`
 (7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8),
 (8, 7, 7, 10, 8, 9, 10, 0, '18-04-2021', 8),
 (9, 8, 9, 7, 9, 5, 8, 0, '19-04-2021', 8),
-(10, 7, 8, 10, 7, 9, 9, 0, '22-04-2021', 9);
+(10, 7, 8, 10, 7, 9, 9, 0, '22-04-2021', 9),
+(11, 7, 8, 10, 7, 8, 5, 10, '30-04-2021', 8);
 
 -- --------------------------------------------------------
 
@@ -168,8 +169,9 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 12, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
-(4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0);
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 32, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
+(4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0),
+(5, 'Nutter ', 5, 900, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -183,6 +185,7 @@ CREATE TABLE `orders` (
   `product_qty` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_amount` int(11) NOT NULL,
+  `order_address` text DEFAULT NULL,
   `payment_mode` varchar(20) NOT NULL,
   `delivery_date` date DEFAULT NULL,
   `payment_status` int(11) NOT NULL DEFAULT 0,
@@ -193,8 +196,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `payment_mode`, `delivery_date`, `payment_status`, `order_status`) VALUES
-(2, 3, 3, 13, 6300, 'COD', NULL, 0, 1);
+INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `payment_status`, `order_status`) VALUES
+(2, 3, 3, 13, 6300, 'Valathel house\\nAthikaripadi\\nMaranchery P.O', 'COD', '2021-05-08', 0, 1),
+(4, 5, 100, 13, 500, NULL, 'COD', '2021-05-07', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -234,7 +238,7 @@ CREATE TABLE `seller` (
 
 INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`, `seller_dst`, `seller_phone`, `seller_mail`, `seller_upi_id`, `seller_gstin`, `seller_status`) VALUES
 (2, 'PVM Stores', 'CV Junction', 'Chamravattom Center', 'Malappuram', 9946739215, 'pvmstores@gmail.com', '2147483647', 'GSTIN00568975', 1),
-(3, 'ANB International', 'Ermanagalam', 'assalama mission', 'Kozhikode', 6238383110, 'anbintl@gmail.com', '9656823@ybl', 'GSTIN00568965', 0);
+(3, 'ANB International', 'Ermanagalam', 'assalama mission', 'Kozhikode', 6238383110, 'anbintl@gmail.com', '9656823@ybl', 'GSTIN00568965', 1);
 
 -- --------------------------------------------------------
 
@@ -391,7 +395,7 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `daily_data`
 --
 ALTER TABLE `daily_data`
-  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `farm`
@@ -415,13 +419,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `marketplace`
 --
 ALTER TABLE `marketplace`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reports`

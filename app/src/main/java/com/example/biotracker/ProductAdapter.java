@@ -48,7 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewTitle.setText(products.getProductName());
         holder.textViewDesc.setText(products.getProductDesc());
         holder.textViewPrice.setText(String.format("INR %s", products.getProductPrice()));
-        String img_location = "http://192.168.0.103/biotracker/seller/pages/" + products.getProductImage();
+        String img_location = "http://192.168.0.105/biotracker/seller/pages/" + products.getProductImage();
         try {
             URL url = new URL(img_location);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());

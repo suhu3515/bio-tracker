@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 
 public interface Api
 {
-    String BASE_URL = "http://192.168.0.103/biotracker/";
+    String BASE_URL = "http://192.168.0.105/biotracker/";
 
     @POST("Api.php?apicall=user_register")
     @FormUrlEncoded

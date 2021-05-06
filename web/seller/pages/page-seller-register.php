@@ -83,7 +83,7 @@
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle d-flex">
+				<a class="sidebar-toggle d-flex" href="../../index.php">
 					<h1>BIOTRACKER</h1>
         </a>
 

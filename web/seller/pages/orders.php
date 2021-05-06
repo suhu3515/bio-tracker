@@ -97,6 +97,26 @@ $seller_id = $_SESSION["seller_id"];
                     </div>
                     <div class="row">
 
+                        <div class="col-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="post" action="">
+                                        <select class="form-group col-md-3" name="select_status" id="select_status">
+                                            <option value="nothing" selected>Select status</option>
+                                            <option value="0">Rejected</option>
+                                            <option value="1">Confirmed</option>
+                                            <option value="2">Dispatched</option>
+                                            <option value="3">Completed</option>
+                                        </select>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <input type="text" class="form-group col-md-4" id="user_name" name="user_name" placeholder="User Name">
+                                        &nbsp;&nbsp;&nbsp;
+                                        <button type="submit" name="search_orders" id="search_orders" class="btn btn-primary col-md-2">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-12 col-xl-12">
                             <div class="card">
                                 <table class="table">
@@ -114,48 +134,68 @@ $seller_id = $_SESSION["seller_id"];
                                     <tbody>
                                     <?php
 
-                                    $order_sel = "select * from orders where product_id in (select product_id from marketplace where seller_id='$seller_id' and product_status='1')";
-                                    $order_res = $conn->query($order_sel);
-                                    while ($order_row = $order_res->fetch_array())
+                                    if (isset($_POST['search_orders']))
                                     {
-                                        echo "<tr>";
-                                        $res_user = $conn->query("select user_name from users where user_id='$order_row[3]'");
-                                        while ($row_user = $res_user->fetch_array())
+                                        $status = $_POST['select_status'];
+                                        $user = $_POST['user_name'];
+                                        if ($status=="nothing")
                                         {
-                                            echo "<td>$row_user[0]</td>";
+                                            echo "<script>alert('Please select status')</script>";
                                         }
-                                        $res_prod = $conn->query("select product_name from marketplace where product_id='$order_row[1]'");
-                                        while ($row_prod = $res_prod->fetch_array())
+                                        else
                                         {
-                                            echo "<td>$row_prod[0]</td>";
+                                            if ($user=="")
+                                            {
+                                                $search = $user."%";
+                                            }
+                                            else
+                                            {
+                                                $search = "%".$user."%";
+                                            }
+                                            $order_sel = "select * from orders where product_id in (select product_id from marketplace where seller_id='$seller_id' and product_status='1') and order_status='$status' and user_id in (select user_id from users where user_name LIKE '$search')";
+                                            $order_res = $conn->query($order_sel);
+                                            while ($order_row = $order_res->fetch_array())
+                                            {
+                                                echo "<tr>";
+                                                $res_user = $conn->query("select user_name from users where user_id='$order_row[3]'");
+                                                while ($row_user = $res_user->fetch_array())
+                                                {
+                                                    echo "<td>$row_user[0]</td>";
+                                                }
+                                                $res_prod = $conn->query("select product_name from marketplace where product_id='$order_row[1]'");
+                                                while ($row_prod = $res_prod->fetch_array())
+                                                {
+                                                    echo "<td>$row_prod[0]</td>";
+                                                }
+                                                echo "<td>$order_row[2]</td>";
+                                                echo "<td>INR $order_row[4]</td>";
+                                                if ($order_row[8] == 0)
+                                                {
+                                                    echo "<td style='color: red'>Not paid</td>";
+                                                }
+                                                if ($order_row[8] == 1)
+                                                {
+                                                    echo "<td style='color: green'>Paid</td>";
+                                                }
+                                                if ($order_row[9] == 0)
+                                                {
+                                                    echo "<td>Rejected</td>";
+                                                }
+                                                if ($order_row[9] == 1)
+                                                {
+                                                    echo "<td>Confirmed</td>";
+                                                }
+                                                if ($order_row[9] == 2)
+                                                {
+                                                    echo "<td>Dispatched</td>";
+                                                }
+                                                if ($order_row[9] == 3)
+                                                {
+                                                    echo "<td>Completed</td>";
+                                                }
+                                                echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
+                                            }
                                         }
-                                        echo "<td>$order_row[2]</td>";
-                                        echo "<td>INR $order_row[4]</td>";
-                                        if ($order_row[7] == 0)
-                                        {
-                                            echo "<td style='color: red'>Not paid</td>";
-                                        }
-                                        if ($order_row[7] == 1)
-                                        {
-                                            echo "<td style='color: green'>Approved</td>";
-                                        }
-                                        if ($order_row[8] == 0)
-                                        {
-                                            echo "<td>Rejected</td>";
-                                        }
-                                        if ($order_row[8] == 1)
-                                        {
-                                            echo "<td>Confirmed</td>";
-                                        }
-                                        if ($order_row[8] == 2)
-                                        {
-                                            echo "<td>Dispatched</td>";
-                                        }
-                                        if ($order_row[8] == 3)
-                                        {
-                                            echo "<td>Completed</td>";
-                                        }
-                                        echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
                                     }
                                     ?>
                                     </tbody>
@@ -172,234 +212,6 @@ $seller_id = $_SESSION["seller_id"];
 
 	<script src="js/vendor.js"></script>
 	<script src="../../examples/js/app.js"></script>
-
-	<script>
-		$(function() {
-			var ctx = document.getElementById('chartjs-dashboard-line').getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, 'rgba(215, 227, 244, 1)');
-			gradient.addColorStop(1, 'rgba(215, 227, 244, 0)');
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: 'line',
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "Sales ($)",
-						fill: true,
-						backgroundColor: gradient,
-						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					tooltips: {
-						intersect: false
-					},
-					hover: {
-						intersect: true
-					},
-					plugins: {
-						filler: {
-							propagate: false
-						}
-					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 1000
-							},
-							display: true,
-							borderDash: [3, 3],
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: 'pie',
-				data: {
-					labels: ["Chrome", "Firefox", "IE"],
-					datasets: [{
-						data: [4306, 3801, 1689],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					cutoutPercentage: 75
-				}
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: 'bar',
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
-							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
-							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			$("#world_map").vectorMap({
-				map: "world_mill",
-				normalizeFunction: "polynomial",
-				hoverOpacity: .7,
-				hoverColor: false,
-				regionStyle: {
-					initial: {
-						fill: "#e3eaef"
-					}
-				},
-				markerStyle: {
-					initial: {
-						"r": 9,
-						"fill": window.theme.primary,
-						"fill-opacity": .95,
-						"stroke": "#fff",
-						"stroke-width": 7,
-						"stroke-opacity": .4
-					},
-					hover: {
-						"stroke": "#fff",
-						"fill-opacity": 1,
-						"stroke-width": 1.5
-					}
-				},
-				backgroundColor: "transparent",
-				zoomOnScroll: false,
-				markers: [{
-						latLng: [31.230391, 121.473701],
-						name: "Shanghai"
-					},
-					{
-						latLng: [28.704060, 77.102493],
-						name: "Delhi"
-					},
-					{
-						latLng: [6.524379, 3.379206],
-						name: "Lagos"
-					},
-					{
-						latLng: [35.689487, 139.691711],
-						name: "Tokyo"
-					},
-					{
-						latLng: [23.129110, 113.264381],
-						name: "Guangzhou"
-					},
-					{
-						latLng: [40.7127837, -74.0059413],
-						name: "New York"
-					},
-					{
-						latLng: [34.052235, -118.243683],
-						name: "Los Angeles"
-					},
-					{
-						latLng: [41.878113, -87.629799],
-						name: "Chicago"
-					},
-					{
-						latLng: [51.507351, -0.127758],
-						name: "London"
-					},
-					{
-						latLng: [40.416775, -3.703790],
-						name: "Madrid"
-					}
-				]
-			});
-			setTimeout(function() {
-				$(window).trigger('resize');
-			}, 250)
-		});
-	</script>
-	<script>
-		$(function() {
-			$('#datetimepicker-dashboard').datetimepicker({
-				inline: true,
-				sideBySide: false,
-				format: 'L'
-			});
-		});
-	</script>
 
 </body>
 

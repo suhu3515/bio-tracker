@@ -141,67 +141,72 @@ $seller = $_SESSION['seller_id'];
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
+                                    <h3><strong>Update Stock</strong></h3>
+                                    <form method="post" action="">
+                                        <div class="form-group">
+                                            <br><label for="upd_qty">Quantity</label><br>
+                                            <input name="upd_qty" id="upd_qty" type="number" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="upd_price">Price</label><br>
+                                            <?php
+                                                echo "<input name='upd_price' id='upd_price' type='number' class='form-control' value='$row_prod[2]' required>";
+                                            ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <button name="upd_stock" id="upd_stock" type="submit" class="btn btn-success">Update Stock</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
                                     <div class="form-group">
                                         <label for="prod_img">Product Image</label><br>
                                         <?php
-                                            echo "<img src='$row_prod[5]'>";
+                                        echo "<img src='$row_prod[5]'>";
                                         ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </main>
         </div>
     </div>
 
-    <script src="js/vendor.js"></script>
+    <script src="../../examples/js/vendor.js"></script>
     <script src="../../examples/js/app.js"></script>
     </body>
     </html>
 
 <?php
-if (isset($_POST['add_products']))
+if (isset($_POST['upd_stock']))
 {
-    $maxsize = 5242880; //5MB
 
-    $prod_name = $_POST['prod_name'];
-    $price = $_POST['prod_price'];
-    $qty = $_POST['prod_qty'];
-    $desc = $_POST['prod_desc'];
+    $price = $_POST['upd_price'];
+    $qty = $_POST['upd_qty'];
+    $total = $row_prod[3] + $qty;
 
-    $name = $_FILES['file']['name'];
-    $target_dir = "images/";
-    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-    $extensions_arr = array("jpg","jpeg","png","gif");
-
-    if (in_array($imageFileType, $extensions_arr))
+    if ($row_prod[7]==0)
     {
-        if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"]==0))
-        {
-            echo "<script>alert('File too large. File must be less than 5MB.')</script>";
-        }
-        else
-        {
-            if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file))
-            {
-                $product_insert = "insert into marketplace(product_name, product_price, product_qty, product_desc, product_img, seller_id) values ('$prod_name','$price','$qty','$desc','$target_file','$seller')";
-                $product_res = $conn->query($product_insert);
-                if ($product_res)
-                {
-                    echo "<script>alert('Product added successfully. Item in review...')</script>";
-                    echo "<script>window.location='products.php'</script>";
-                }
-            }
-        }
+        echo "<script>alert('Cannot update stock when product is in review.')</script>";
+        echo "<script>window.location='products.php'</script>";
     }
     else
     {
-        echo "<script>alert('Invalid file extension.')</script>";
+        $res_upd = $conn->query("update marketplace set product_qty='$total', product_price='$price' where product_id='$row_prod[0]'");
+        if ($res_upd)
+        {
+            //echo "<script>alert('$total')</script>";
+            echo "<script>alert('Updated stock successfully...')</script>";
+            echo "<script>window.location='products.php'</script>";
+        }
     }
+
 }
