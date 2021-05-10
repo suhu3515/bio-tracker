@@ -74,4 +74,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_margin="10dp"/>
 
+    <Button
+        android:id="@+id/button_orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my orders"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/button_farm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

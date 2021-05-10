@@ -105,8 +105,9 @@ $seller_id = $_SESSION["seller_id"];
                                             <option value="nothing" selected>Select status</option>
                                             <option value="0">Rejected</option>
                                             <option value="1">Confirmed</option>
-                                            <option value="2">Dispatched</option>
-                                            <option value="3">Completed</option>
+                                            <option value="2">Packed</option>
+                                            <option value="3">Dispatched</option>
+                                            <option value="4">Completed</option>
                                         </select>
                                         &nbsp;&nbsp;&nbsp;
                                         <input type="text" class="form-group col-md-4" id="user_name" name="user_name" placeholder="User Name">
@@ -169,27 +170,31 @@ $seller_id = $_SESSION["seller_id"];
                                                 }
                                                 echo "<td>$order_row[2]</td>";
                                                 echo "<td>INR $order_row[4]</td>";
-                                                if ($order_row[8] == 0)
+                                                if ($order_row[9] == 0)
                                                 {
                                                     echo "<td style='color: red'>Not paid</td>";
                                                 }
-                                                if ($order_row[8] == 1)
+                                                if ($order_row[9] == 1)
                                                 {
                                                     echo "<td style='color: green'>Paid</td>";
                                                 }
-                                                if ($order_row[9] == 0)
+                                                if ($order_row[10] == 0)
                                                 {
                                                     echo "<td>Rejected</td>";
                                                 }
-                                                if ($order_row[9] == 1)
+                                                if ($order_row[10] == 1)
                                                 {
                                                     echo "<td>Confirmed</td>";
                                                 }
-                                                if ($order_row[9] == 2)
+                                                if ($order_row[10] == 2)
+                                                {
+                                                    echo "<td>Packed</td>";
+                                                }
+                                                if ($order_row[10] == 3)
                                                 {
                                                     echo "<td>Dispatched</td>";
                                                 }
-                                                if ($order_row[9] == 3)
+                                                if ($order_row[10] == 4)
                                                 {
                                                     echo "<td>Completed</td>";
                                                 }

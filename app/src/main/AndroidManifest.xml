@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BioTracker">
-        <activity android:name=".ConfirmOrderActivity"></activity>
+        <activity android:name=".OrderDetailsActivity"></activity>
+        <activity android:name=".ViewOrdersActivity" />
+        <activity android:name=".ConfirmOrderActivity" />
         <activity android:name=".AddOrderInfoActivity" />
         <activity android:name=".SellerDetailsActivity" />
         <activity android:name=".ProductDetailsActivity" />

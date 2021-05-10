@@ -22,7 +22,7 @@ public class MoreFragment extends Fragment {
 
     TextView textViewUserName, textViewUserPhone;
     User user;
-    Button buttonAddFarm;
+    Button buttonAddFarm, buttonViewOrders;
 
     public MoreFragment() {
     }
@@ -70,6 +70,7 @@ public class MoreFragment extends Fragment {
         textViewUserPhone.setText(user.getUserMobile());
 
         buttonAddFarm = view.findViewById(R.id.button_farm);
+        buttonViewOrders = view.findViewById(R.id.button_orders);
 
         buttonAddFarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +78,16 @@ public class MoreFragment extends Fragment {
 
                 Intent farmIntent = new Intent(getContext(),FarmActivity.class);
                 startActivity(farmIntent);
+            }
+        });
+
+        buttonViewOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent orderIntent = new Intent(getContext(), ViewOrdersActivity.class);
+                startActivity(orderIntent);
+
             }
         });
 

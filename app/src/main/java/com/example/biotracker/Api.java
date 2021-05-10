@@ -12,7 +12,8 @@ import retrofit2.http.POST;
 
 public interface Api
 {
-    String BASE_URL = "http://192.168.0.105/biotracker/";
+
+    String BASE_URL = "http://"+URLs.ipAddress+"/biotracker/";
 
     @POST("Api.php?apicall=user_register")
     @FormUrlEncoded
@@ -62,6 +63,14 @@ public interface Api
     @POST("Api.php?apicall=add_orders")
     @FormUrlEncoded
     Call<JsonObject> addOrder(@Field("product_id") String productId, @Field("user_id") String userId, @Field("payment_mode") String paymentMode,
-                              @Field("product_qty") String orderQty, @Field("order_amount") String orderAmount);
+                              @Field("product_qty") String orderQty, @Field("order_amount") String orderAmount, @Field("order_address") String orderAddress);
+
+    @POST("Api.php?apicall=get_orders")
+    @FormUrlEncoded
+    Call<JsonArray> getOrders(@Field("user_id") String userId);
+
+    @POST("Api.php?apicall=cancel_order")
+    @FormUrlEncoded
+    Call<JsonObject> cancelOrder(@Field("order_id") String orderId);
 
 }

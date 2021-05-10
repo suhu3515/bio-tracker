@@ -348,15 +348,17 @@ if(isset($_GET['apicall']))
 
         case "add_orders":
 
-            if(isTheseParametersAvailable(array('product_id','user_id','payment_mode','product_qty','order_amount')))
+            if(isTheseParametersAvailable(array('product_id','user_id','payment_mode','product_qty','order_amount','order_address')))
             {
                 $product = $_POST['product_id'];
                 $userId = $_POST['user_id'];
                 $payment_mode = $_POST['payment_mode'];
                 $product_qty = (int)$_POST['product_qty'];
                 $order_amount = $_POST['order_amount'];
+                $order_address = $_POST['order_address'];
+                $order_date = date("d-m-Y");
 
-                $res_order = $conn->query("insert into orders(product_id,product_qty,user_id,order_amount,payment_mode) values ('$product',$product_qty,'$userId','$order_amount','$payment_mode')");
+                $res_order = $conn->query("insert into orders(product_id,product_qty,user_id,order_amount,order_date,payment_mode,order_address) values ('$product',$product_qty,'$userId','$order_amount','$order_date','$payment_mode','$order_address')");
                 if ($res_order)
                 {
                    $res_prod = $conn->query("select product_qty from marketplace where product_id='$product'");
@@ -389,6 +391,94 @@ if(isset($_GET['apicall']))
                     $response['message'] = 'Something went wrong!';
                 }
 
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_orders":
+
+            if (isTheseParametersAvailable(array('user_id')))
+            {
+                $userId2 = $_POST['user_id'];
+                $order_res = $conn->query("select * from orders where user_id='$userId2'");
+                $orders = array();
+                $temp = array();
+                if ($order_res)
+                {
+                    while ($order_row = $order_res->fetch_array())
+                    {
+                        $product_res = $conn->query("select product_name,product_img from marketplace where product_id = '$order_row[1]'");
+                        $product_row = $product_res->fetch_array();
+                        $temp['order_id'] = $order_row[0];
+                        $temp['product_name'] = $product_row[0];
+                        $temp['product_img'] = $product_row[1];
+                        $temp['order_qty'] = $order_row[2];
+                        $temp['order_amount'] = $order_row[4];
+                        $temp['order_date'] = $order_row[8];
+                        $temp['payment_mode'] = $order_row[6];
+                        $temp['order_address'] = $order_row[5];
+                        if ($order_row[9]==0)
+                        {
+                            $temp['pay_status'] = "Not paid";
+                        }
+                        if ($order_row[9]==1)
+                        {
+                            $temp['pay_status'] = "Paid";
+                        }
+                        if ($order_row[10]==0)
+                        {
+                            $temp['order_status'] = "Rejected";
+                        }
+                        if ($order_row[10]==1)
+                        {
+                            $temp['order_status'] = "Confirmed";
+                        }
+                        if ($order_row[10]==2)
+                        {
+                            $temp['order_status'] = "Packed";
+                        }
+                        if ($order_row[10]==3)
+                        {
+                            $temp['order_status'] = "Dispatched";
+                        }
+                        if ($order_row[10]==4)
+                        {
+                            $temp['order_status'] = "Completed";
+                        }
+                        $temp['estimated_date'] = $order_row[7];
+                        array_push($orders,$temp);
+                    }
+                    $response = $orders;
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "cancel_order":
+
+            if (isTheseParametersAvailable(array('order_id')))
+            {
+                $order_id = $_POST['order_id'];
+
+                $cancel_order = $conn->query("update orders set order_status='0' where order_id='$order_id'");
+                if ($cancel_order)
+                {
+                    $response['error'] = false;
+                    $response['message'] = "Order cancelled successfully..";
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = "Something went wrong!";
+                }
             }
             else
             {

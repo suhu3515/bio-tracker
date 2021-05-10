@@ -113,7 +113,7 @@ $seller = $_SESSION['seller_id'];
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h3><strong>Product details</strong></h3><br>
+                                    <h3><strong>Order details</strong></h3><br>
                                     <div class="form-group">
                                         <label><strong>Product Name</strong></label><br>
                                     <?php
@@ -165,13 +165,19 @@ $seller = $_SESSION['seller_id'];
                                         ?>
                                     </div>
                                     <div class="form-group">
+                                        <label><strong>Order Date</strong></label><br>
+                                        <?php
+                                        echo "<label class='form-group'>$order_row[8]</label>";
+                                        ?>
+                                    </div>
+                                    <div class="form-group">
                                         <label><strong>Payment Status</strong></label><br>
                                         <?php
-                                        if($order_row[8]==0)
+                                        if($order_row[9]==0)
                                         {
                                             echo "<label class='form-group'>Not paid</label>";
                                         }
-                                        if ($order_row[8]==1)
+                                        if ($order_row[9]==1)
                                         {
                                             echo "<label class='form-group'>Paid</label>";
                                         }
@@ -180,19 +186,23 @@ $seller = $_SESSION['seller_id'];
                                     <div class="form-group">
                                         <label><strong>Order Status</strong></label><br>
                                         <?php
-                                        if($order_row[9]==0)
+                                        if($order_row[10]==0)
                                         {
                                             echo "<label class='form-group'>Rejected</label>";
                                         }
-                                        if ($order_row[9]==1)
+                                        if ($order_row[10]==1)
                                         {
                                             echo "<label class='form-group'>Confirmed</label>";
                                         }
-                                        if ($order_row[9]==2)
+                                        if ($order_row[10]==2)
+                                        {
+                                            echo "<label class='form-group'>Packed</label>";
+                                        }
+                                        if ($order_row[10]==3)
                                         {
                                             echo "<label class='form-group'>Dispatched</label>";
                                         }
-                                        if ($order_row[9]==3)
+                                        if ($order_row[10]==4)
                                         {
                                             echo "<label class='form-group'>Completed</label>";
                                         }
@@ -213,6 +223,7 @@ $seller = $_SESSION['seller_id'];
                                             <option value="nothing" selected>Select status</option>
                                             <option value="0">Rejected</option>
                                             <option value="1">Confirmed</option>
+                                            <option value="2">Packed</option>
                                             <option value="2">Dispatched</option>
                                             <option value="3">Completed</option>
                                         </select>
@@ -220,9 +231,6 @@ $seller = $_SESSION['seller_id'];
                                     <div class="form-group">
                                         <label for="estdeliverydate"><strong>Estimated date</strong></label><br>
                                         <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                             <input id='estdeliverydate' type='date' class='form-control' name='estdeliverydate' required>
                                         </div>
                                     </div>

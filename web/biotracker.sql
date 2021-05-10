@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2021 at 06:53 PM
+-- Generation Time: May 10, 2021 at 09:08 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -169,7 +169,7 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 32, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 30, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0),
 (5, 'Nutter ', 5, 900, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1);
 
@@ -188,6 +188,7 @@ CREATE TABLE `orders` (
   `order_address` text DEFAULT NULL,
   `payment_mode` varchar(20) NOT NULL,
   `delivery_date` date DEFAULT NULL,
+  `order_date` varchar(20) NOT NULL,
   `payment_status` int(11) NOT NULL DEFAULT 0,
   `order_status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -196,9 +197,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `payment_status`, `order_status`) VALUES
-(2, 3, 3, 13, 6300, 'Valathel house\\nAthikaripadi\\nMaranchery P.O', 'COD', '2021-05-08', 0, 1),
-(4, 5, 100, 13, 500, NULL, 'COD', '2021-05-07', 0, 1);
+INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `order_date`, `payment_status`, `order_status`) VALUES
+(5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -425,7 +425,7 @@ ALTER TABLE `marketplace`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `reports`
