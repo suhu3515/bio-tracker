@@ -7,6 +7,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $userId = $_POST['user_id'];
     $caption = $_POST['caption'];
     $image = $_POST['image'];
+    $date = $_POST['date'];
 /*    $image_parts = explode(";base64,", $_POST['image']);
     $image_type_aux = explode("image/", $image_parts[0]);
     $image_type = $image_type_aux[1];
@@ -16,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $path = "user_posts/" . $name;
     $actual_path = "http://192.168.0.103/biotracker/$path";
 
-    $res_new_post = $conn->query("insert into community_post(user_id,caption,post_image) values ('$userId','$caption','$path')");
+    $res_new_post = $conn->query("insert into community_post(user_id,caption,post_image,post_date) values ('$userId','$caption','$path','$date')");
     if ($res_new_post)
     {
         file_put_contents($path, base64_decode($image));

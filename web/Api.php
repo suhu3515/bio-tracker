@@ -490,12 +490,13 @@ if(isset($_GET['apicall']))
 
         case "add_new_post":
 
-            if (isTheseParametersAvailable(array('posted_user','post_caption')))
+            if (isTheseParametersAvailable(array('posted_user','post_caption','date')))
             {
                 $userId3 = $_POST['posted_user'];
                 $caption = $_POST['post_caption'];
+                $post_date = $_POST['date'];
 
-                $res_new_text_post = $conn->query("insert into community_post(user_id,caption) values ('$userId3','$caption')");
+                $res_new_text_post = $conn->query("insert into community_post(user_id,caption,post_date) values ('$userId3','$caption','$post_date')");
                 if ($res_new_text_post)
                 {
                     $response['error'] = false;
@@ -516,7 +517,7 @@ if(isset($_GET['apicall']))
 
         case "upload_image_post":
 
-            if (isset($_POST['desc']) && isset($_POST['user_id']) && strlen($_POST['desc'] > 0) && $_FILES['image']['error'] === UPLOAD_ERR_OK)
+            if (isset($_POST['desc']) && isset($_POST['user_id']) && isset($_POST['date']) && strlen($_POST['desc'] > 0) && $_FILES['image']['error'] === UPLOAD_ERR_OK)
             {
                 $upload = new FileHandler();
 
@@ -525,6 +526,8 @@ if(isset($_GET['apicall']))
                 $user = $_POST['user_id'];
 
                 $desc = $_POST['desc'];
+
+                $date = $_POST['date'];
 
                 if ($upload->saveFile($user,$file,getFileExtension($_FILES['image']['name']),$desc))
                 {
@@ -538,6 +541,31 @@ if(isset($_GET['apicall']))
                 $response['message'] = 'required parameters are not available';
             }
 
+        break;
+
+        case "get_posts":
+
+            $posts_res = $conn->query("SELECT * FROM community_post where status='1' ORDER BY post_id DESC");
+            $posts = array();
+            $temp = array();
+            while ($posts_row = $posts_res->fetch_array())
+            {
+                $temp['post_id'] = $posts_row[0];
+                $temp['post_date'] = $posts_row[5];
+                $temp['post_caption'] = $posts_row[2];
+                $temp['post_image'] = $posts_row[3];
+                $likes_count_res = $conn->query("select count(*) from post_likes where liked_post='$posts_row[0]'");
+                $likes_count_row = $likes_count_res->fetch_array();
+                $temp['post_likes'] = $likes_count_row[0];
+                $comments_count_res = $conn->query("select count(*) from comments where post_id='$posts_row[0]'");
+                $comments_count_row = $comments_count_res->fetch_array();
+                $temp['post_comments'] = $comments_count_row[0];
+                $user_res = $conn->query("select user_name from users where user_id='$posts_row[1]'");
+                $user_row = $user_res->fetch_array();
+                $temp['user_name'] = $user_row[0];
+                array_push($posts,$temp);
+            }
+            $response = $posts;
         break;
     }
 }

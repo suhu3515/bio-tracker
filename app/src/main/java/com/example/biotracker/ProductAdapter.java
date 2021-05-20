@@ -39,44 +39,44 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        @Override
+        public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
 
-        Products products = productsList.get(position);
+            Products products = productsList.get(position);
 
-        holder.textViewTitle.setText(products.getProductName());
-        holder.textViewDesc.setText(products.getProductDesc());
-        holder.textViewPrice.setText(String.format("INR %s", products.getProductPrice()));
-        String img_location = "http://"+ Constants.ipAddress+"/biotracker/seller/pages/" + products.getProductImage();
-        try {
-            URL url = new URL(img_location);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            holder.imageViewProduct.setImageBitmap(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        holder.cardViewProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Context context = mCtx;
-
-                Intent detailsIntent = new Intent(context, ProductDetailsActivity.class);
-                detailsIntent.putExtra("prod_name", productsList.get(holder.getLayoutPosition()).getProductName());
-                detailsIntent.putExtra("prod_id", productsList.get(holder.getLayoutPosition()).getProductId());
-                detailsIntent.putExtra("prod_price", productsList.get(holder.getLayoutPosition()).getProductPrice());
-                detailsIntent.putExtra("prod_qty", productsList.get(holder.getLayoutPosition()).getProductQty());
-                detailsIntent.putExtra("prod_desc", productsList.get(holder.getLayoutPosition()).getProductDesc());
-                detailsIntent.putExtra("prod_img", productsList.get(holder.getLayoutPosition()).getProductImage());
-                detailsIntent.putExtra("seller_name", productsList.get(holder.getLayoutPosition()).getSellerName());
-                detailsIntent.putExtra("seller_id", productsList.get(holder.getLayoutPosition()).getSellerId());
-
-                context.startActivity(detailsIntent);
+            holder.textViewTitle.setText(products.getProductName());
+            holder.textViewDesc.setText(products.getProductDesc());
+            holder.textViewPrice.setText(String.format("INR %s", products.getProductPrice()));
+            String img_location = "http://"+ Constants.ipAddress+"/biotracker/seller/pages/" + products.getProductImage();
+            try {
+                URL url = new URL(img_location);
+                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                holder.imageViewProduct.setImageBitmap(bmp);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
 
-    }
+            holder.cardViewProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Context context = mCtx;
+
+                    Intent detailsIntent = new Intent(context, ProductDetailsActivity.class);
+                    detailsIntent.putExtra("prod_name", productsList.get(holder.getLayoutPosition()).getProductName());
+                    detailsIntent.putExtra("prod_id", productsList.get(holder.getLayoutPosition()).getProductId());
+                    detailsIntent.putExtra("prod_price", productsList.get(holder.getLayoutPosition()).getProductPrice());
+                    detailsIntent.putExtra("prod_qty", productsList.get(holder.getLayoutPosition()).getProductQty());
+                    detailsIntent.putExtra("prod_desc", productsList.get(holder.getLayoutPosition()).getProductDesc());
+                    detailsIntent.putExtra("prod_img", productsList.get(holder.getLayoutPosition()).getProductImage());
+                    detailsIntent.putExtra("seller_name", productsList.get(holder.getLayoutPosition()).getSellerName());
+                    detailsIntent.putExtra("seller_id", productsList.get(holder.getLayoutPosition()).getSellerId());
+
+                    context.startActivity(detailsIntent);
+                }
+            });
+
+        }
 
     @Override
     public int getItemCount() {

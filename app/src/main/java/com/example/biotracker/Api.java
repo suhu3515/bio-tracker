@@ -76,13 +76,13 @@ public interface Api
 
     @POST("Api.php?apicall=add_new_post")
     @FormUrlEncoded
-    Call<JsonObject> addPosts(@Field("posted_user") String userId, @Field("post_caption") String caption);
+    Call<JsonObject> addPosts(@Field("posted_user") String userId, @Field("post_caption") String caption, @Field("date") String date);
 
     @POST("upload.php")
     @FormUrlEncoded
-    Call<JsonObject> uploadImage(@Field("user_id") String userId, @Field("caption") String caption, @Field("image") String postImage);
+    Call<JsonObject> uploadImage(@Field("user_id") String userId, @Field("caption") String caption, @Field("image") String postImage, @Field("date") String date);
 
-    /*@Multipart
-    @POST("upload_image_post")
-    Call<JsonObject> uploadImage(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file, @Part("desc") RequestBody desc, @Part("user_id") RequestBody userId);*/
+    @POST("Api.php?apicall=get_posts")
+    Call<JsonArray> getPosts();
+
 }

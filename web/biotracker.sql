@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2021 at 04:33 PM
+-- Generation Time: May 20, 2021 at 08:22 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -45,16 +45,20 @@ CREATE TABLE `community_post` (
   `user_id` int(11) NOT NULL,
   `caption` text DEFAULT NULL,
   `post_image` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1
+  `status` int(11) NOT NULL DEFAULT 1,
+  `post_date` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `community_post`
 --
 
-INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `status`) VALUES
-(143, 11, 'smile', 'user_posts/1621520396782.jpg', 1),
-(144, 14, 'Hello guys...I also started fish farming ..', NULL, 1);
+INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `status`, `post_date`) VALUES
+(143, 11, 'smile', 'user_posts/1621520396782.jpg', 1, '20-05-2021'),
+(144, 14, 'Hello guys...I also started fish farming ..', NULL, 1, '20-05-2021'),
+(145, 14, 'Is this type of tilapia good for growing???', 'user_posts/1621525527575.jpg', 1, '20-05-2021'),
+(146, 13, 'I started using this motor for my fish tank', 'user_posts/1621525585330.jpg', 1, '20-05-2021'),
+(147, 11, 'ഫിഷ് ടാങ്കിൽ oxygen കുറഞ്ഞാൽ എന്ത് ചെയ്യണം ???', NULL, 1, '20-05-2021');
 
 -- --------------------------------------------------------
 
@@ -418,7 +422,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `community_post`
 --
 ALTER TABLE `community_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `daily_data`

@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -33,6 +34,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import android.util.Base64;
 
@@ -48,6 +51,10 @@ public class NewPostActivity extends AppCompatActivity {
     EditText editTextPostCaption;
     ImageView imageViewPostImage;
     User user;
+
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String todayDate;
 
     private int PICK_IMAGE_REQUEST = 1;
     private static final int STORAGE_PERMISSION_CODE = 123;
@@ -67,6 +74,10 @@ public class NewPostActivity extends AppCompatActivity {
         user = SharedPrefManager.getInstance(this).getUser();
 
         requestStoragePermission();
+
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        todayDate = dateFormat.format(calendar.getTime());
 
         buttonSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +101,7 @@ public class NewPostActivity extends AppCompatActivity {
                     if (imageViewPostImage.getVisibility()==View.VISIBLE)
                     {
 
-                        Call<JsonObject> newPostImgCall = RetrofitClient.getInstance().getMyApi().uploadImage(String.valueOf(user.getId()),editTextPostCaption.getText().toString(),encodeTobase64(bitmap));
+                        Call<JsonObject> newPostImgCall = RetrofitClient.getInstance().getMyApi().uploadImage(String.valueOf(user.getId()),editTextPostCaption.getText().toString(),encodeTobase64(bitmap),todayDate);
                         newPostImgCall.enqueue(new Callback<JsonObject>() {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -135,7 +146,7 @@ public class NewPostActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
-                                        Call<JsonObject> newPostCall = RetrofitClient.getInstance().getMyApi().addPosts(String.valueOf(user.getId()),editTextPostCaption.getText().toString());
+                                        Call<JsonObject> newPostCall = RetrofitClient.getInstance().getMyApi().addPosts(String.valueOf(user.getId()),editTextPostCaption.getText().toString(),todayDate);
                                         newPostCall.enqueue(new Callback<JsonObject>() {
                                             @Override
                                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

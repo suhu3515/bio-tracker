@@ -1,18 +1,26 @@
 package com.example.biotracker;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 public class CommunityFragment extends Fragment {
@@ -25,6 +33,10 @@ public class CommunityFragment extends Fragment {
 
     View root;
     FloatingActionButton buttonCreatePosts;
+    RecyclerView recyclerView;
+    ProgressBar progressBar;
+    List<Posts> postsLists;
+    SwipeRefreshLayout pullToRefresh;
 
     public CommunityFragment() {
     }
@@ -56,6 +68,16 @@ public class CommunityFragment extends Fragment {
 
         root = inflater.inflate(R.layout.fragment_community, container, false);
         buttonCreatePosts = root.findViewById(R.id.fab_add_posts);
+        recyclerView = root.findViewById(R.id.recycler_posts);
+        progressBar = root.findViewById(R.id.progress_community);
+        pullToRefresh = root.findViewById(R.id.pulltorefresh);
+
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                
+            }
+        });
         buttonCreatePosts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +88,16 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        postsLists = new ArrayList<>();
+
+        postsLists = HomeActivity.postsList;
+
+        PostsAdapterActivity adapterActivity = new PostsAdapterActivity(getContext(),postsLists);
+        recyclerView.setAdapter(adapterActivity);
+        progressBar.setVisibility(View.GONE);
 
         return root;
 

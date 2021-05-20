@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/imageViewUser"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/profile_logo"
+                android:padding="4dp"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/textViewUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/imageViewUser"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="USAMA BIN ABOOBACKER"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textViewPostDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewUserName"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/imageViewUser"
+                android:text="posted on 09-05-2021"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/textViewPostCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageViewUser"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="23sp"
+                android:text="Hello guys... I also started fish farming. "
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/imageViewPostImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_below="@id/textViewPostCaption"/>
+
+            <TextView
+                android:id="@+id/textViewPostLikesAndComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageViewPostImage"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"
+                android:text="5 Likes \u2022 122 Comments"
+                android:textColor="@color/black"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

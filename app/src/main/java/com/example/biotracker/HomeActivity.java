@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -29,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
     public static List<Products> productsList;
+    public static List<Posts> postsList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +45,59 @@ public class HomeActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(HomeFragment.newInstance("",""));
 
         productsList = new ArrayList<>();
+        postsList = new ArrayList<>();
+
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+
+            }
+        });
+
+        Call<JsonArray> getPostsCall = RetrofitClient.getInstance().getMyApi().getPosts();
+        getPostsCall.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+
+                if (response.isSuccessful())
+                {
+                    try
+                    {
+                        JSONArray array = new JSONArray(response.body().toString());
+                        for (int j=0;j<array.length();j++)
+                        {
+                            JSONObject jsonObject = array.getJSONObject(j);
+                            postsList.add(new Posts(Integer.parseInt(jsonObject.getString("post_id")),
+                                    jsonObject.getString("post_date"),
+                                    jsonObject.getString("post_caption"),
+                                    jsonObject.getString("post_image"),
+                                    jsonObject.getString("post_likes"),
+                                    jsonObject.getString("post_comments"),
+                                    jsonObject.getString("user_name")));
+                        }
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Call<JsonArray> getProductsCall = RetrofitClient.getInstance().getMyApi().getProducts();
         getProductsCall.enqueue(new Callback<JsonArray>() {
