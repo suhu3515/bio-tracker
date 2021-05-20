@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2021 at 09:08 PM
+-- Generation Time: May 20, 2021 at 04:33 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -43,9 +43,18 @@ CREATE TABLE `comments` (
 CREATE TABLE `community_post` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `likes` int(11) NOT NULL,
-  `status` int(11) NOT NULL
+  `caption` text DEFAULT NULL,
+  `post_image` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `community_post`
+--
+
+INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `status`) VALUES
+(143, 11, 'smile', 'user_posts/1621520396782.jpg', 1),
+(144, 14, 'Hello guys...I also started fish farming ..', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +110,8 @@ CREATE TABLE `farm` (
 
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
 (8, 'Nutter', 500, '6358500', '2021-04-16', 6, 13),
-(9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 13);
+(9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 13),
+(10, 'Nutter fish', 600, '480000', '2021-05-19', 6, 14);
 
 -- --------------------------------------------------------
 
@@ -145,7 +155,8 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (13, 9946739215, 'pvmstores', 'SELLER'),
 (15, 9876543210, 'admin', 'ADMIN'),
 (16, 6238383110, 'anbintl', 'SELLER'),
-(17, 9946739216, 'sakkeer123', 'USER');
+(17, 9946739216, 'sakkeer123', 'USER'),
+(18, 9446476922, 'abcde', 'USER');
 
 -- --------------------------------------------------------
 
@@ -169,9 +180,9 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 30, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 27, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0),
-(5, 'Nutter ', 5, 900, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1);
+(5, 'Nutter ', 5, 820, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -198,7 +209,21 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `order_date`, `payment_status`, `order_status`) VALUES
-(5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1);
+(5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1),
+(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', NULL, '19-05-2021', 0, 1),
+(7, 5, 80, 14, 400, 'valathel house,\nathikaripadi,\n679581,\nmalappuram', 'COD', NULL, '19-05-2021', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_likes`
+--
+
+CREATE TABLE `post_likes` (
+  `like_id` int(11) NOT NULL,
+  `liked_user` int(11) NOT NULL,
+  `liked_post` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -279,15 +304,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_dob`, `user_hname`, `user_place`, `user_pincode`, `user_dst`, `user_mobile`, `user_email`, `user_status`) VALUES
-(2, 'fsg', '2021-04-09', 'asds', 'adadd', 558464, 'adas', 9564558548, 's@s.s', 1),
-(3, 'ysf', '2021-04-09', 'afaf', 'dsff', 678581, 'zfacx', 9565224554, 's@s.s', 1),
-(4, 'suh', '2021-04-09', 'bsnjs', 'ghsjh', 679594, 'bakjzis', 8766316667, 's@s.s', 1),
 (5, 'sijhh', '2021-04-09', 'hhjs', 'bjsjjs', 975946, 'bjauhs', 9546679357, 's@s.s', 1),
-(6, 'fsff', '0000-00-00', 'asaaa', 'dgweg', 685581, 'FCC dh', 5484584854, 'sczd@sdd.ffg', 1),
-(7, 'fhh', '2021-04-09', 'gghg', 'gjhg', 678585, 'dgfd', 9533626233, 's@e.s', 1),
 (10, 'Suhail A K', '1998-10-28', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 9633058949, 'suhu3515@gmail.com', 1),
 (11, 'Safwan V', '2002-09-30', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 7994367615, 'safwan@gmail.com', 1),
-(13, 'Mohammed Sakkeer', '1980-05-02', 'valathel', 'athikaripadi', 679581, 'malappuram', 9946739216, 'mohamedsawani@gmail.com', 1);
+(13, 'Mohammed Sakkeer', '1980-05-02', 'valathel', 'athikaripadi', 679581, 'malappuram', 9946739216, 'mohamedsawani@gmail.com', 1),
+(14, 'jaseela a k', '1968-05-10', 'valathel house', 'athikaripadi', 679581, 'malappuram', 9446476922, 'jaseelasakkeer123@gmail.com', 1);
 
 --
 -- Indexes for dumped tables
@@ -350,6 +371,14 @@ ALTER TABLE `orders`
   ADD KEY `fk_ordered_user` (`user_id`);
 
 --
+-- Indexes for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  ADD PRIMARY KEY (`like_id`),
+  ADD KEY `fk_liked_user` (`liked_user`),
+  ADD KEY `fk_liked_post` (`liked_post`);
+
+--
 -- Indexes for table `reports`
 --
 ALTER TABLE `reports`
@@ -389,7 +418,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `community_post`
 --
 ALTER TABLE `community_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT for table `daily_data`
@@ -401,7 +430,7 @@ ALTER TABLE `daily_data`
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `instructions`
@@ -413,19 +442,25 @@ ALTER TABLE `instructions`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
 --
 ALTER TABLE `marketplace`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -449,7 +484,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -492,6 +527,13 @@ ALTER TABLE `marketplace`
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_ordered_product` FOREIGN KEY (`product_id`) REFERENCES `marketplace` (`product_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_ordered_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  ADD CONSTRAINT `fk_liked_post` FOREIGN KEY (`liked_post`) REFERENCES `community_post` (`post_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_liked_user` FOREIGN KEY (`liked_user`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reports`

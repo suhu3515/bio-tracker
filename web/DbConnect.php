@@ -4,6 +4,7 @@ $user_name = "root";
 $password = "";
 $database = "biotracker";
 
+
 $conn = new mysqli($server_name, $user_name, $password, $database);
 
 if ($conn->connect_error)

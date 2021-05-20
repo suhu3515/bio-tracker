@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -49,7 +48,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrdersViewHo
         holder.textViewProductName.setText(orders.getProduct_name());
         holder.textViewOrderDate.setText(String.format("ordered on %s",orders.getOrder_date()));
 
-        String img_location = "http://" + URLs.ipAddress + "/biotracker/seller/pages/" + orders.getProduct_image();
+        String img_location = "http://" + Constants.ipAddress + "/biotracker/seller/pages/" + orders.getProduct_image();
         try
         {
             URL url = new URL(img_location);

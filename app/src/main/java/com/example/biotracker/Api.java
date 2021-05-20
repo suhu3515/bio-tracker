@@ -3,17 +3,18 @@ package com.example.biotracker;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface Api
 {
 
-    String BASE_URL = "http://"+URLs.ipAddress+"/biotracker/";
+    String BASE_URL = "http://"+ Constants.ipAddress+"/biotracker/";
 
     @POST("Api.php?apicall=user_register")
     @FormUrlEncoded
@@ -73,4 +74,15 @@ public interface Api
     @FormUrlEncoded
     Call<JsonObject> cancelOrder(@Field("order_id") String orderId);
 
+    @POST("Api.php?apicall=add_new_post")
+    @FormUrlEncoded
+    Call<JsonObject> addPosts(@Field("posted_user") String userId, @Field("post_caption") String caption);
+
+    @POST("upload.php")
+    @FormUrlEncoded
+    Call<JsonObject> uploadImage(@Field("user_id") String userId, @Field("caption") String caption, @Field("image") String postImage);
+
+    /*@Multipart
+    @POST("upload_image_post")
+    Call<JsonObject> uploadImage(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file, @Part("desc") RequestBody desc, @Part("user_id") RequestBody userId);*/
 }

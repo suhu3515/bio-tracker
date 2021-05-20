@@ -15,7 +15,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewTitle.setText(products.getProductName());
         holder.textViewDesc.setText(products.getProductDesc());
         holder.textViewPrice.setText(String.format("INR %s", products.getProductPrice()));
-        String img_location = "http://"+ URLs.ipAddress+"/biotracker/seller/pages/" + products.getProductImage();
+        String img_location = "http://"+ Constants.ipAddress+"/biotracker/seller/pages/" + products.getProductImage();
         try {
             URL url = new URL(img_location);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());

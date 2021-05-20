@@ -1,6 +1,7 @@
 <?php
 
 require_once 'DbConnect.php';
+require_once dirname(__FILE__) . '/FileHandler.php';
 $response = array();
 
 if(isset($_GET['apicall']))
@@ -486,6 +487,58 @@ if(isset($_GET['apicall']))
                 $response['message'] = 'required parameters are not available';
             }
         break;
+
+        case "add_new_post":
+
+            if (isTheseParametersAvailable(array('posted_user','post_caption')))
+            {
+                $userId3 = $_POST['posted_user'];
+                $caption = $_POST['post_caption'];
+
+                $res_new_text_post = $conn->query("insert into community_post(user_id,caption) values ('$userId3','$caption')");
+                if ($res_new_text_post)
+                {
+                    $response['error'] = false;
+                    $response['message'] = 'Posted successfully...';
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Something went wrong...';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "upload_image_post":
+
+            if (isset($_POST['desc']) && isset($_POST['user_id']) && strlen($_POST['desc'] > 0) && $_FILES['image']['error'] === UPLOAD_ERR_OK)
+            {
+                $upload = new FileHandler();
+
+                $file = $_FILES['image']['tmp_name'];
+
+                $user = $_POST['user_id'];
+
+                $desc = $_POST['desc'];
+
+                if ($upload->saveFile($user,$file,getFileExtension($_FILES['image']['name']),$desc))
+                {
+                    $response['error'] = false;
+                    $response['message'] = 'Posted Successfully';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+
+        break;
     }
 }
 else
@@ -509,4 +562,9 @@ function isTheseParametersAvailable($params)
     return true;
 }
 
+function getFileExtension($file)
+{
+    $path_parts = pathinfo($file);
+    return $path_parts['extension'];
+}
 ?>  

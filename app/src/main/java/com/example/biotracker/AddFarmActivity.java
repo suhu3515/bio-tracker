@@ -34,7 +34,7 @@ public class AddFarmActivity extends AppCompatActivity {
 
     EditText editTextFishType, editTextFishCount, editTextStartDate, editTextEstTime;
     Button buttonNextStep;
-    TextView textViewBreadth, textViewLength, textViewHeight, textViewCircleHeight, textViewRadius, textViewShape, textViewChangeShape;
+    TextView textViewBreadth, textViewLength, textViewHeight, textViewCircleHeight, textViewRadius, textViewShape, textViewShapeText, textViewChangeShape;
     RadioGroup tankShapes;
     RadioButton radioButtonCircle, radioButtonRectangle;
     final Calendar myCalendar = Calendar.getInstance();
@@ -49,6 +49,7 @@ public class AddFarmActivity extends AppCompatActivity {
         editTextStartDate = findViewById(R.id.edit_text_fish_start_date);
         editTextEstTime = findViewById(R.id.edit_text_fish_est_time);
         textViewShape = findViewById(R.id.text_view_tank_shape);
+        textViewShapeText = findViewById(R.id.text_view_tank_shape_desc);
         buttonNextStep = findViewById(R.id.button_next_page);
         tankShapes = findViewById(R.id.tank_shape_grp);
         radioButtonCircle = findViewById(R.id.radio_circle);
@@ -107,8 +108,10 @@ public class AddFarmActivity extends AppCompatActivity {
             editTextStartDate.setHint("തുടങ്ങിയ തിയ്യതി");
             editTextEstTime.setHint("ഏകദേശ സമയം (മാസത്തിൽ)");
             textViewShape.setText("ടാങ്കിൻറെ രൂപം");
+            textViewShapeText.setText("ടാങ്കിൻറെ  രൂപം തിരഞ്ഞെടുക്കുക");
             radioButtonCircle.setText("വൃത്തം");
             radioButtonRectangle.setText("ദീർഘചതുരം");
+            buttonNextStep.setText("തുടരുക");
         }
 
         buttonNextStep.setOnClickListener(new View.OnClickListener() {

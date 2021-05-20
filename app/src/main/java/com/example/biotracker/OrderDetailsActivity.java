@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -63,7 +62,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
             textViewEstDate.setText(String.format("Estimated delivery date: %s",getIntent().getExtras().getString("estimated_time")));
         }
         textViewOrderAmount.setText(String.format("Order Amount: INR %s ( %s )",getIntent().getExtras().getString("order_amount"),getIntent().getExtras().getString("pay_mode")));
-        img_location = String.format("http://"+URLs.ipAddress+"/biotracker/seller/pages/%s",getIntent().getExtras().getString("prod_img"));
+        img_location = String.format("http://"+ Constants.ipAddress+"/biotracker/seller/pages/%s",getIntent().getExtras().getString("prod_img"));
         try
         {
             URL url = new URL(img_location);

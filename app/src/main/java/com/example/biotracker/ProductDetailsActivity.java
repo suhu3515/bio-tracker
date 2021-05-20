@@ -44,7 +44,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         sellerId = getIntent().getExtras().getInt("seller_id");
         productId = getIntent().getExtras().getInt("prod_id");
-        location = String.format("http://"+URLs.ipAddress+"/biotracker/seller/pages/%s",getIntent().getExtras().getString("prod_img"));
+        location = String.format("http://"+ Constants.ipAddress+"/biotracker/seller/pages/%s",getIntent().getExtras().getString("prod_img"));
 
         textViewSeller.setOnClickListener(new View.OnClickListener() {
             @Override
