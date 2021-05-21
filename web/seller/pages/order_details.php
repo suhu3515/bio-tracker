@@ -224,8 +224,8 @@ $seller = $_SESSION['seller_id'];
                                             <option value="0">Rejected</option>
                                             <option value="1">Confirmed</option>
                                             <option value="2">Packed</option>
-                                            <option value="2">Dispatched</option>
-                                            <option value="3">Completed</option>
+                                            <option value="3">Dispatched</option>
+                                            <option value="4">Completed</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

@@ -85,4 +85,23 @@ public interface Api
     @POST("Api.php?apicall=get_posts")
     Call<JsonArray> getPosts();
 
+    @POST("Api.php?apicall=is_post_liked")
+    @FormUrlEncoded
+    Call<JsonObject> isPostLiked(@Field("user_id") String userId, @Field("post_id") String postid);
+
+    @POST("Api.php?apicall=like_post")
+    @FormUrlEncoded
+    Call<JsonObject> likePost(@Field("user_id") String userId, @Field("post_id") String postid);
+
+    @POST("Api.php?apicall=dislike_post")
+    @FormUrlEncoded
+    Call<JsonObject> dislikePost(@Field("user_id") String userId, @Field("post_id") String postid);
+
+    @POST("Api.php?apicall=get_comments")
+    @FormUrlEncoded
+    Call<JsonArray> getComments(@Field("post_id") String postId);
+
+    @POST("Api.php?apicall=add_comment")
+    @FormUrlEncoded
+    Call<JsonObject> addComment(@Field("user_id") String userId, @Field("post_id") String postId, @Field("comment_text") String comment);
 }

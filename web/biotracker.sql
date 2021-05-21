@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2021 at 08:22 PM
+-- Generation Time: May 21, 2021 at 08:56 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -34,6 +34,15 @@ CREATE TABLE `comments` (
   `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comm_id`, `user_id`, `comm_text`, `post_id`) VALUES
+(2, 14, 'Hello', 147),
+(3, 13, 'good morning you too...', 157),
+(4, 10, 'smile always', 157);
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +67,8 @@ INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `st
 (144, 14, 'Hello guys...I also started fish farming ..', NULL, 1, '20-05-2021'),
 (145, 14, 'Is this type of tilapia good for growing???', 'user_posts/1621525527575.jpg', 1, '20-05-2021'),
 (146, 13, 'I started using this motor for my fish tank', 'user_posts/1621525585330.jpg', 1, '20-05-2021'),
-(147, 11, 'ഫിഷ് ടാങ്കിൽ oxygen കുറഞ്ഞാൽ എന്ത് ചെയ്യണം ???', NULL, 1, '20-05-2021');
+(147, 11, 'ഫിഷ് ടാങ്കിൽ oxygen കുറഞ്ഞാൽ എന്ത് ചെയ്യണം ???', NULL, 1, '20-05-2021'),
+(157, 14, 'Good Morning. keep smiling', 'user_posts/1621571867844.jpg', 1, '21-05-2021');
 
 -- --------------------------------------------------------
 
@@ -214,7 +224,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `order_date`, `payment_status`, `order_status`) VALUES
 (5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1),
-(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', NULL, '19-05-2021', 0, 1),
+(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', '2021-05-24', '19-05-2021', 0, 1),
 (7, 5, 80, 14, 400, 'valathel house,\nathikaripadi,\n679581,\nmalappuram', 'COD', NULL, '19-05-2021', 0, 1);
 
 -- --------------------------------------------------------
@@ -228,6 +238,14 @@ CREATE TABLE `post_likes` (
   `liked_user` int(11) NOT NULL,
   `liked_post` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `post_likes`
+--
+
+INSERT INTO `post_likes` (`like_id`, `liked_user`, `liked_post`) VALUES
+(9, 14, 157),
+(10, 14, 147);
 
 -- --------------------------------------------------------
 
@@ -416,13 +434,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `community_post`
 --
 ALTER TABLE `community_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `daily_data`
@@ -464,7 +482,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `reports`

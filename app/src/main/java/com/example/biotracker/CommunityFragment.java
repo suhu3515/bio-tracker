@@ -62,6 +62,14 @@ public class CommunityFragment extends Fragment {
         }
     }
 
+    public void openFragment(Fragment fragment)
+    {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,9 +83,20 @@ public class CommunityFragment extends Fragment {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                
+
+                postsLists.clear();
+                recyclerView.getAdapter().notifyDataSetChanged();
+                HomeActivity.getPosts();
+                postsLists = HomeActivity.postsList;
+                PostsAdapterActivity adapterActivity = new PostsAdapterActivity(getContext(),postsLists);
+                recyclerView.getAdapter().notifyDataSetChanged();
+                recyclerView.setAdapter(adapterActivity);
+                pullToRefresh.setRefreshing(false);
+                openFragment(CommunityFragment.newInstance("",""));
             }
         });
+
+
         buttonCreatePosts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

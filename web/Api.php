@@ -567,6 +567,152 @@ if(isset($_GET['apicall']))
             }
             $response = $posts;
         break;
+
+        case "is_post_liked":
+
+            if (isTheseParametersAvailable(array('post_id','user_id')))
+            {
+                $user = $_POST['user_id'];
+                $post = $_POST['post_id'];
+                $post_liked = $conn->query("select count(*) from post_likes where liked_user='$user' and liked_post='$post'");
+                $post_liked_row = $post_liked->fetch_array();
+                if ($post_liked_row[0]>0)
+                {
+                    $response['is_liked'] = true;
+                    $response['error'] = false;
+                }
+                else if ($post_liked_row[0]==0)
+                {
+                    $response['is_liked'] = false;
+                    $response['error'] = false;
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "like_post":
+
+            if (isTheseParametersAvailable(array('user_id','post_id')))
+            {
+                $user = $_POST['user_id'];
+                $post = $_POST['post_id'];
+                $post_liked = $conn->query("select count(*) from post_likes where liked_user='$user' and liked_post='$post'");
+                $post_liked_row = $post_liked->fetch_array();
+                if ($post_liked_row[0]>0)
+                {
+                    $response['message'] = "you already liked this";
+                }
+                else
+                {
+                    $like_post_res = $conn->query("insert into post_likes(liked_user,liked_post) values ('$user','$post')");
+                    if ($like_post_res)
+                    {
+                        $response['error'] = false;
+                        $response['message'] = 'you liked this post';
+                    }
+                    else
+                    {
+                        $response['error'] = true;
+                        $response['message'] = 'Something went wrong!';
+                    }
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "dislike_post":
+            if (isTheseParametersAvailable(array('user_id','post_id')))
+            {
+                $user = $_POST['user_id'];
+                $post = $_POST['post_id'];
+                $post_liked = $conn->query("select count(*) from post_likes where liked_user='$user' and liked_post='$post'");
+                $post_liked_row = $post_liked->fetch_array();
+                if ($post_liked_row[0]==0)
+                {
+                    $response['message'] = "you haven't liked this";
+                }
+                else
+                {
+                    $like_post_res = $conn->query("delete from post_likes where liked_user='$user' and liked_post='$post'");
+                    if ($like_post_res)
+                    {
+                        $response['error'] = false;
+                        $response['message'] = 'you disliked this post';
+                    }
+                    else
+                    {
+                        $response['error'] = true;
+                        $response['message'] = 'Something went wrong!';
+                    }
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+            break;
+
+        case "add_comment":
+
+            if (isTheseParametersAvailable(array('user_id','post_id','comment_text')))
+            {
+                $post = $_POST['post_id'];
+                $user = $_POST['user_id'];
+                $comment = $_POST['comment_text'];
+                $comment_res = $conn->query("insert into comments(user_id,comm_text,post_id) values ('$user','$comment','$post')");
+                if ($comment_res)
+                {
+                    $response['error'] = false;
+                    $response['message'] = 'Comment added';
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Something went wrong!';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_comments":
+
+            if (isTheseParametersAvailable(array('post_id')))
+            {
+                $post = $_POST['post_id'];
+                $stmt11 = $conn->query("select * from comments where post_id='$post'");
+                $temp = array();
+                $comments = array();
+                while ($row_stmt11 = $stmt11->fetch_array())
+                {
+                    $temp['post_id'] = $row_stmt11[3];
+                    $temp['comment_id'] = $row_stmt11[0];
+                    $stmt12 = $conn->query("select user_name from users where user_id='$row_stmt11[1]'");
+                    $row_stmt12 = $stmt12->fetch_array();
+                    $temp['commented_user'] = $row_stmt12[0];
+                    $temp['comment_text'] = $row_stmt11[2];
+                    array_push($comments, $temp);
+                }
+                $response = $comments;
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
     }
 }
 else

@@ -47,7 +47,7 @@ public class PostsAdapterActivity extends RecyclerView.Adapter<PostsAdapterActiv
         holder.textViewpostedDate.setText(String.format("posted on %s",post.getPost_date()));
         holder.textViewPostCaption.setText(post.getPost_caption());
         holder.textViewPostLikesComments.setText(String.format("%s Likes  •  %s Comments",post.getPost_likes(),post.getPost_comments()));
-        if (post.getPost_image() == null)
+        if (post.getPost_image() == "null")
         {
             holder.imageViewPostContent.setVisibility(View.GONE);
         }
@@ -63,25 +63,24 @@ public class PostsAdapterActivity extends RecyclerView.Adapter<PostsAdapterActiv
             }
         }
 
-        /*holder.cardViewProduct.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Context context = mCtx;
 
-                Intent detailsIntent = new Intent(context, ProductDetailsActivity.class);
-                detailsIntent.putExtra("prod_name", productsList.get(holder.getLayoutPosition()).getProductName());
-                detailsIntent.putExtra("prod_id", productsList.get(holder.getLayoutPosition()).getProductId());
-                detailsIntent.putExtra("prod_price", productsList.get(holder.getLayoutPosition()).getProductPrice());
-                detailsIntent.putExtra("prod_qty", productsList.get(holder.getLayoutPosition()).getProductQty());
-                detailsIntent.putExtra("prod_desc", productsList.get(holder.getLayoutPosition()).getProductDesc());
-                detailsIntent.putExtra("prod_img", productsList.get(holder.getLayoutPosition()).getProductImage());
-                detailsIntent.putExtra("seller_name", productsList.get(holder.getLayoutPosition()).getSellerName());
-                detailsIntent.putExtra("seller_id", productsList.get(holder.getLayoutPosition()).getSellerId());
+                Intent detailsIntent = new Intent(context, PostDetailsActivity.class);
+                detailsIntent.putExtra("post_id", postsList.get(holder.getLayoutPosition()).getPost_id());
+                detailsIntent.putExtra("post_date", postsList.get(holder.getLayoutPosition()).getPost_date());
+                detailsIntent.putExtra("post_caption", postsList.get(holder.getLayoutPosition()).getPost_caption());
+                detailsIntent.putExtra("post_image", postsList.get(holder.getLayoutPosition()).getPost_image());
+                detailsIntent.putExtra("post_likes", postsList.get(holder.getLayoutPosition()).getPost_likes());
+                detailsIntent.putExtra("post_comments", postsList.get(holder.getLayoutPosition()).getPost_comments());
+                detailsIntent.putExtra("user_name", postsList.get(holder.getLayoutPosition()).getUser_name());
 
                 context.startActivity(detailsIntent);
             }
-        });*/
+        });
 
     }
 
