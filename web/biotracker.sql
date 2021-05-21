@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 09:36 AM
+-- Generation Time: May 21, 2021 at 11:45 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -257,15 +257,16 @@ CREATE TABLE `reports` (
   `report_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `report_text` text NOT NULL,
-  `post_id` int(11) NOT NULL
+  `post_id` int(11) NOT NULL,
+  `report_status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`report_id`, `user_id`, `report_text`, `post_id`) VALUES
-(2, 14, 'not related with farming', 143);
+INSERT INTO `reports` (`report_id`, `user_id`, `report_text`, `post_id`, `report_status`) VALUES
+(2, 14, 'not related with farming', 143, 1);
 
 -- --------------------------------------------------------
 

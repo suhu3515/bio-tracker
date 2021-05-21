@@ -42,13 +42,13 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item active">
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="products.php">
                         <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Products</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item active">
                     <a class="sidebar-link" href="reports.php">
                         <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Reports</span>
                     </a>
@@ -90,100 +90,56 @@
 
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
-                        <h3><strong>Products</strong></h3>
+                        <h3><strong>Report</strong></h3>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <?php
                                 include_once '../../DbConnect.php';
 
-                                $product = $_GET['prod_id'];
-                                $sel_prod = "select * from marketplace where product_id='$product'";
-                                $res_prod = $conn->query($sel_prod);
-                                $row_prod = $res_prod->fetch_array();
+                                $report = $_GET['report_id'];
+                                $sel_report = "select * from reports where report_id='$report'";
+                                $res_report = $conn->query($sel_report);
+                                $row_report = $res_report->fetch_array();
 
-                                $sel_seller = "select * from seller where seller_id='$row_prod[6]'";
-                                $res_seller = $conn->query($sel_seller);
-                                $row_seller = $res_seller->fetch_array();
+                                $sel_post = "select caption,post_image from community_post where post_id='$row_report[3]'";
+                                $res_post = $conn->query($sel_post);
+                                $row_post = $res_post->fetch_array();
 
                                 ?>
                                 <div class="form-group">
-                                    <label class="form-group"><strong>Name</strong></label><br>
+                                    <label class="form-group"><strong>Report Reason</strong></label><br>
                                     <?php
-                                    echo "<label class='form-group'>$row_prod[1]</label>";
+                                    echo "<label class='form-group'>$row_report[2]</label>";
                                     ?>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-group"><strong>Price</strong></label><br>
+                                    <label class="form-group"><strong>Post Caption</strong></label><br>
                                     <?php
-                                    echo "<label class='form-group'>$row_prod[2]</label>";
+                                    echo "<label class='form-group'>$row_post[0]</label>";
                                     ?>
                                 </div>
+                                <?php
+                                if ($row_post[1]!=null)
+                                {
+                                    echo "<div class='form-group'>";
+                                    echo "<label class='form-group'><strong>Post Image</strong></label><br><br>";
+                                    $file_loc = "../../".$row_post[1];
+                                    echo "<img src='$file_loc' width='20%' height='30%'>";
+                                }
+                                ?>
                                 <div class="form-group">
-                                    <label class="form-group"><strong>Quantity</strong></label><br>
-                                    <?php
-                                    echo "<label class='form-group'>$row_prod[3]</label>";
-                                    ?>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group"><strong>Description</strong></label><br>
-                                    <?php
-                                    echo "<label class='form-group'>$row_prod[4]</label>";
-                                    ?>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group"><strong>Product Image</strong></label><br>
-                                    <?php
-                                    $file_loc = "../../seller/pages/".$row_prod[5];
-                                    echo "<img src='$file_loc'>";
-                                    ?>
-                                </div>
+                                    <br><br><label class="form-group"><strong>Update Post</strong></label><br><br>
+                                    <form action="" method="post">
+                                        <button class="btn btn-danger" type="submit" name="del_post" id="del_post">Delete Post</button>
+                                        <a href="reports.php"><button type="button" class="btn btn-primary">Cancel</button></a>
+                                    </form>
+                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <form method="post" action="">
-                                <div class="card-body">
-                                    <h3><strong>Seller</strong></h3>
-                                    <div class="form-group">
-                                        <label class="form-group"><strong>Seller Name</strong></label><br>
-                                        <?php
-                                        echo "<label class='form-group'>$row_seller[1]</label>";
-                                        ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-group"><strong>Seller Address</strong></label><br>
-                                        <?php
-                                        echo "<label class='form-group'>$row_seller[3]<br>$row_seller[2]<br>$row_seller[4]</label>";
-                                        ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-group"><strong>Seller Mobile</strong></label><br>
-                                        <?php
-                                        echo "<label class='form-group'>$row_seller[5]</label>";
-                                        ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-group"><strong>Seller Email</strong></label>
-                                        <?php
-                                        echo "<label class='form-group'>$row_seller[6]</label>";
-                                        ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-group"><strong>Select Action</strong></label>
-                                        <select class='form-control col-md-6' name="product_status" id="product_status">
-                                            <option value="1">Approve</option>
-                                            <option value="0">Cancel</option>
-                                        </select>
-                                    </div>
-                                    <button type='submit' class='btn btn-primary' name="update_status" id="update_status">Update</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

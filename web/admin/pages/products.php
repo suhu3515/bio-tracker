@@ -49,7 +49,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#">
+                    <a class="sidebar-link" href="reports.php">
                         <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Reports</span>
                     </a>
                 </li>
