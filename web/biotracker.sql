@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 11:45 AM
+-- Generation Time: May 21, 2021 at 12:05 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -63,7 +63,7 @@ CREATE TABLE `community_post` (
 --
 
 INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `status`, `post_date`) VALUES
-(143, 11, 'smile', 'user_posts/1621520396782.jpg', 1, '20-05-2021'),
+(143, 11, 'smile', 'user_posts/1621520396782.jpg', 0, '20-05-2021'),
 (144, 14, 'Hello guys...I also started fish farming ..', NULL, 1, '20-05-2021'),
 (145, 14, 'Is this type of tilapia good for growing???', 'user_posts/1621525527575.jpg', 1, '20-05-2021'),
 (146, 13, 'I started using this motor for my fish tank', 'user_posts/1621525585330.jpg', 1, '20-05-2021'),
@@ -266,7 +266,7 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`report_id`, `user_id`, `report_text`, `post_id`, `report_status`) VALUES
-(2, 14, 'not related with farming', 143, 1);
+(2, 14, 'not related with farming', 143, 0);
 
 -- --------------------------------------------------------
 

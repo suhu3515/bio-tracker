@@ -158,14 +158,13 @@
 
 <?php
 
-if (isset($_POST['update_status']))
+if (isset($_POST['del_post']))
 {
-    $product_status = $_POST['product_status'];
-    $product_update = "update marketplace set product_status='$product_status' where product_id='$row_prod[0]'";
-    $res_product_update = $conn->query($product_update);
-    if ($res_product_update)
+    $post_status = $conn->query("update community_post set status='0' where post_id='$row_report[3]'");
+    $report_status = $conn->query("update reports set report_status='0' where report_id='$report'");
+    if ($post_status && $report_status)
     {
         echo "<script>alert('Updated status')</script>";
-        echo "<script>window.location='products.php'</script>";
+        echo "<script>window.location='reports.php'</script>";
     }
 }
