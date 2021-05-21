@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 08:56 AM
+-- Generation Time: May 21, 2021 at 09:36 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -260,6 +260,13 @@ CREATE TABLE `reports` (
   `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`report_id`, `user_id`, `report_text`, `post_id`) VALUES
+(2, 14, 'not related with farming', 143);
+
 -- --------------------------------------------------------
 
 --
@@ -488,7 +495,7 @@ ALTER TABLE `post_likes`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `seller`

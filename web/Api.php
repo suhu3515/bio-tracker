@@ -713,6 +713,32 @@ if(isset($_GET['apicall']))
                 $response['message'] = 'required parameters are not available';
             }
         break;
+
+        case "report_posts":
+
+            if (isTheseParametersAvailable(array('user_id','report_text','post_id')))
+            {
+                $user = $_POST['user_id'];
+                $report = $_POST['report_text'];
+                $post = $_POST['post_id'];
+
+                $res_stmt12 = $conn->query("insert into reports(user_id,report_text,post_id) values('$user','$report','$post') ");
+                if ($res_stmt12)
+                {
+                    $response['error'] = false;
+                    $response['message'] = 'Reported post successfully...';
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Something went wrong!';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
     }
 }
 else

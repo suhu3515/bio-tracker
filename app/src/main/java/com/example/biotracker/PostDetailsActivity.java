@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -66,6 +67,17 @@ public class PostDetailsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentsList = new ArrayList<>();
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent reportIntent = new Intent(PostDetailsActivity.this, ReportPostsActivity.class);
+                reportIntent.putExtra("postId", postId);
+                startActivity(reportIntent);
+                finish();
+            }
+        });
 
         buttonComment.setOnClickListener(new View.OnClickListener() {
             @Override

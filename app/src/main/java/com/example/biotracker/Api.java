@@ -104,4 +104,8 @@ public interface Api
     @POST("Api.php?apicall=add_comment")
     @FormUrlEncoded
     Call<JsonObject> addComment(@Field("user_id") String userId, @Field("post_id") String postId, @Field("comment_text") String comment);
+
+    @POST("Api.php?apicall=report_posts")
+    @FormUrlEncoded
+    Call<JsonObject> reportPosts(@Field("user_id") String userId, @Field("post_id") String postId, @Field("report_text") String report);
 }

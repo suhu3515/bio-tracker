@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BioTracker">
-        <activity android:name=".PostDetailsActivity"></activity>
+        <activity android:name=".ReportPostsActivity"></activity>
+        <activity android:name=".PostDetailsActivity" />
         <activity android:name=".NewPostActivity" />
         <activity android:name=".OrderDetailsActivity" />
         <activity android:name=".ViewOrdersActivity" />
