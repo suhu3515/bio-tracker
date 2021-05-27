@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DailyDataActivity"
-    android:background="#F44336">
+    android:background="#3949AB">
 
     <EditText
         android:id="@+id/edit_text_data_ammonia"

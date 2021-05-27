@@ -54,6 +54,18 @@
             </a>
 					</li>
 
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="">
+                            <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="instructions.php">
+                            <i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
+                        </a>
+                    </li>
+
 				</ul>
 
 			</div>

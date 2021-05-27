@@ -22,7 +22,7 @@ public class MoreFragment extends Fragment {
 
     TextView textViewUserName, textViewUserPhone;
     User user;
-    Button buttonAddFarm, buttonViewOrders;
+    Button buttonAddFarm, buttonViewOrders, buttonLogout;
 
     public MoreFragment() {
     }
@@ -71,6 +71,7 @@ public class MoreFragment extends Fragment {
 
         buttonAddFarm = view.findViewById(R.id.button_farm);
         buttonViewOrders = view.findViewById(R.id.button_orders);
+        buttonLogout = view.findViewById(R.id.button_logout);
 
         buttonAddFarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +91,17 @@ public class MoreFragment extends Fragment {
 
             }
         });
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getActivity().finishAffinity();
+                SharedPrefManager.getInstance(getContext()).logout();
+
+            }
+        });
+
 
     }
 }

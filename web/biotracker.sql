@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 12:05 PM
+-- Generation Time: May 27, 2021 at 03:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -41,7 +41,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`comm_id`, `user_id`, `comm_text`, `post_id`) VALUES
 (2, 14, 'Hello', 147),
 (3, 13, 'good morning you too...', 157),
-(4, 10, 'smile always', 157);
+(4, 10, 'smile always', 157),
+(5, 14, 'good smile', 158);
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,8 @@ INSERT INTO `community_post` (`post_id`, `user_id`, `caption`, `post_image`, `st
 (145, 14, 'Is this type of tilapia good for growing???', 'user_posts/1621525527575.jpg', 1, '20-05-2021'),
 (146, 13, 'I started using this motor for my fish tank', 'user_posts/1621525585330.jpg', 1, '20-05-2021'),
 (147, 11, 'ഫിഷ് ടാങ്കിൽ oxygen കുറഞ്ഞാൽ എന്ത് ചെയ്യണം ???', NULL, 1, '20-05-2021'),
-(157, 14, 'Good Morning. keep smiling', 'user_posts/1621571867844.jpg', 1, '21-05-2021');
+(157, 14, 'Good Morning. keep smiling', 'user_posts/1621571867844.jpg', 1, '21-05-2021'),
+(158, 14, 'Good morning', 'user_posts/1621593649671.jpg', 0, '21-05-2021');
 
 -- --------------------------------------------------------
 
@@ -135,11 +137,18 @@ INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_
 
 CREATE TABLE `instructions` (
   `ins_id` int(11) NOT NULL,
-  `language` varchar(15) NOT NULL,
+  `ins_language` varchar(15) NOT NULL,
   `ins_name` varchar(30) NOT NULL,
   `ins_text` text NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `instructions`
+--
+
+INSERT INTO `instructions` (`ins_id`, `ins_language`, `ins_name`, `ins_text`, `status`) VALUES
+(2, 'English', 'check_water', 'Check water ', 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +192,7 @@ CREATE TABLE `marketplace` (
   `product_name` varchar(70) NOT NULL,
   `product_price` int(11) NOT NULL,
   `product_qty` int(11) NOT NULL,
-  `product_desc` varchar(100) NOT NULL,
+  `product_desc` text NOT NULL,
   `product_img` text NOT NULL,
   `seller_id` int(11) NOT NULL,
   `product_status` int(11) NOT NULL DEFAULT 0
@@ -196,7 +205,10 @@ CREATE TABLE `marketplace` (
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
 (3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 27, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0),
-(5, 'Nutter ', 5, 820, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1);
+(5, 'Nutter ', 5, 820, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1),
+(9, 'Hailea HAP-60 Air Pump', 7000, 6, 'Model: HAP -60\r\nPower: 55W.\r\nVoltage: 110-115/220-240V.\r\nOutput: 60 litres per minute .\r\nNoise: 40dB.', 'images/4234haileahap60airpumpa.jpeg.jpg.83edf174ad.999x400x400.jpg', 3, 1),
+(10, 'API Freshwater Master Water Test Kit', 3550, 75, 'Fish need properly balanced levels of ammonia, pH, high range pH, nitrite and nitrate, these levels can change rapidly and createharmful condition when fish waste, uneaten food or other organic matter accumulate, or when untreated water is added, if left unorrected, all of these can be harmful or even fatal to fish, with consequences such as reduction of oxygen, increase in stress and higher risk of disease.', 'images/apifreshwatermasterwatertestkit.jpg.d99ff84e1a.999x400x400.jpg', 3, 1),
+(11, 'easykitt Water testing Kit', 599, 100, 'You can do the tests for yourself.', 'images/WhatsAppImage2020-10-17at7.38.48PM_360x.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +236,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `order_date`, `payment_status`, `order_status`) VALUES
 (5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1),
-(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', '2021-05-24', '19-05-2021', 0, 1),
+(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', '2021-05-24', '19-05-2021', 0, 0),
 (7, 5, 80, 14, 400, 'valathel house,\nathikaripadi,\n679581,\nmalappuram', 'COD', NULL, '19-05-2021', 0, 1);
 
 -- --------------------------------------------------------
@@ -244,7 +256,6 @@ CREATE TABLE `post_likes` (
 --
 
 INSERT INTO `post_likes` (`like_id`, `liked_user`, `liked_post`) VALUES
-(9, 14, 157),
 (10, 14, 147);
 
 -- --------------------------------------------------------
@@ -266,7 +277,8 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`report_id`, `user_id`, `report_text`, `post_id`, `report_status`) VALUES
-(2, 14, 'not related with farming', 143, 0);
+(2, 14, 'not related with farming', 143, 0),
+(3, 14, 'not related with farming ', 158, 0);
 
 -- --------------------------------------------------------
 
@@ -442,13 +454,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `community_post`
 --
 ALTER TABLE `community_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `daily_data`
@@ -466,7 +478,7 @@ ALTER TABLE `farm`
 -- AUTO_INCREMENT for table `instructions`
 --
 ALTER TABLE `instructions`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -478,7 +490,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `marketplace`
 --
 ALTER TABLE `marketplace`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -490,13 +502,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `seller`

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChooseLanguageActivity"
-    android:background="#F44336">
+    android:background="#3949AB">
 
     <TextView
         android:id="@+id/language_heading"

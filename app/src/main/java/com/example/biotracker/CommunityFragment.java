@@ -84,15 +84,12 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                postsLists.clear();
-                recyclerView.getAdapter().notifyDataSetChanged();
-                HomeActivity.getPosts();
-                postsLists = HomeActivity.postsList;
-                PostsAdapterActivity adapterActivity = new PostsAdapterActivity(getContext(),postsLists);
-                recyclerView.getAdapter().notifyDataSetChanged();
-                recyclerView.setAdapter(adapterActivity);
-                pullToRefresh.setRefreshing(false);
-                openFragment(CommunityFragment.newInstance("",""));
+                getActivity().recreate();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, CommunityFragment.newInstance("",""));
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
 
