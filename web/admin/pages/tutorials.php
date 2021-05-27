@@ -54,13 +54,13 @@
             </a>
 					</li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href="tutorials.php">
                             <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="instructions.php">
                             <i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
                         </a>
@@ -102,8 +102,8 @@
 
 					<div class="row mb-2 mb-xl-3">
 						<div class="col-auto d-none d-sm-block">
-							<h3><strong>Instructions</strong></h3>
-                            <a href="instructions_add.php"><button class="btn btn-primary">Add  <span class="fa fa-plus"></span></button></a>
+							<h3><strong>Tutorials</strong></h3>
+                            <a href="tutorials_add.php"><button class="btn btn-primary">Add  <span class="fa fa-plus"></span></button></a>
 						</div>
 
 					</div>
@@ -116,6 +116,7 @@
 									<tr>
 										<th style="width:25%;">Title</th>
 										<th style="width:25%">Text</th>
+										<th style="width:25%">Social link</th>
 										<th class="d-none d-md-table-cell" style="width:20%">Language</th>
 										<th>Status</th>
 										<th style="width=10%">Details</th>
@@ -125,24 +126,32 @@
 									<?php
 									    include_once '../../DbConnect.php';
 
-									    $ins_sel = "select * from instructions";
+									    $ins_sel = "select * from tutorials";
 									    $ins_res = $conn->query($ins_sel);
 									    while ($ins_row = $ins_res->fetch_array())
                                         {
                                             echo "<tr>";
                                             echo "<td>$ins_row[2]</td>";
                                             echo "<td>$ins_row[3]</td>";
+                                            if ($ins_row[4]!=null)
+                                            {
+                                                echo "<td>$ins_row[4]</td>";
+                                            }
+                                            else
+                                            {
+                                                echo "<td>No link</td>";
+                                            }
                                             echo "<td>$ins_row[1]</td>";
-                                            if ($ins_row[4] == 0)
+                                            if ($ins_row[5] == 0)
                                             {
                                                 echo "<td style='color: red'>Removed</td>";
                                             }
 
-                                            if ($ins_row[4] == 1)
+                                            if ($ins_row[5] == 1)
                                             {
                                                 echo "<td style='color: green'>Active</td>";
                                             }
-                                            echo "<td><a href='instruction_details.php?ins_id=$ins_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
+                                            echo "<td><a href='tutorial_details.php?tut_id=$ins_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
                                         }
 									?>
 									</tbody>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2021 at 03:13 PM
+-- Generation Time: May 27, 2021 at 05:19 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -315,12 +315,19 @@ INSERT INTO `seller` (`seller_id`, `seller_name`, `seller_place`, `seller_addr`,
 
 CREATE TABLE `tutorials` (
   `tut_id` int(11) NOT NULL,
-  `language` varchar(15) NOT NULL,
+  `tut_language` varchar(15) NOT NULL,
   `tut_name` varchar(30) NOT NULL,
   `tut_txt` text NOT NULL,
   `tut_link` varchar(30) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tutorials`
+--
+
+INSERT INTO `tutorials` (`tut_id`, `tut_language`, `tut_name`, `tut_txt`, `tut_link`, `status`) VALUES
+(1, 'English', 'Tutorial 1', 'Video by fishing freaks', 'https://youtu.be/BVhEllocPW8', 1);
 
 -- --------------------------------------------------------
 
@@ -520,7 +527,7 @@ ALTER TABLE `seller`
 -- AUTO_INCREMENT for table `tutorials`
 --
 ALTER TABLE `tutorials`
-  MODIFY `tut_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tut_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

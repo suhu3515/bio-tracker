@@ -54,13 +54,13 @@
             </a>
 					</li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href="tutorials.php">
                             <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="instructions.php">
                             <i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
                         </a>
@@ -101,14 +101,16 @@
 
             include_once '../../DbConnect.php';
 
-            $instruction = $_GET['ins_id'];
+            $tutorial = $_GET['tut_id'];
 
-            $ins_sel = "select * from instructions where ins_id='$instruction'";
+            $ins_sel = "select * from tutorials where tut_id='$tutorial'";
             $ins_res = $conn->query($ins_sel);
             $row_res = $ins_res->fetch_array();
 
             $ins_name = $row_res[2];
             $ins_text = $row_res[3];
+            $ins_link = $row_res[4];
+
             ?>
 
 			<main class="content">
@@ -125,7 +127,7 @@
                                         ?>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <label>Language</label>
+                                        <br><label>Language</label>
                                         <br>
                                         <input type="radio" id="english" name="ins_language" value="English" checked>
                                         <label for="english">English</label>
@@ -138,23 +140,30 @@
                                     </div>
                                     <div class="form-group col-md-8">
                                         <br>
-                                        <label for="ins_text">Instructions</label>
+                                        <label for="ins_link">Social Link</label>
+                                        <?php
+                                        echo "<input type='url' class='form-control' id='ins_link' name='ins_link' value='$ins_link'>";
+                                        ?>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <br>
+                                        <label for="ins_text">Tutorial</label>
                                         <?php
                                         echo "<textarea class='form-control' rows='4' id='ins_text' name='ins_text' required>$ins_text</textarea>";
                                         ?>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <label>Instruction Status </label>
+                                        <label>Tutorial Status </label>
                                         <br><label for="active">Active</label>
                                         <input type="checkbox" id="active" name="ins_status" value="active" checked>
                                     </div>
                                     <div class="row col-md-12">
                                         <div class="form-group col-md-6">
-                                            <button type="submit" name="upd_ins" id="upd_ins" class="btn btn-primary">Update instruction</button>
+                                            <button type="submit" name="upd_tut" id="upd_tut" class="btn btn-primary">Update tutorial</button>
                                         </div>
                                 </form>
                                 <div class="form-group col-md-6">
-                                    <a href="instructions.php" style="color:red;">Cancel</a>
+                                    <a href="tutorials.php" style="color:red;">Cancel</a>
                                 </div>
                                     </div>
 							</div>
@@ -171,10 +180,11 @@
 
 <?php
 
-if (isset($_POST['upd_ins']))
+if (isset($_POST['upd_tut']))
 {
     $instruction_title = $_POST['ins_name'];
     $instruction_text = $_POST['ins_text'];
+    $instruction_link = $_POST['ins_link'];
     $instruction_lang = $_POST['ins_language'];
     $instruction_status = $_POST['ins_status'];
     if ($instruction_status=="active")
@@ -186,10 +196,10 @@ if (isset($_POST['upd_ins']))
         $status = 0;
     }
 
-    $res_ins = $conn->query("update instructions set ins_language='$instruction_lang',ins_name='$instruction_title',ins_text='$instruction_text',status='$status' where ins_id='$instruction'");
+    $res_ins = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',tut_link='$instruction_link',status='$status' where tut_id='$tutorial'");
     if ($res_ins)
     {
-        echo "<script>alert('Updated instruction')</script>";
-        echo "<script>window.location='instructions.php'</script>";
+        echo "<script>alert('Updated tutorial')</script>";
+        echo "<script>window.location='tutorials.php'</script>";
     }
 }

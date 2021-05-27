@@ -54,13 +54,13 @@
             </a>
 					</li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href="tutorials.php">
                             <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="instructions.php">
                             <i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
                         </a>
@@ -99,54 +99,46 @@
 
 			<main class="content">
 				<div class="container-fluid p-0">
-
-					<div class="row mb-2 mb-xl-3">
-						<div class="col-auto d-none d-sm-block">
-							<h3><strong>Instructions</strong></h3>
-                            <a href="instructions_add.php"><button class="btn btn-primary">Add  <span class="fa fa-plus"></span></button></a>
-						</div>
-
-					</div>
 					<div class="row">
-
-						<div class="col-12 col-xl-12">
+						<div class="col-6 col-xl-6">
 							<div class="card">
-								<table class="table">
-									<thead>
-									<tr>
-										<th style="width:25%;">Title</th>
-										<th style="width:25%">Text</th>
-										<th class="d-none d-md-table-cell" style="width:20%">Language</th>
-										<th>Status</th>
-										<th style="width=10%">Details</th>
-									</tr>
-									</thead>
-									<tbody>
-									<?php
-									    include_once '../../DbConnect.php';
-
-									    $ins_sel = "select * from instructions";
-									    $ins_res = $conn->query($ins_sel);
-									    while ($ins_row = $ins_res->fetch_array())
-                                        {
-                                            echo "<tr>";
-                                            echo "<td>$ins_row[2]</td>";
-                                            echo "<td>$ins_row[3]</td>";
-                                            echo "<td>$ins_row[1]</td>";
-                                            if ($ins_row[4] == 0)
-                                            {
-                                                echo "<td style='color: red'>Removed</td>";
-                                            }
-
-                                            if ($ins_row[4] == 1)
-                                            {
-                                                echo "<td style='color: green'>Active</td>";
-                                            }
-                                            echo "<td><a href='instruction_details.php?ins_id=$ins_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
-                                        }
-									?>
-									</tbody>
-								</table>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <div class="form-group col-md-8">
+                                        <label for="ins_name">Title</label>
+                                        <input type="text" class="form-control" id="ins_name" name="ins_name" placeholder="Tutorial Title" required><br>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label>Language</label>
+                                        <br>
+                                        <input type="radio" id="english" name="ins_language" value="English" checked>
+                                        <label for="english">English</label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="malayalam" name="ins_language" value="Malayalam">
+                                        <label for="malayalam">Malayalam</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <br>
+                                        <label for="ins_link">Social Link</label>
+                                        <input type="url" class="form-control" id="ins_link" name="ins_link" placeholder="Tutorial link">
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <br>
+                                        <label for="ins_text">Tutorial</label>
+                                        <textarea class="form-control" rows="4" id="ins_text" name="ins_text" placeholder="Tutorial Text" required></textarea>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label>Tutorial Status </label>
+                                        <br><label for="active">Active</label>
+                                        <input type="checkbox" id="active" name="ins_status" value="active" checked>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <button type="submit" name="add_ins" id="add_ins" class="btn btn-primary">Add instruction</button>
+                                    </div>
+                                </form>
 							</div>
 						</div>
 					</div>
@@ -158,3 +150,31 @@
 	<script src="../../examples/js/app.js"></script>
 </body>
 </html>
+
+<?php
+
+include_once '../../DbConnect.php';
+
+if (isset($_POST['add_ins']))
+{
+    $instruction_title = $_POST['ins_name'];
+    $instruction_text = $_POST['ins_text'];
+    $instruction_link = $_POST['ins_link'];
+    $instruction_lang = $_POST['ins_language'];
+    $instruction_status = $_POST['ins_status'];
+    if ($instruction_status=="active")
+    {
+        $status = 1;
+    }
+    else
+    {
+        $status = 0;
+    }
+
+    $res_ins = $conn->query("insert into tutorials(tut_language,tut_name,tut_txt,tut_link,status) values ('$instruction_lang','$instruction_title','$instruction_text','$instruction_link','$status')");
+    if ($res_ins)
+    {
+        echo "<script>alert('Added tutorial')</script>";
+        echo "<script>window.location='tutorials.php'</script>";
+    }
+}
