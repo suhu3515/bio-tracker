@@ -739,6 +739,28 @@ if(isset($_GET['apicall']))
                 $response['error'] = true;
                 $response['message'] = 'required parameters are not available';
             }
+        break;
+
+        case "get_instructions":
+
+            if (isTheseParametersAvailable(array('language','title')))
+            {
+                $language = $_POST['language'];
+                $title = $_POST['title'];
+
+                $instr_res = $conn->query("select * from instructions where ins_language='$language' and ins_name='$title' and status='1'");
+                while ($instr_row = $instr_res->fetch_array())
+                {
+                    $response['ins_id'] = $instr_row[0];
+                    $response['message'] = $instr_row[1];
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
     }
 }
 else
