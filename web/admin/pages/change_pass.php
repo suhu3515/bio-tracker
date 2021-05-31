@@ -29,7 +29,7 @@
 						Pages
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="admin_panel.html">
               <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
             </a>
@@ -54,7 +54,7 @@
             </a>
 					</li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="tutorials.php">
                             <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
                         </a>
@@ -97,22 +97,6 @@
 				</div>
 			</nav>
 
-            <?php
-
-            include_once '../../DbConnect.php';
-
-            $tutorial = $_GET['tut_id'];
-
-            $ins_sel = "select * from tutorials where tut_id='$tutorial'";
-            $ins_res = $conn->query($ins_sel);
-            $row_res = $ins_res->fetch_array();
-
-            $ins_name = $row_res[2];
-            $ins_text = $row_res[3];
-            $ins_link = $row_res[4];
-
-            ?>
-
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="row">
@@ -121,40 +105,21 @@
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <br>
                                     <div class="form-group col-md-8">
-                                        <label for="ins_name">Title</label>
-                                        <?php
-                                        echo "<input type='text' class='form-control' id='ins_name' name='ins_name' value='$ins_name' required>";
-                                        ?>
+                                        <label for="currPass">Current Password</label>
+                                        <input type="password" class="form-control" id="currPass" name="currPass" placeholder="Current Password" required><br>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <br>
-                                        <label for="ins_link">File Path</label>
-                                        <?php
-                                        $full_link = "https://youtu.be/" . $ins_link;
-                                        echo "<input type='text' class='form-control' id='ins_link' name='ins_link' value='$full_link'>";
-                                        ?>
+                                        <label for="newPass">New Password</label>
+                                        <input type="password" class="form-control" id="newPass" name="newPass" placeholder="New Password" required><br>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <br>
-                                        <label for="ins_text">Tutorial</label>
-                                        <?php
-                                        echo "<textarea class='form-control' rows='4' id='ins_text' name='ins_text' required>$ins_text</textarea>";
-                                        ?>
+                                        <label for="confirmPass">Confirm Password</label>
+                                        <input type="password" class="form-control"  id="confirmPass" name="confirmPass" placeholder="Confirm Password" required>
                                     </div>
-                                    <div class="form-group col-md-8">
-                                        <label>Tutorial Status </label>
-                                        <br><label for="active">Active</label>
-                                        <input type="checkbox" id="active" name="ins_status" value="active" checked>
+                                    <div class="form-group col-md-6">
+                                        <br><button type="submit" name="change_pass" id="change_pass" class="btn btn-primary">Change Password</button>
                                     </div>
-                                    <div class="row col-md-12">
-                                        <div class="form-group col-md-6">
-                                            <button type="submit" name="upd_tut" id="upd_tut" class="btn btn-primary">Update tutorial</button>
-                                        </div>
                                 </form>
-                                <div class="form-group col-md-6">
-                                    <a href="tutorials.php" style="color:red;">Cancel</a>
-                                </div>
-                                    </div>
 							</div>
 						</div>
 					</div>
@@ -169,41 +134,36 @@
 
 <?php
 
-if (isset($_POST['upd_tut']))
+include_once '../../DbConnect.php';
+
+if (isset($_POST['change_pass']))
 {
-    $instruction_title = $_POST['ins_name'];
-    $instruction_text = $_POST['ins_text'];
-    $instruction_link = $_POST['ins_link'];
-    $instruction_lang = 'English';
-    $instruction_status = $_POST['ins_status'];
-    if ($instruction_status=="active")
+    $current_pass = $_POST['currPass'];
+    $new_pass = $_POST['newPass'];
+    $confirm_pass = $_POST['confirmPass'];
+
+    if ($new_pass!==$confirm_pass)
     {
-        $status = 1;
+        echo "<script>alert('new password and confirm password not matching')</script>";
     }
     else
     {
-        $status = 0;
-    }
-
-    if(!isset($_POST['ins_link']) || strlen($_POST['ins_link']< 0))
-    {
-        $res_ins_no = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',status='$status' where tut_id='$tutorial'");
-        if ($res_ins_no)
+        $res_select = $conn->query("select count(*) from login where mobile='9876543210' and password='$current_pass' and role='ADMIN'");
+        while ($row_select = $res_select->fetch_array())
         {
-            echo "<script>alert('Updated tutorial')</script>";
-            echo "<script>window.location='tutorials.php'</script>";
-        }
-    }
-    else
-    {
-        $array_link = (explode("/",$instruction_link));
-        $video_id = $array_link[3];
-
-        $res_ins = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',tut_link='$video_id',status='$status' where tut_id='$tutorial'");
-        if ($res_ins)
-        {
-            echo "<script>alert('Updated tutorial')</script>";
-            echo "<script>window.location='tutorials.php'</script>";
+            if ($row_select[0]>0)
+            {
+                $res_change = $conn->query("update login set password='$confirm_pass' where mobile='9876543210' and password='$current_pass' and role='ADMIN'");
+                if ($res_change)
+                {
+                    echo "<script>alert('Password changed successfully...')</script>";
+                    echo "<script>window.location='../../index.php'</script>";
+                }
+            }
+            else
+            {
+                echo "<script>alert('Please enter correct password')</script>";
+            }
         }
     }
 }

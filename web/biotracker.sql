@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 12:38 PM
+-- Generation Time: May 31, 2021 at 03:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -180,7 +180,7 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (7, 9533626233, 'dhldhl', 'USER'),
 (10, 9633058949, 'suhu3515@', 'USER'),
 (13, 9946739215, 'pvmstores', 'SELLER'),
-(15, 9876543210, 'admin', 'ADMIN'),
+(15, 9876543210, 'iamadmin', 'ADMIN'),
 (16, 6238383110, 'anbintl', 'SELLER'),
 (17, 9946739216, 'sakkeer123', 'USER'),
 (18, 9446476922, 'abcde', 'USER'),
