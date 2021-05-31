@@ -36,6 +36,7 @@ public class AddFarmActivity extends AppCompatActivity {
     Button buttonNextStep;
     TextView textViewBreadth, textViewLength, textViewHeight, textViewCircleHeight, textViewRadius, textViewShape, textViewShapeText, textViewChangeShape;
     RadioGroup tankShapes;
+    String sendingDate;
     RadioButton radioButtonCircle, radioButtonRectangle;
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -63,9 +64,12 @@ public class AddFarmActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, month);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "yyyy-MM-dd";
+                String myFormat = "dd-MM-yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 editTextStartDate.setText(sdf.format(myCalendar.getTime()));
+
+                SimpleDateFormat ndf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                sendingDate = ndf.format(myCalendar.getTime());
             }
         };
 
@@ -185,7 +189,7 @@ public class AddFarmActivity extends AppCompatActivity {
                     Intent volumeIntent = new Intent(AddFarmActivity.this, VolumeCalculationActivity.class);
                     volumeIntent.putExtra("fish_type", editTextFishType.getText().toString());
                     volumeIntent.putExtra("fish_count", editTextFishCount.getText().toString());
-                    volumeIntent.putExtra("start_date", editTextStartDate.getText().toString());
+                    volumeIntent.putExtra("start_date", sendingDate);
                     volumeIntent.putExtra("est_time", editTextEstTime.getText().toString());
                     volumeIntent.putExtra("shape", selected_shape);
                     startActivity(volumeIntent);

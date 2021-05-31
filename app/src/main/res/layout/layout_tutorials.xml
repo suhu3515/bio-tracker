@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="#3949AB">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_tut_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is a demo title which needs two lines and trying to make it two"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/text_tut_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is a demo title which needs\n two lines and trying\n to make it two"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:layout_below="@id/text_tut_title"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/video_tut_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  video tutorial available"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:drawableStart="@drawable/ic_play"
+                android:layout_below="@id/text_tut_text"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonRegister;
     TextView textViewLogin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String newDate;
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -39,6 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.register_btn_register);
         textViewLogin = findViewById(R.id.register_tv_login);
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("language_settings", Context.MODE_PRIVATE);
+        String language = sharedPreferences.getString("selected_language",null);
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -46,14 +52,30 @@ public class RegisterActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, month);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "yyyy-MM-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                editTextDob.setText(sdf.format(myCalendar.getTime()));
+                Calendar minAge = new GregorianCalendar();
+                minAge.add(Calendar.YEAR, -18);
+                if (minAge.before(myCalendar))
+                {
+                    if (language.equals("Malayalam"))
+                    {
+                        Toast.makeText(RegisterActivity.this, "ഉപയോക്താവിന് കുറഞ്ഞത് 18 വയസ്സ് ആയിരിക്കണം", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(RegisterActivity.this, "User must be atleast 18 years", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    String myFormat = "dd-MM-yyyy";
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    editTextDob.setText(sdf.format(myCalendar.getTime()));
+                    SimpleDateFormat ndf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                    newDate = ndf.format(myCalendar.getTime());
+                }
             }
         };
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("language_settings", Context.MODE_PRIVATE);
-        String language = sharedPreferences.getString("selected_language",null);
 
         if (language.equals("Malayalam"))
         {
@@ -244,7 +266,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     Intent addressIntent = new Intent(RegisterActivity.this,AddAddressActivity.class);
                     addressIntent.putExtra("fullName", editTextName.getText().toString().trim());
-                    addressIntent.putExtra("dob", editTextDob.getText().toString().trim());
+                    addressIntent.putExtra("dob", newDate);
                     addressIntent.putExtra("mailid", editTextEmail.getText().toString().trim());
                     addressIntent.putExtra("mobileno", editTextMob.getText().toString().trim());
                     addressIntent.putExtra("password", editTextPass.getText().toString().trim());

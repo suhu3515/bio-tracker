@@ -91,6 +91,18 @@
             android:layout_margin="10dp"/>
 
         <Button
+            android:id="@+id/button_tutorials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tutorials"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/button_orders"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="10dp"/>
+
+        <Button
             android:id="@+id/button_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +110,7 @@
             android:backgroundTint="@android:color/white"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/button_orders"
+            app:layout_constraintTop_toBottomOf="@id/button_tutorials"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
 

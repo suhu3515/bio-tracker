@@ -127,22 +127,11 @@
                                         ?>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <br><label>Language</label>
                                         <br>
-                                        <input type="radio" id="english" name="ins_language" value="English" checked>
-                                        <label for="english">English</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" id="malayalam" name="ins_language" value="Malayalam">
-                                        <label for="malayalam">Malayalam</label>
-                                    </div>
-                                    <div class="form-group col-md-8">
-                                        <br>
-                                        <label for="ins_link">Social Link</label>
+                                        <label for="ins_link">File Path</label>
                                         <?php
-                                        echo "<input type='url' class='form-control' id='ins_link' name='ins_link' value='$ins_link'>";
+                                        $full_link = "https://youtu.be/" . $ins_link;
+                                        echo "<input type='text' class='form-control' id='ins_link' name='ins_link' value='$full_link'>";
                                         ?>
                                     </div>
                                     <div class="form-group col-md-8">
@@ -185,7 +174,7 @@ if (isset($_POST['upd_tut']))
     $instruction_title = $_POST['ins_name'];
     $instruction_text = $_POST['ins_text'];
     $instruction_link = $_POST['ins_link'];
-    $instruction_lang = $_POST['ins_language'];
+    $instruction_lang = 'English';
     $instruction_status = $_POST['ins_status'];
     if ($instruction_status=="active")
     {
@@ -196,10 +185,25 @@ if (isset($_POST['upd_tut']))
         $status = 0;
     }
 
-    $res_ins = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',tut_link='$instruction_link',status='$status' where tut_id='$tutorial'");
-    if ($res_ins)
+    if(!isset($_POST['ins_link']) || strlen($_POST['ins_link']< 0))
     {
-        echo "<script>alert('Updated tutorial')</script>";
-        echo "<script>window.location='tutorials.php'</script>";
+        $res_ins_no = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',status='$status' where tut_id='$tutorial'");
+        if ($res_ins_no)
+        {
+            echo "<script>alert('Updated tutorial')</script>";
+            echo "<script>window.location='tutorials.php'</script>";
+        }
+    }
+    else
+    {
+        $array_link = (explode("/",$instruction_link));
+        $video_id = $array_link[3];
+
+        $res_ins = $conn->query("update tutorials set tut_language='$instruction_lang',tut_name='$instruction_title',tut_txt='$instruction_text',tut_link='$video_id',status='$status' where tut_id='$tutorial'");
+        if ($res_ins)
+        {
+            echo "<script>alert('Updated tutorial')</script>";
+            echo "<script>window.location='tutorials.php'</script>";
+        }
     }
 }

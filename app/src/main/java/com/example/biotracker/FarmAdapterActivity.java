@@ -10,7 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class FarmAdapterActivity extends RecyclerView.Adapter<FarmAdapterActivity.FarmViewHolder>{
 
@@ -76,6 +80,7 @@ public class FarmAdapterActivity extends RecyclerView.Adapter<FarmAdapterActivit
             {
                 if (v == itemView)
                 {
+
                     intent = new Intent(context, FarmDetailsActivity.class);
                     intent.putExtra("farm_id", farmList.get(getLayoutPosition()).farm_id);
                     intent.putExtra("fish_type", farmList.get(getLayoutPosition()).fish_type);

@@ -108,4 +108,7 @@ public interface Api
     @POST("Api.php?apicall=report_posts")
     @FormUrlEncoded
     Call<JsonObject> reportPosts(@Field("user_id") String userId, @Field("post_id") String postId, @Field("report_text") String report);
+
+    @POST("Api.php?apicall=get_tutorials")
+    Call<JsonArray> getTutorials();
 }

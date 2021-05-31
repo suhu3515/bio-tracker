@@ -129,7 +129,8 @@ if(isset($_GET['apicall']))
                         $temp['fish_type'] = $row_stmt3[1];
                         $temp['fish_count'] = $row_stmt3[2];
                         $temp['tank_volume'] = $row_stmt3[3];
-                        $temp['start_date'] = $row_stmt3[4];
+                        $startDate = date("d-m-Y",strtotime($row_stmt3[4]));
+                        $temp['start_date'] = $startDate;
                         $temp['est_time'] = $row_stmt3[5];
                         array_push($farm,$temp);
                     }
@@ -450,7 +451,15 @@ if(isset($_GET['apicall']))
                         {
                             $temp['order_status'] = "Completed";
                         }
-                        $temp['estimated_date'] = $order_row[7];
+                        if ($order_row[7]==null)
+                        {
+                            $estDate = null;
+                        }
+                        else
+                        {
+                            $estDate = date("d-m-Y",strtotime($order_row[7]));
+                        }
+                        $temp['estimated_date'] = $estDate;
                         array_push($orders,$temp);
                     }
                     $response = $orders;
@@ -761,6 +770,22 @@ if(isset($_GET['apicall']))
                 $response['message'] = 'required parameters are not available';
             }
         break;
+
+        case "get_tutorials":
+
+            $tut_res = $conn->query("select * from tutorials where status=1");
+            $temp = array();
+            $tutorials = array();
+            while($tut_row = $tut_res->fetch_array())
+            {
+                $temp['tut_id'] = $tut_row[0];
+                $temp['tut_title'] = $tut_row[2];
+                $temp['tut_text'] = $tut_row[3];
+                $temp['tut_link'] = $tut_row[4];
+                array_push($tutorials,$temp);
+            }
+            $response = $tutorials;
+
     }
 }
 else

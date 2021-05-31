@@ -109,24 +109,10 @@
                                         <input type="text" class="form-control" id="ins_name" name="ins_name" placeholder="Tutorial Title" required><br>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <label>Language</label>
-                                        <br>
-                                        <input type="radio" id="english" name="ins_language" value="English" checked>
-                                        <label for="english">English</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" id="malayalam" name="ins_language" value="Malayalam">
-                                        <label for="malayalam">Malayalam</label>
+                                        <label for="ins_link">Youtube Link</label>
+                                        <input type="text" class="form-control" id="ins_link" name="ins_link" placeholder="Youtube Link" ><br>
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <br>
-                                        <label for="ins_link">Social Link</label>
-                                        <input type="url" class="form-control" id="ins_link" name="ins_link" placeholder="Tutorial link">
-                                    </div>
-                                    <div class="form-group col-md-8">
-                                        <br>
                                         <label for="ins_text">Tutorial</label>
                                         <textarea class="form-control" rows="4" id="ins_text" name="ins_text" placeholder="Tutorial Text" required></textarea>
                                     </div>
@@ -136,7 +122,7 @@
                                         <input type="checkbox" id="active" name="ins_status" value="active" checked>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <button type="submit" name="add_ins" id="add_ins" class="btn btn-primary">Add instruction</button>
+                                        <button type="submit" name="add_ins" id="add_ins" class="btn btn-primary">Add tutorial</button>
                                     </div>
                                 </form>
 							</div>
@@ -160,7 +146,7 @@ if (isset($_POST['add_ins']))
     $instruction_title = $_POST['ins_name'];
     $instruction_text = $_POST['ins_text'];
     $instruction_link = $_POST['ins_link'];
-    $instruction_lang = $_POST['ins_language'];
+    $instruction_lang = 'English';
     $instruction_status = $_POST['ins_status'];
     if ($instruction_status=="active")
     {
@@ -171,10 +157,26 @@ if (isset($_POST['add_ins']))
         $status = 0;
     }
 
-    $res_ins = $conn->query("insert into tutorials(tut_language,tut_name,tut_txt,tut_link,status) values ('$instruction_lang','$instruction_title','$instruction_text','$instruction_link','$status')");
-    if ($res_ins)
+    if(!isset($_POST['ins_link']) || strlen($_POST['ins_link']< 0))
     {
-        echo "<script>alert('Added tutorial')</script>";
-        echo "<script>window.location='tutorials.php'</script>";
+        $res_ins_no = $conn->query("insert into tutorials(tut_language,tut_name,tut_txt,status) values ('$instruction_lang','$instruction_title','$instruction_text','$status')");
+        if ($res_ins_no)
+        {
+            echo "<script>alert('Added tutorial')</script>";
+            echo "<script>window.location='tutorials.php'</script>";
+        }
+    }
+    else
+    {
+        $array_link = (explode("/",$instruction_link));
+        $video_id = $array_link[3];
+
+        $res_ins = $conn->query("insert into tutorials(tut_language,tut_name,tut_txt,tut_link,status) values ('$instruction_lang','$instruction_title','$instruction_text','$video_id','$status')");
+        if ($res_ins)
+        {
+            echo "<script>alert('Added tutorial')</script>";
+            echo "<script>window.location='tutorials.php'</script>";
+        }
+
     }
 }

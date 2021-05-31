@@ -135,7 +135,7 @@
                                             echo "<td>$ins_row[3]</td>";
                                             if ($ins_row[4]!=null)
                                             {
-                                                echo "<td>$ins_row[4]</td>";
+                                                echo "<td>https://youtu.be/$ins_row[4]</td>";
                                             }
                                             else
                                             {

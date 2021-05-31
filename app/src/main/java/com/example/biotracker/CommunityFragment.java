@@ -87,7 +87,6 @@ public class CommunityFragment extends Fragment {
                 getActivity().recreate();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, CommunityFragment.newInstance("",""));
-                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
             }

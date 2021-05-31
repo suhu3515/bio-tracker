@@ -22,7 +22,7 @@ public class MoreFragment extends Fragment {
 
     TextView textViewUserName, textViewUserPhone;
     User user;
-    Button buttonAddFarm, buttonViewOrders, buttonLogout;
+    Button buttonAddFarm, buttonViewOrders, buttonLogout, buttonTutorials;
 
     public MoreFragment() {
     }
@@ -72,6 +72,7 @@ public class MoreFragment extends Fragment {
         buttonAddFarm = view.findViewById(R.id.button_farm);
         buttonViewOrders = view.findViewById(R.id.button_orders);
         buttonLogout = view.findViewById(R.id.button_logout);
+        buttonTutorials = view.findViewById(R.id.button_tutorials);
 
         buttonAddFarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +103,15 @@ public class MoreFragment extends Fragment {
             }
         });
 
+        buttonTutorials.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent tutorialIntent = new Intent(getContext(),ViewTutorialsActivity.class);
+                startActivity(tutorialIntent);
+
+            }
+        });
 
     }
 }
