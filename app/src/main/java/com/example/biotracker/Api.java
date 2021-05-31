@@ -115,4 +115,8 @@ public interface Api
     @POST("Api.php?apicall=change_pass")
     @FormUrlEncoded
     Call<JsonObject> changePassword(@Field("student_mob") String mobile, @Field("old_pass") String oldPass, @Field("new_pass") String newPass);
+
+    @POST("Api.php?apicall=user_login")
+    @FormUrlEncoded
+    Call<JsonObject> userLogin(@Field("mobile") String mobile, @Field("password") String pass);
 }

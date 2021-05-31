@@ -10,6 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,6 +58,67 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (editTextMob.getText().toString().isEmpty())
+                {
+                    editTextMob.setError("Please enter mobile number");
+                    editTextMob.requestFocus();
+                }
+                else if (editTextPass.getText().toString().isEmpty())
+                {
+                    editTextPass.setError("Please enter mobile number");
+                    editTextPass.requestFocus();
+                }
+                else
+                {
+                    Call<JsonObject> userLoginCall = RetrofitClient.getInstance().getMyApi().userLogin(editTextMob.getText().toString(),editTextPass.getText().toString());
+                    userLoginCall.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                            if (response.isSuccessful())
+                            {
+                                try
+                                {
+                                    JSONObject jsonObject = new JSONObject(response.body().toString());
+                                    if (!jsonObject.getBoolean("error"))
+                                    {
+                                        Toast.makeText(LoginActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        JSONObject userJson = jsonObject.getJSONObject("user");
+                                        User user = new User(userJson.getInt("user_id"),
+                                                userJson.getString("user_name"),
+                                                userJson.getString("user_dob"),
+                                                userJson.getString("user_hname"),
+                                                userJson.getString("user_place"),
+                                                userJson.getString("user_pin"),
+                                                userJson.getString("user_dst"),
+                                                userJson.getString("user_mobile"),
+                                                userJson.getString("user_email"));
+
+                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+                                        Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(homeIntent);
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(LoginActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                        }
+                    });
+                }
 
             }
         });

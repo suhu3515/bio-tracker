@@ -131,8 +131,6 @@ public class AddAddressActivity extends AppCompatActivity {
                 }
                 else
                 {
-
-
                     Call<JsonObject> userRegCall = RetrofitClient.getInstance().getMyApi().regUser(fullName,dateOfBirth,mobileNumber,emailAddress,password,editTextHouseName.getText().toString().trim(),
                             editTextPlace.getText().toString().trim(),editTextPincode.getText().toString().trim(),editTextDistrict.getText().toString().trim());
 
@@ -149,21 +147,6 @@ public class AddAddressActivity extends AppCompatActivity {
                                     if (!json.getBoolean("error"))
                                     {
                                         Toast.makeText(AddAddressActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
-                                        JSONObject userJson = json.getJSONObject("user");
-                                        User user = new User(userJson.getInt("user_id"),
-                                                userJson.getString("user_name"),
-                                                userJson.getString("user_dob"),
-                                                userJson.getString("user_hname"),
-                                                userJson.getString("user_place"),
-                                                userJson.getString("user_pin"),
-                                                userJson.getString("user_dst"),
-                                                userJson.getString("user_mobile"),
-                                                userJson.getString("user_email"));
-
-                                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                                        Intent homeIntent = new Intent(AddAddressActivity.this, HomeActivity.class);
-                                        startActivity(homeIntent);
                                         finish();
                                     }
                                     else

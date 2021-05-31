@@ -43,30 +43,8 @@ if(isset($_GET['apicall']))
 
                     if ($stmt->execute() && $stmt1->execute() )
                     {
-                        $stmt = $conn->prepare("SELECT user_id, user_name, user_dob, user_hname, user_place, user_pincode, user_dst, user_mobile, user_email from users where user_mobile=?" );
-                        $stmt->bind_param("s",$user_mob);
-                        $stmt->execute();
-                        $stmt->bind_result($user_id, $user_name, $user_dob, $user_hname, $user_place, $user_pincode, $user_district, $user_mob, $user_mail);
-                        $stmt->fetch();
-
-                        $user = array
-                        (
-                            'user_id'=>$user_id,
-                            'user_name'=>$user_name,
-                            'user_dob'=>$user_dob,
-                            'user_hname'=>$user_hname,
-                            'user_place'=>$user_place,
-                            'user_pin'=>$user_pincode,
-                            'user_dst'=>$user_district,
-                            'user_mobile'=>$user_mob,
-                            'user_email'=>$user_mail
-                        );
-
-                        $stmt->close();
-
                         $response['error']= false;
                         $response['message'] = 'User registered Successfully';
-                        $response['user'] = $user;
                     }
                 }
             }
@@ -75,6 +53,53 @@ if(isset($_GET['apicall']))
                 $response['error'] = true;
                 $response['message'] = 'required parameters are not available';
 
+            }
+        break;
+
+        case "user_login":
+            if (isTheseParametersAvailable(array('mobile','password'))) {
+                $mobile = $_POST['mobile'];
+                $password = $_POST['password'];
+                $stmt13 = $conn->prepare("SELECT * from login where role='USER' and mobile=? and password=?");
+                $stmt13->bind_param("ss", $mobile, $password);
+                $stmt13->execute();
+                $stmt13->store_result();
+                if ($stmt13->num_rows > 0) {
+                    $stmt14 = $conn->prepare("SELECT user_id, user_name, user_dob, user_hname, user_place, user_pincode, user_dst, user_mobile, user_email from users where user_mobile=?");
+                    $stmt14->bind_param("s", $mobile);
+                    $stmt14->execute();
+                    $stmt14->bind_result($user_id, $user_name, $user_dob, $user_hname, $user_place, $user_pincode, $user_district, $user_mob, $user_mail);
+                    $stmt14->fetch();
+
+                    $new_date = date("d-m-Y", strtotime($user_dob));
+
+                    $user = array
+                    (
+                        'user_id' => $user_id,
+                        'user_name' => $user_name,
+                        'user_dob' => $new_date,
+                        'user_hname' => $user_hname,
+                        'user_place' => $user_place,
+                        'user_pin' => $user_pincode,
+                        'user_dst' => $user_district,
+                        'user_mobile' => $user_mob,
+                        'user_email' => $user_mail
+                    );
+
+                    $stmt14->close();
+                    $response['error'] = false;
+                    $response['message'] = 'Logged in successfully';
+                    $response['user'] = $user;
+                } else {
+                    $response['error'] = true;
+                    $response['message'] = 'Check username/password';
+                    $stmt13->close();
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
             }
         break;
 
