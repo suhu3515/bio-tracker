@@ -785,6 +785,43 @@ if(isset($_GET['apicall']))
                 array_push($tutorials,$temp);
             }
             $response = $tutorials;
+        break;
+
+        case "change_pass":
+
+            if (isTheseParametersAvailable(array('student_mob','old_pass','new_pass')))
+            {
+                $mob = $_POST['student_mob'];
+                $pass = $_POST['old_pass'];
+                $new_pass = $_POST['new_pass'];
+
+                $res_pass = $conn->query("select * from login where mobile='$mob' and password='$pass' and role='USER'");
+                if ($res_pass->num_rows>0)
+                {
+                    $update_pass = $conn->query("update login set password='$new_pass' where mobile='$mob' and role='USER'");
+                    if ($update_pass)
+                    {
+                        $response['error'] = false;
+                        $response['message'] = 'Password changed successfully...';
+                    }
+                    else
+                    {
+                        $response['error'] = true;
+                        $response['message'] = 'Something went wrong!';
+                    }
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Please check your current password';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
 
     }
 }

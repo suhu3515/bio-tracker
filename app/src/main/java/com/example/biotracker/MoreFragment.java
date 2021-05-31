@@ -22,7 +22,7 @@ public class MoreFragment extends Fragment {
 
     TextView textViewUserName, textViewUserPhone;
     User user;
-    Button buttonAddFarm, buttonViewOrders, buttonLogout, buttonTutorials;
+    Button buttonAddFarm, buttonViewOrders, buttonLogout, buttonTutorials, buttonPass;
 
     public MoreFragment() {
     }
@@ -73,6 +73,17 @@ public class MoreFragment extends Fragment {
         buttonViewOrders = view.findViewById(R.id.button_orders);
         buttonLogout = view.findViewById(R.id.button_logout);
         buttonTutorials = view.findViewById(R.id.button_tutorials);
+        buttonPass = view.findViewById(R.id.button_password);
+
+        buttonPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent passIntent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(passIntent);
+
+            }
+        });
 
         buttonAddFarm.setOnClickListener(new View.OnClickListener() {
             @Override
