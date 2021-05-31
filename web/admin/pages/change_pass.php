@@ -101,6 +101,9 @@
 				<div class="container-fluid p-0">
 					<div class="row">
 						<div class="col-6 col-xl-6">
+                            <div class="col-auto d-none d-sm-block">
+                                <h3><strong>Change Password</strong></h3>
+                            </div>
 							<div class="card">
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <br>
