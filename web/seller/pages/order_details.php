@@ -28,7 +28,7 @@ $seller = $_SESSION['seller_id'];
     <div class="wrapper">
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="seller_panel.html">
+                <a class="sidebar-brand" href="seller_panel.php">
                     <span class="align-middle">BIOTRACKER</span>
                 </a>
 
@@ -38,7 +38,7 @@ $seller = $_SESSION['seller_id'];
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="seller_panel.html">
+                        <a class="sidebar-link" href="seller_panel.php">
                             <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
@@ -188,21 +188,25 @@ $seller = $_SESSION['seller_id'];
                                         <?php
                                         if($order_row[10]==0)
                                         {
-                                            echo "<label class='form-group'>Rejected</label>";
+                                            echo "<label class='form-group'>Cancelled</label>";
                                         }
-                                        if ($order_row[10]==1)
+                                        if($order_row[10]==1)
                                         {
-                                            echo "<label class='form-group'>Confirmed</label>";
+                                            echo "<label class='form-group'>Rejected</label>";
                                         }
                                         if ($order_row[10]==2)
                                         {
-                                            echo "<label class='form-group'>Packed</label>";
+                                            echo "<label class='form-group'>Confirmed</label>";
                                         }
                                         if ($order_row[10]==3)
                                         {
-                                            echo "<label class='form-group'>Dispatched</label>";
+                                            echo "<label class='form-group'>Packed</label>";
                                         }
                                         if ($order_row[10]==4)
+                                        {
+                                            echo "<label class='form-group'>Dispatched</label>";
+                                        }
+                                        if ($order_row[10]==5)
                                         {
                                             echo "<label class='form-group'>Completed</label>";
                                         }
@@ -221,18 +225,23 @@ $seller = $_SESSION['seller_id'];
                                         <br><label><strong>Status</strong></label><br>
                                         <select class="form-control" name="select_status" id="select_status">
                                             <option value="nothing" selected>Select status</option>
-                                            <option value="0">Rejected</option>
-                                            <option value="1">Confirmed</option>
-                                            <option value="2">Packed</option>
-                                            <option value="3">Dispatched</option>
-                                            <option value="4">Completed</option>
+                                            <option value="1">Reject Order</option>
+                                            <option value="2">Confirm Order</option>
+                                            <option value="3">Pack Order</option>
+                                            <option value="4">Dispatch Order</option>
+                                            <option value="5">Complete Order</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="estdeliverydate"><strong>Estimated date</strong></label><br>
-                                        <div class="input-group">
-                                            <input id='estdeliverydate' type='date' class='form-control' name='estdeliverydate' required>
-                                        </div>
+                                        <?php
+                                        if ($order_row[7] != null)
+                                        {
+                                            echo "<label for='estdeliverydate'><strong>Estimated date</strong></label><br>";
+                                            echo "<div class='input-group'>";
+                                            echo "<label class='form-group'>$order_row[7]</label>";
+                                            echo "</div>";
+                                        }
+                                        ?>
                                     </div>
                                     <div class="form-group">
                                         <br><button name="upd_order" id="upd_order" type="submit" class="btn btn-success">Update Order</button>
@@ -264,20 +273,27 @@ if (isset($_POST['upd_order']))
     {
         echo "<script>alert('Please select a valid status')</script>";
     }
-    else if ($status=="0")
+    else if ($status=="1")
     {
         $res_upd = $conn->query("update orders set order_status='$status', delivery_date=null where order_id='$order'");
         if ($res_upd)
         {
             //echo "<script>alert('$total')</script>";
-            echo "<script>alert('Delivery date excluded and updated order')</script>";
+            echo "<script>alert('updated order ')</script>";
             echo "<script>window.location='orders.php'</script>";
         }
 
     }
-    else if ($est_date<$today_date)
+    else if ($status=="5")
     {
-        echo "<script>alert('Please select a date from today')</script>";
+        $res_upd = $conn->query("update orders set order_status='$status', delivery_date='$today_date' where order_id='$order'");
+        if ($res_upd)
+        {
+            //echo "<script>alert('$total')</script>";
+            echo "<script>alert('updated order ')</script>";
+            echo "<script>window.location='orders.php'</script>";
+        }
+
     }
     else
     {

@@ -50,6 +50,7 @@ public class FarmDetailsActivity extends AppCompatActivity {
 
                 Intent reportIntent = new Intent(FarmDetailsActivity.this, ReportsActivity.class);
                 reportIntent.putExtra("farm_id", farm_id);
+                reportIntent.putExtra("fish_count", Integer.parseInt(getIntent().getExtras().getString("fish_count")));
                 startActivity(reportIntent);
                 finish();
 

@@ -246,7 +246,7 @@ if (isset($_POST['buttonlogin']))
     if ($count > 0)
     {
         $_SESSION['logged_in'] = "admin";
-        echo "<script>window.location='admin/pages/admin_panel.html'</script>";
+        echo "<script>window.location='admin/pages/admin_panel.php'</script>";
     }
 
     $status_check = "select * from seller where seller_phone='$login_mob' and seller_status = 1";
@@ -260,7 +260,7 @@ if (isset($_POST['buttonlogin']))
         {
             $seller = $row_status_check[0];
             $_SESSION['seller_id'] = $seller;
-            echo "<script>window.location='seller/pages/seller_panel.html'</script>";
+            echo "<script>window.location='seller/pages/seller_panel.php'</script>";
         }
         else
         {

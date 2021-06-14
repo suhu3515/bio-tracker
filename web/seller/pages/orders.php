@@ -27,7 +27,7 @@ $seller_id = $_SESSION["seller_id"];
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="seller_panel.html">
+				<a class="sidebar-brand" href="seller_panel.php">
           <span class="align-middle">BIOTRACKER</span>
         </a>
 
@@ -37,7 +37,7 @@ $seller_id = $_SESSION["seller_id"];
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="seller_panel.html">
+						<a class="sidebar-link" href="seller_panel.php">
               <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
@@ -103,11 +103,12 @@ $seller_id = $_SESSION["seller_id"];
                                     <form method="post" action="">
                                         <select class="form-group col-md-3" name="select_status" id="select_status">
                                             <option value="nothing" selected>Select status</option>
-                                            <option value="0">Rejected</option>
-                                            <option value="1">Confirmed</option>
-                                            <option value="2">Packed</option>
-                                            <option value="3">Dispatched</option>
-                                            <option value="4">Completed</option>
+                                            <option value="0">Cancelled</option>
+                                            <option value="1">Rejected</option>
+                                            <option value="2">Confirmed</option>
+                                            <option value="3">Packed</option>
+                                            <option value="4">Dispatched</option>
+                                            <option value="5">Completed</option>
                                         </select>
                                         &nbsp;&nbsp;&nbsp;
                                         <input type="text" class="form-group col-md-4" id="user_name" name="user_name" placeholder="User Name">
@@ -180,25 +181,34 @@ $seller_id = $_SESSION["seller_id"];
                                                 }
                                                 if ($order_row[10] == 0)
                                                 {
-                                                    echo "<td>Rejected</td>";
+                                                    echo "<td>Cancelled</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary' disabled>Update</button></a></td>";
                                                 }
                                                 if ($order_row[10] == 1)
                                                 {
-                                                    echo "<td>Confirmed</td>";
+                                                    echo "<td>Rejected</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary' disabled>Update</button></a></td>";
                                                 }
                                                 if ($order_row[10] == 2)
                                                 {
-                                                    echo "<td>Packed</td>";
+                                                    echo "<td>Confirmed</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
                                                 }
                                                 if ($order_row[10] == 3)
                                                 {
-                                                    echo "<td>Dispatched</td>";
+                                                    echo "<td>Packed</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
                                                 }
                                                 if ($order_row[10] == 4)
                                                 {
-                                                    echo "<td>Completed</td>";
+                                                    echo "<td>Dispatched</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
                                                 }
-                                                echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary'>Update</button></a></td>";
+                                                if ($order_row[10] == 5)
+                                                {
+                                                    echo "<td>Completed</td>";
+                                                    echo "<td><a href='order_details.php?order_id=$order_row[0]'><button class='btn btn-primary' disabled>Update</button></a></td>";
+                                                }
                                             }
                                         }
                                     }

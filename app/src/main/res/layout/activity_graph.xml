@@ -6,4 +6,211 @@
     android:layout_height="match_parent"
     tools:context=".GraphActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/graph_ammonia_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ammonia level is OK"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_ammonia_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                app:layout_constraintTop_toBottomOf="@id/graph_ammonia_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:visibility="gone"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_ph_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="pH level is OK"
+                app:layout_constraintTop_toBottomOf="@+id/graph_ammonia_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_ph_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                app:layout_constraintTop_toBottomOf="@id/graph_ph_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:visibility="gone"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_oxygen_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Oxygen level is OK"
+                app:layout_constraintTop_toBottomOf="@id/graph_ph_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_oxygen_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/graph_oxygen_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrogen_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nitrogen level is OK"
+                app:layout_constraintTop_toBottomOf="@+id/graph_oxygen_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrogen_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/graph_nitrogen_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrate_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nitrate level is OK"
+                app:layout_constraintTop_toBottomOf="@+id/graph_nitrogen_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrate_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/graph_nitrate_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrite_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nitrite level is OK"
+                app:layout_constraintTop_toBottomOf="@+id/graph_nitrate_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_nitrite_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/graph_nitrite_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_mortality_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mortality rate is Normal"
+                app:layout_constraintTop_toBottomOf="@+id/graph_nitrite_action"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/graph_mortality_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View suggestion"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/graph_mortality_msg"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:id="@+id/graph_button_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#3949AB"
+                android:text="Go home"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/graph_mortality_action"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="25dp"
+                android:textColor="@android:color/white"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

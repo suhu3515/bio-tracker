@@ -17,19 +17,26 @@
 </head>
 
 <body>
+<?php
+    include_once '../../DbConnect.php';
+
+    $product_count = mysqli_fetch_array($conn->query("select count(*) from marketplace where product_status='1'"));
+    $seller_count = mysqli_fetch_array($conn->query("select count(*) from seller where seller_status='1'"));
+    $user_count = mysqli_fetch_array($conn->query("select count(*) from users"));
+    $reports_count = mysqli_fetch_array($conn->query("select count(*) from reports"));
+?>
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="admin_panel.php">
           <span class="align-middle">BIOTRACKER</span>
         </a>
-
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
 						Pages
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="admin_panel.php">
               <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
             </a>
@@ -54,17 +61,17 @@
             </a>
 					</li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="tutorials.php">
-                            <i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
-                        </a>
-                    </li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="tutorials.php">
+							<i class="align-middle" data-feather="film"></i> <span class="align-middle">Tutorials</span>
+						</a>
+					</li>
 
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="instructions.php">
-                            <i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
-                        </a>
-                    </li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="instructions.php">
+							<i class="align-middle" data-feather="info"></i> <span class="align-middle">Instructions</span>
+						</a>
+					</li>
 
 				</ul>
 
@@ -89,8 +96,8 @@
               </a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="change_pass.php"><i class="align-middle mr-1" data-feather="user"></i> Change Password</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../../index.php"><i class="align-middle mr-1" data-feather="log-out"></i>Log out</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="../../index.php"><i class="align-middle mr-1" data-feather="log-out"></i>Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -102,59 +109,63 @@
 
 					<div class="row mb-2 mb-xl-3">
 						<div class="col-auto d-none d-sm-block">
-							<h3><strong>Instructions</strong></h3>
-                            <a href="instructions_add.php"><button class="btn btn-primary">Add  <span class="fa fa-plus"></span></button></a>
+							<h3><strong>Analytics</strong> Dashboard</h3>
 						</div>
 
 					</div>
 					<div class="row">
-
-						<div class="col-12 col-xl-12">
-							<div class="card">
-								<table class="table">
-									<thead>
-									<tr>
-										<th style="width:25%;">Title</th>
-										<th style="width:25%">Text</th>
-										<th class="d-none d-md-table-cell" style="width:20%">Language</th>
-										<th>Status</th>
-										<th style="width=10%">Details</th>
-									</tr>
-									</thead>
-									<tbody>
-									<?php
-									    include_once '../../DbConnect.php';
-
-									    $ins_sel = "select * from instructions";
-									    $ins_res = $conn->query($ins_sel);
-									    while ($ins_row = $ins_res->fetch_array())
-                                        {
-                                            echo "<tr>";
-                                            echo "<td>$ins_row[2]</td>";
-                                            echo "<td>$ins_row[3]</td>";
-                                            echo "<td>$ins_row[1]</td>";
-                                            if ($ins_row[4] == 0)
-                                            {
-                                                echo "<td style='color: red'>Removed</td>";
-                                            }
-
-                                            if ($ins_row[4] == 1)
-                                            {
-                                                echo "<td style='color: green'>Active</td>";
-                                            }
-                                            echo "<td><a href='instruction_details.php?ins_id=$ins_row[0]'><button class='btn btn-primary'>Details</button></a></td>";
-                                        }
-									?>
-									</tbody>
-								</table>
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Products</h5>
+                                                <?php
+                                                echo "<h1 class='display-5 mt-1 mb-3'>$product_count[0]</h1>";
+                                                ?>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Users</h5>
+                                                <?php
+                                                echo "<h1 class='display-5 mt-1 mb-3'>$user_count[0]</h1>";
+                                                ?>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">Sellers</h5>
+                                                <?php
+                                                echo "<h1 class='display-5 mt-1 mb-3'>$seller_count[0]</h1>";
+                                                ?>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title mb-4">User Reports</h5>
+                                                <?php
+                                                echo "<h1 class='display-5 mt-1 mb-3'>$reports_count[0]</h1>";
+                                                ?>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</main>
 		</div>
 	</div>
+
 	<script src="js/vendor.js"></script>
 	<script src="../../examples/js/app.js"></script>
+
 </body>
+
 </html>

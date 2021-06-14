@@ -147,6 +147,7 @@ public class AddAddressActivity extends AppCompatActivity {
                                     if (!json.getBoolean("error"))
                                     {
                                         Toast.makeText(AddAddressActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(AddAddressActivity.this,LoginActivity.class));
                                         finish();
                                     }
                                     else

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 04:14 PM
+-- Generation Time: Jun 14, 2021 at 04:38 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -103,9 +103,21 @@ INSERT INTO `daily_data` (`data_id`, `ammonia_level`, `ph_level`, `oxygen_level`
 (6, 10, 25, 55, 54, 10, 11, 5, '15-04-2021', 8),
 (7, 7, 7, 8, 6, 7, 8, 0, '17-04-2021', 8),
 (8, 7, 7, 10, 8, 9, 10, 0, '18-04-2021', 8),
-(9, 8, 9, 7, 9, 5, 8, 0, '19-04-2021', 8),
-(10, 7, 8, 10, 7, 9, 9, 0, '22-04-2021', 9),
-(11, 7, 8, 10, 7, 8, 5, 10, '30-04-2021', 8);
+(9, 8, 9, 7, 9, 5, 8, 3, '19-04-2021', 8),
+(10, 7, 8, 10, 7, 9, 9, 5, '22-04-2021', 9),
+(11, 7, 8, 10, 7, 8, 5, 10, '30-04-2021', 8),
+(12, 1, 9, 4, 1, 1, 0, 32, '04-06-2021', 12),
+(13, 1, 9, 3, 0, 0, 0, 4, '21-05-2021', 12),
+(14, 3, 9, 0, 1, 1, 0, 17, '22-05-2021', 12),
+(15, 3, 9, 2, 1, 1, 0, 6, '23-05-2021', 12),
+(16, 2, 8, 1, 0, 0, 0, 7, '24-05-2021', 12),
+(17, 2, 9, 1, 0, 1, 0, 17, '25-05-2021', 12),
+(18, 4, 8, 1, 0, 0, 1, 5, '26-05-2021', 12),
+(19, 4, 7, 1, 0, 0, 0, 3, '27-05-2021', 12),
+(20, 4, 7, 2, 1, 0, 1, 3, '28-05-2021', 12),
+(21, 3, 8, 1, 0, 1, 0, 0, '29-05-2021', 12),
+(22, 1, 7, 1, 0, 0, 1, 0, '30-05-2021', 12),
+(23, 4, 8, 0, 1, 0, 0, 6, '31-05-2021', 12);
 
 -- --------------------------------------------------------
 
@@ -130,7 +142,9 @@ CREATE TABLE `farm` (
 INSERT INTO `farm` (`farm_id`, `fish_type`, `fish_count`, `tank_volume`, `start_date`, `est_time`, `user_id`) VALUES
 (8, 'Nutter', 500, '6358500', '2021-04-16', 6, 13),
 (9, 'Gift Tillapia', 500, '420000', '2021-04-22', 6, 13),
-(10, 'Nutter fish', 600, '480000', '2021-05-19', 6, 14);
+(10, 'Nutter fish', 600, '480000', '2021-05-19', 6, 14),
+(12, 'Tillapia', 400, '495000', '2021-05-20', 7, 19),
+(13, 'Nutter', 300, '904320', '2021-06-01', 6, 19);
 
 -- --------------------------------------------------------
 
@@ -151,8 +165,34 @@ CREATE TABLE `instructions` (
 --
 
 INSERT INTO `instructions` (`ins_id`, `ins_language`, `ins_name`, `ins_text`, `status`) VALUES
-(2, 'English', 'check_water', 'Check water ', 1),
-(4, 'English', 'Check water level', 'Check water level frequently ', 1);
+(2, 'English', 'check_water', 'Check water ', 0),
+(4, 'English', 'Check water level', 'Check water level frequently ', 0),
+(5, 'English', 'high_ammonia', 'Remove unwanted fish food from the fish tank', 1),
+(6, 'Malayalam', 'high_ammonia', 'മീൻ കുളത്തിൽ കൂടുതൽ കിടക്കുന്ന ഭക്ഷണം ഒഴിവാക്കുക', 1),
+(7, 'English', 'low_ammonia', 'Increase the feeding level to the fish', 1),
+(8, 'Malayalam', 'low_ammonia', 'മീൻ ഭക്ഷണം കൂടുതൽ കൊടുക്കുക', 1),
+(9, 'English', 'high_ph', 'Keep driftwood pieces in the fish tank which will reduce the pH level to normal', 1),
+(10, 'Malayalam', 'high_ph', 'മീൻ ടാങ്കിൽ ഒഴുക്ക് തടിയുടെ കഷ്ണങ്ങൾ ഇട്ടാൽ പി.എച്ച് ലെവൽ നോർമൽ ആവും', 1),
+(11, 'English', 'low_ph', 'Add some baking soda to the fish tank to increase the pH level', 1),
+(12, 'Malayalam', 'low_ph', 'പി.എച്ച് ലെവൽ കൂട്ടാൻ വേണ്ടി മീൻ ടാങ്കിലോ കുളത്തിലോ അപ്പ സോഡ ചേർക്കുക', 1),
+(13, 'English', 'high_oxygen', 'Use a air pump for the aeration in the water.', 1),
+(14, 'Malayalam', 'high_oxygen', 'ഓക്സിജൻ അളവ് നിലനിർത്താൻ എയർ പമ്പ് ഉപയോഗിച്ച് എയറേഷൻ നടത്തുക', 1),
+(15, 'English', 'low_oxygen', 'Use a water foundation to regulate water to improve oxygen', 1),
+(16, 'Malayalam', 'low_oxygen', 'ഓക്സിജൻ അളവ് കൂട്ടുന്നതിന് ഒരു വാട്ടർ ഫൌണ്ടേഷൻ ഉപയോഗിക്കുക', 1),
+(17, 'English', 'high_nitrogen', 'Change the water in the fish tank to lower the nitrogen in regular interval', 1),
+(18, 'Malayalam', 'high_nitrogen', 'കൃത്യമായ ഇടവേളകളിൽ നൈട്രജൻ കുറയ്ക്കുന്നതിന് ഫിഷ് ടാങ്കിലെ വെള്ളം മാറ്റുക', 1),
+(19, 'English', 'low_nitrogen', 'Nitrogen is developed automatically from the ammonia in the fish tank ', 1),
+(20, 'Malayalam', 'low_nitrogen', 'ഫിഷ് ടാങ്കിലെ അമോണിയയിൽ നിന്ന് നൈട്രജൻ സ്വപ്രേരിതമായി വികസിക്കുന്നു. അതിനായി കൂടുതൽ മീൻ തീറ്റ കൊടുക്കുക.', 1),
+(21, 'English', 'high_nitrate', 'Change the water in the fish tank to lower the nitrogen in regular interval', 1),
+(22, 'Malayalam', 'high_nitrate', 'കൃത്യമായ ഇടവേളകളിൽ നൈട്രജൻ കുറയ്ക്കുന്നതിന് ഫിഷ് ടാങ്കിലെ വെള്ളം മാറ്റുക', 1),
+(23, 'English', 'low_nitrate', 'Nitrogen is developed automatically from the ammonia in the fish tank', 1),
+(24, 'Malayalam', 'low_nitrate', 'ഫിഷ് ടാങ്കിലെ അമോണിയയിൽ നിന്ന് നൈട്രജൻ സ്വപ്രേരിതമായി വികസിക്കുന്നു. അതിനായി കൂടുതൽ മീൻ തീറ്റ കൊടുക്കുക.', 1),
+(25, 'English', 'high_nitrite', 'Change the water in the fish tank to lower the nitrogen in regular interval', 1),
+(26, 'Malayalam', 'high_nitrite', 'കൃത്യമായ ഇടവേളകളിൽ നൈട്രജൻ കുറയ്ക്കുന്നതിന് ഫിഷ് ടാങ്കിലെ വെള്ളം മാറ്റുക', 1),
+(27, 'English', 'low_nitrite', 'Nitrogen is developed automatically from the ammonia in the fish tank', 1),
+(28, 'Malayalam', 'low_nitrite', 'ഫിഷ് ടാങ്കിലെ അമോണിയയിൽ നിന്ന് നൈട്രജൻ സ്വപ്രേരിതമായി വികസിക്കുന്നു. അതിനായി കൂടുതൽ മീൻ തീറ്റ കൊടുക്കുക.', 1),
+(29, 'English', 'high_mortality', 'Check all the components are in normal range. Ensure that oxygen level is normal.', 1),
+(30, 'Malayalam', 'high_mortality', 'എല്ലാ ഘടകങ്ങളും സാധാരണ പരിധിയിലാണെന്ന് പരിശോധിക്കുക. ഓക്സിജന്റെ അളവ് സാധാരണമാണെന്ന് ഉറപ്പാക്കുക.', 1);
 
 -- --------------------------------------------------------
 
@@ -179,8 +219,8 @@ INSERT INTO `login` (`login_id`, `mobile`, `password`, `role`) VALUES
 (6, 5484584854, 'asaaas', 'USER'),
 (7, 9533626233, 'dhldhl', 'USER'),
 (10, 9633058949, 'suhu3515@', 'USER'),
-(13, 9946739215, 'pvmstores', 'SELLER'),
-(15, 9876543210, 'iamadmin', 'ADMIN'),
+(13, 9946739215, 'PVMSTORES', 'SELLER'),
+(15, 9876543210, 'admin', 'ADMIN'),
 (16, 6238383110, 'anbintl', 'SELLER'),
 (17, 9946739216, 'sakkeer123', 'USER'),
 (18, 9446476922, 'abcde', 'USER'),
@@ -208,7 +248,7 @@ CREATE TABLE `marketplace` (
 --
 
 INSERT INTO `marketplace` (`product_id`, `product_name`, `product_price`, `product_qty`, `product_desc`, `product_img`, `seller_id`, `product_status`) VALUES
-(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 27, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
+(3, 'SunSun HJ - 3000 Multi Function Submersible Pump', 2100, 23, 'Pump body and casing are made of high quality plastic which is anti corrosive and highly durable.', 'images/motor.jpg', 2, 1),
 (4, 'Gift Tillapia', 4, 1000, 'Best Quality fish seeds', 'images/Tilapia-Seed-gift.jpg', 2, 0),
 (5, 'Nutter ', 5, 810, 'A type of piranna which looks like flatter fish', 'images/Tilapia-Seed-gift.jpg', 2, 1),
 (9, 'Hailea HAP-60 Air Pump', 7000, 6, 'Model: HAP -60\r\nPower: 55W.\r\nVoltage: 110-115/220-240V.\r\nOutput: 60 litres per minute .\r\nNoise: 40dB.', 'images/4234haileahap60airpumpa.jpeg.jpg.83edf174ad.999x400x400.jpg', 3, 1),
@@ -229,7 +269,7 @@ CREATE TABLE `orders` (
   `order_amount` int(11) NOT NULL,
   `order_address` text DEFAULT NULL,
   `payment_mode` varchar(20) NOT NULL,
-  `delivery_date` date DEFAULT NULL,
+  `delivery_date` varchar(20) DEFAULT NULL,
   `order_date` varchar(20) NOT NULL,
   `payment_status` int(11) NOT NULL DEFAULT 0,
   `order_status` int(11) NOT NULL DEFAULT 1
@@ -240,10 +280,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `product_id`, `product_qty`, `user_id`, `order_amount`, `order_address`, `payment_mode`, `delivery_date`, `order_date`, `payment_status`, `order_status`) VALUES
-(5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', NULL, '09-05-2021', 0, 1),
-(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', '2021-05-24', '19-05-2021', 0, 0),
-(7, 5, 80, 14, 400, 'valathel house,\nathikaripadi,\n679581,\nmalappuram', 'COD', NULL, '19-05-2021', 0, 1),
-(9, 11, 5, 19, 2995, 'Karuthankattil House,\nParavanna,\n676502,\nMalappuram', 'COD', NULL, '28-05-2021', 0, 1);
+(5, 3, 2, 13, 4200, 'valathel\nathikaripadi\n679581\nmalappuram', 'COD', '16-06-2021', '09-05-2021', 0, 2),
+(6, 3, 3, 14, 6300, 'valathel house,\nathikaripadi,\n679581,\nmalappuram dst', 'COD', '24-05-2021', '19-05-2021', 0, 0),
+(7, 5, 80, 14, 400, 'valathel house,\nathikaripadi,\n679581,\nmalappuram', 'COD', NULL, '19-05-2021', 0, 2),
+(9, 11, 5, 19, 2995, 'Karuthankattil House,\nParavanna,\n676502,\nMalappuram', 'COD', NULL, '28-05-2021', 0, 2),
+(10, 3, 3, 19, 6300, 'Karuthankattil House,\nParavanna,\n676502,\nMalappuram', 'COD', NULL, '07-06-2021', 0, 2),
+(11, 3, 1, 19, 2100, 'Karuthankattil House,\nParavanna,\n676502,\nMalappuram', 'COD', NULL, '12-06-2021', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -361,7 +403,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_dob`, `user_hname`, `user_place`, `user_pincode`, `user_dst`, `user_mobile`, `user_email`, `user_status`) VALUES
-(5, 'sijhh', '2021-04-09', 'hhjs', 'bjsjjs', 975946, 'bjauhs', 9546679357, 's@s.s', 1),
 (10, 'Suhail A K', '1998-10-28', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 9633058949, 'suhu3515@gmail.com', 1),
 (11, 'Safwan V', '2002-09-30', 'Valathel House', 'Maranchery', 679581, 'Malappuram', 7994367615, 'safwan@gmail.com', 1),
 (13, 'Mohammed Sakkeer', '1980-05-02', 'valathel', 'athikaripadi', 679581, 'malappuram', 9946739216, 'mohamedsawani@gmail.com', 1),
@@ -482,25 +523,25 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `daily_data`
 --
 ALTER TABLE `daily_data`
-  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `farm`
 --
 ALTER TABLE `farm`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `instructions`
 --
 ALTER TABLE `instructions`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `marketplace`
@@ -512,7 +553,7 @@ ALTER TABLE `marketplace`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `post_likes`
@@ -542,7 +583,7 @@ ALTER TABLE `tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

@@ -384,8 +384,9 @@ if(isset($_GET['apicall']))
                 $order_amount = $_POST['order_amount'];
                 $order_address = $_POST['order_address'];
                 $order_date = date("d-m-Y");
+                $est_date = date('d-m-Y', strtotime($order_date. ' + 10 days'));
 
-                $res_order = $conn->query("insert into orders(product_id,product_qty,user_id,order_amount,order_date,payment_mode,order_address) values ('$product',$product_qty,'$userId','$order_amount','$order_date','$payment_mode','$order_address')");
+                $res_order = $conn->query("insert into orders(product_id,product_qty,user_id,order_amount,order_date,payment_mode,order_address,delivery_date) values ('$product',$product_qty,'$userId','$order_amount','$order_date','$payment_mode','$order_address','$est_date')");
                 if ($res_order)
                 {
                    $res_prod = $conn->query("select product_qty from marketplace where product_id='$product'");
@@ -458,21 +459,25 @@ if(isset($_GET['apicall']))
                         }
                         if ($order_row[10]==0)
                         {
-                            $temp['order_status'] = "Rejected";
+                            $temp['order_status'] = "Cancelled";
                         }
                         if ($order_row[10]==1)
                         {
-                            $temp['order_status'] = "Confirmed";
+                            $temp['order_status'] = "Rejected";
                         }
                         if ($order_row[10]==2)
                         {
-                            $temp['order_status'] = "Packed";
+                            $temp['order_status'] = "Confirmed";
                         }
                         if ($order_row[10]==3)
                         {
-                            $temp['order_status'] = "Dispatched";
+                            $temp['order_status'] = "Packed";
                         }
                         if ($order_row[10]==4)
+                        {
+                            $temp['order_status'] = "Dispatched";
+                        }
+                        if ($order_row[10]==5)
                         {
                             $temp['order_status'] = "Completed";
                         }
@@ -848,6 +853,59 @@ if(isset($_GET['apicall']))
             }
         break;
 
+        case "view_suggestion":
+
+            if (isTheseParametersAvailable(array('language','topic')))
+            {
+                $language = $_POST['language'];
+                $topic = $_POST['topic'];
+                $res_stmt13 = $conn->query("select * from instructions where ins_language='$language' and ins_name='$topic' and status='1'");
+                if ($res_stmt13)
+                {
+                    $row_stmt13 = $res_stmt13->fetch_array();
+                    $response['error'] = false;
+                    $response['message'] = $row_stmt13[3];
+                }
+                else
+                {
+                    $response['error'] = true;
+                    $response['message'] = 'Something went wrong!';
+                }
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
+
+        case "get_home_data":
+
+            if(isTheseParametersAvailable(array('user_id')))
+            {
+                $user = $_POST['user_id'];
+                $res_stmt14 = $conn->query("select count(*), sum(fish_count) from farm where user_id='$user'");
+                while ($row_stmt14 = $res_stmt14->fetch_array())
+                {
+                    $response['farm_count'] = $row_stmt14[0];
+                    $response['fish_total'] = $row_stmt14[1];
+                }
+                $res_stmt15 = $conn->query("select farm_id from farm where user_id='$user'");
+                $count = 0;
+                while ($row_stmt15 = $res_stmt15->fetch_array())
+                {
+                    $res_stmt16 = $conn->query("select sum(mortality_count) from daily_data where farm_id='$row_stmt15[0]'");
+                    $row_stmt16 = $res_stmt16->fetch_array();
+                    $count = $count + $row_stmt16[0];
+                }
+                $response['mortal_count'] = $count;
+            }
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+            }
+        break;
     }
 }
 else

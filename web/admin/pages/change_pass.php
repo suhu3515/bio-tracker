@@ -20,7 +20,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="admin_panel.html">
+				<a class="sidebar-brand" href="admin_panel.php">
           <span class="align-middle">BIOTRACKER</span>
         </a>
 
@@ -30,7 +30,7 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="admin_panel.html">
+						<a class="sidebar-link" href="admin_panel.php">
               <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>

@@ -119,4 +119,12 @@ public interface Api
     @POST("Api.php?apicall=user_login")
     @FormUrlEncoded
     Call<JsonObject> userLogin(@Field("mobile") String mobile, @Field("password") String pass);
+
+    @POST("Api.php?apicall=view_suggestion")
+    @FormUrlEncoded
+    Call<JsonObject> viewSuggestion(@Field("language") String language, @Field("topic") String topic);
+
+    @POST("Api.php?apicall=get_home_data")
+    @FormUrlEncoded
+    Call<JsonObject> getHomeData(@Field("user_id") String userId);
 }

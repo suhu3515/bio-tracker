@@ -1,17 +1,22 @@
 package com.example.biotracker;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +34,8 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     public static List<Products> productsList;
     public static List<Posts> postsList;
-
+    public static String fishCount, fishCountTotal, farmCount;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,38 @@ public class HomeActivity extends AppCompatActivity {
         productsList = new ArrayList<>();
         postsList = new ArrayList<>();
 
+        user = SharedPrefManager.getInstance(this).getUser();
+
+        Call<JsonObject> getHomeDataCall = RetrofitClient.getInstance().getMyApi().getHomeData(String.valueOf(user.getId()));
+        getHomeDataCall.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                try
+                {
+                    JSONObject jsonObject = new JSONObject(response.body().toString());
+                    farmCount = jsonObject.getString("farm_count");
+                    fishCountTotal = jsonObject.getString("fish_total");
+                    int mortal_count = jsonObject.getInt("mortal_count");
+
+                    fishCount = String.valueOf((Integer.parseInt(fishCountTotal) - mortal_count));
+
+                    Log.e( "Details:","farms: " + farmCount + "\n" + "total fish: " + fishCountTotal + "\n" +"remaining : " + fishCount);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         Call<JsonArray> getPostsCall = RetrofitClient.getInstance().getMyApi().getPosts();
         getPostsCall.enqueue(new Callback<JsonArray>() {
@@ -134,7 +172,6 @@ public class HomeActivity extends AppCompatActivity {
     {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

@@ -27,7 +27,7 @@ $seller_id = $_SESSION["seller_id"];
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="seller_panel.html">
+				<a class="sidebar-brand" href="seller_panel.php">
           <span class="align-middle">BIOTRACKER</span>
         </a>
 
@@ -37,7 +37,7 @@ $seller_id = $_SESSION["seller_id"];
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="seller_panel.html">
+						<a class="sidebar-link" href="seller_panel.php">
               <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>

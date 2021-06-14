@@ -66,9 +66,11 @@ public class ReportsActivity extends AppCompatActivity {
                 if (date.equals("Average"))
                 {
                     getDataCount();
+                    buttonAnalyse.setVisibility(View.VISIBLE);
                 }
                 else
                 {
+                    buttonAnalyse.setVisibility(View.GONE);
                     Call<JsonObject> dailyDataCall = RetrofitClient.getInstance().getMyApi().getDailyData(String.valueOf(getIntent().getExtras().getInt("farm_id")),date);
                     dailyDataCall.enqueue(new Callback<JsonObject>() {
                         @Override
@@ -114,7 +116,16 @@ public class ReportsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent graphIntent = new Intent(ReportsActivity.this, GraphActivity.class);
+                graphIntent.putExtra("ammonia", Double.parseDouble(textViewAmmonia.getText().toString()));
+                graphIntent.putExtra("ph", Double.parseDouble(textViewPh.getText().toString()));
+                graphIntent.putExtra("oxygen", Double.parseDouble(textViewOxygen.getText().toString()));
+                graphIntent.putExtra("nitrogen", Double.parseDouble(textViewNitrogen.getText().toString()));
+                graphIntent.putExtra("nitrate", Double.parseDouble(textViewNitrate.getText().toString()));
+                graphIntent.putExtra("nitrite", Double.parseDouble(textViewNitrite.getText().toString()));
+                graphIntent.putExtra("mortality", Integer.parseInt(textViewMortality.getText().toString()));
+                graphIntent.putExtra("fish_count", getIntent().getExtras().getInt("fish_count"));
                 startActivity(graphIntent);
+                finish();
             }
         });
     }
